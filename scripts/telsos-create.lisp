@@ -2,5 +2,5 @@
 (ql:quickload "quickproject")
 
 (quickproject:make-project
- "/media/kongra/Devel/Projects/Present/Lisp/telsos/"
+ "/home/kongra/quicklisp/local-projects/"
  :depends-on '(alexandria))
