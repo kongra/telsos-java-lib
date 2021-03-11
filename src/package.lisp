@@ -3,4 +3,5 @@
 (defpackage #:telsos
   (:use #:cl
         #:cl-user
-        #:alexandria))
+        #:alexandria
+        #:iterate))

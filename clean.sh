@@ -1,2 +1,2 @@
 #!/bin/sh
-rm -f *.lx64fsl
+rm -f `find . -name "*.lx64fsl"`
