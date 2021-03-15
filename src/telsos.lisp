@@ -2,11 +2,14 @@
 
 (in-package #:telsos)
 
-(defun whitespace-p (c)
-  (or (char= c #\Space)
-      (char= c #\Tab)
-      (char= c #\Linefeed)
-      (char= c #\Return)
-      (char= c #\Newline)
-      (char= c #\Page)
-      (char= c #\Vt)))
+(defun blank-p (s)
+  (iter (for c :in-string s)
+    (unless (serapeum:whitespacep c)
+      (return-from blank-p nil)))
+  t)
+
+(defun non-blank-p (s)
+  (not (blank-p s)))
+
+(def-assert-ch ch-blank         blank-p)
+(def-assert-ch ch-non-blank non-blank-p)
