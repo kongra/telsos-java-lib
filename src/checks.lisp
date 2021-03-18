@@ -52,6 +52,26 @@
 (def-check-type-ch ch-simple-string simple-string)
 (def-check-type-ch ch-string               string)
 
+(defun blank-p (s)
+  (iter (for c :in-string s)
+    (unless (or (eq c #\Space)
+                (eq c #\Newline)
+                (eq c #\Backspace)
+                (eq c #\Tab)
+                (eq c #\Linefeed)
+                (eq c #\Page)
+                (eq c #\Return)
+                (eq c #\Rubout))
+
+      (return-from blank-p nil)))
+  t)
+
+(defun non-blank-p (s)
+  (not (blank-p s)))
+
+(def-assert-ch ch-blank         blank-p)
+(def-assert-ch ch-non-blank non-blank-p)
+
 ;; SYMBOLS
 (def-check-type-ch ch-symbol symbol)
 

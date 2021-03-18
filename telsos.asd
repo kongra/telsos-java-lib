@@ -6,8 +6,7 @@
   :version     "0.1.0"
   :serial t
   :depends-on (#:alexandria
-               #:iterate
-               #:serapeum)
+               #:iterate)
 
   :components ((:module "src"
                 :components
