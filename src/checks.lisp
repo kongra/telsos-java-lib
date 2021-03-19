@@ -9,7 +9,7 @@
        (with-gensyms (,x)
          `(let ((,x (progn ,@body)))
             (check-type ,x ,',typespec)
-            ,x)))))
+            (the ,',typespec ,x))))))
 
 (defmacro def-assert-ch (name pred)
   (let ((x 'x))
@@ -39,8 +39,41 @@
 (def-assert-ch ch-evenp   evenp)
 (def-assert-ch ch-oddp     oddp)
 
-;; TODO: fixnum-nat-p, (integer-)nat-p
-;; TODO: fixnum-pos-p, (integer-)pos-p
+(defun fixnum-nat-p (n)
+  (and (typep n 'fixnum)
+       (>= (the fixnum n) 0)))
+
+(defun integer-nat-p (n)
+  (and (typep n 'integer)
+       (>= (the integer n) 0)))
+
+(defun fixnum-pos-p (n)
+  (and (typep n 'fixnum)
+       (> (the fixnum n) 0)))
+
+(defun integer-pos-p (n)
+  (and (typep n 'integer)
+       (> (the integer n) 0)))
+
+(def-assert-ch ch-fixnum-nat   fixnum-nat-p)
+(def-assert-ch ch-fixnum-pos   fixnum-pos-p)
+(def-assert-ch ch-integer-nat integer-nat-p)
+(def-assert-ch ch-integer-pos integer-pos-p)
+
+(defun fixnum-in-p (n start end)
+  (check-type n     fixnum)
+  (check-type start fixnum)
+  (check-type end   fixnum)
+
+  (<= (the fixnum start)
+      (the fixnum     n)
+      (the fixnum   end)))
+
+(defmacro ch-fixnum-in ((start end) &body body)
+  (with-gensyms (n)
+    `(let ((,n (progn ,@body)))
+       (assert (fixnum-in-p ,n ,start ,end))
+       (the fixnum ,n))))
 
 ;; CHARACTERS
 (def-check-type-ch ch-base-char         base-char)
@@ -117,7 +150,7 @@
 (defmacro ch-some (&body body)
   (with-gensyms (x)
     `(let ((,x (progn ,@body)))
-       (assert ,x (,x))
+       (assert ,x)
        ,x)))
 
 ;; NILABLE VALUES
