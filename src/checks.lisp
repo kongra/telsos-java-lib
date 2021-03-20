@@ -9,7 +9,7 @@
        (with-gensyms (,x)
          `(let ((,x (progn ,@body)))
             (check-type ,x ,',typespec)
-            (the ,',typespec ,x))))))
+            ,x)))))
 
 (defmacro def-assert-ch (name pred)
   (let ((x 'x))
@@ -135,8 +135,8 @@
 (def-check-type-ch ch-array               array)
 
 ;; VECTORS
-(def-check-type-ch ch-simple-vector simple-vector)
-(def-check-type-ch ch-vector               vector)
+(def-check-type-ch ch-simple-vector         simple-vector)
+(def-check-type-ch ch-vector                       vector)
 (def-check-type-ch ch-simple-bit-vector simple-bit-vector)
 (def-check-type-ch ch-bit-vector               bit-vector)
 
@@ -154,9 +154,22 @@
        ,x)))
 
 ;; NILABLE VALUES
-(defmacro ch-maybe ((check)  &body body)
+(defmacro ch-maybe ((check) &body body)
   (with-gensyms (x)
     `(let ((,x (progn ,@body)))
        (if (not ,x)
            ,x
            (,check ,x)))))
+
+;; CHECKS IN PROCEDURES
+(defmacro defn (spec args check &body body)
+  (let* ((check (if (symbolp check) (list check) check))
+         (body  (concatenate 'list check body)))
+
+    `(defun ,spec ,args ,body)))
+
+(defmacro fn (args check &body body)
+  (let* ((check (if (symbolp check) (list check) check))
+         (body  (concatenate 'list check body)))
+
+    `(lambda ,args ,body)))
