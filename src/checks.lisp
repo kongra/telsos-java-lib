@@ -16,7 +16,7 @@
     `(defmacro ,name (&body body)
        (with-gensyms (,x)
          `(let ((,x (progn ,@body)))
-            (assert (,',pred ,x) (,x))
+            (assert (,',pred ,x))
             ,x)))))
 
 ;; NUMBERS

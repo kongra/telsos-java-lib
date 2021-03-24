@@ -13,23 +13,23 @@
     #\Return
     #\Rubout))
 
-(defun str-trim-left (s)
+(defn str-trim-left (s) (ch-string)
   (ch-string s)
   (string-left-trim *whitespaces* s))
 
-(defun str-trim-right (s)
+(defn str-trim-right (s) (ch-string)
   (ch-string s)
   (string-right-trim *whitespaces* s))
 
-(defun str-trim (s)
+(defn str-trim (s) (ch-string)
   (ch-string s)
   (string-trim *whitespaces* s))
 
-(defun str-collapse-whitespaces (s)
+(defn str-collapse-whitespaces (s) (ch-string)
   (ch-string s)
   (ppcre:regex-replace-all "\\s+" s " "))
 
-(defun str-replace-first (old new s)
+(defn str-replace-first (old new s) (ch-string)
   (ch-string old)
   (ch-string new)
   (ch-string   s)
@@ -37,7 +37,7 @@
          (old (concatenate 'string  "\\Q" old)))
     (ppcre:regex-replace old s (list new))))
 
-(defun str-replace-all (old new s)
+(defn str-replace-all (old new s) (ch-string)
   (ch-string old)
   (ch-string new)
   (ch-string   s)
@@ -45,19 +45,19 @@
          (old (concatenate 'string  "\\Q" old)))
     (ppcre:regex-replace-all old s (list new))))
 
-(defun str-join (sep &rest strings)
+(defn str-join (sep &rest strings) (ch-string)
   (ch-string sep)
   (let ((sep (str-replace-all "~" "~~" (string sep))))
     (format nil
             (concatenate 'string "~{~a~^" sep "~}")
             strings)))
 
-(defun str-concat (&rest strings)
+(defn str-concat (&rest strings) (ch-string)
   (apply #'concatenate 'string strings))
 
-(defun str-repeat (n s)
-  (ch-fixnum n)
-  (ch-string s)
+(defn str-repeat (n s) (ch-string)
+  (ch-fixnum-nat n)
+  (ch-string     s)
   (let ((result nil))
     (dotimes (i n)
       (setf result (cons s result)))
