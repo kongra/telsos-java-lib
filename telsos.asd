@@ -12,5 +12,15 @@
   :components ((:module "src"
                 :components
                 ((:file "packages")
-                 (:file "checks" :depends-on ("packages"))
-                 (:file "telsos" :depends-on ("packages" "checks"))))))
+
+                 (:file "checks"
+                  :depends-on ("packages"))
+
+                 (:file "str"
+                  :depends-on ("packages"
+                               "checks"))
+
+                 (:file "telsos"
+                  :depends-on ("packages"
+                               "checks"
+                               "str"))))))
