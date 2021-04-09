@@ -39,26 +39,10 @@
 (def-assert-ch ch-evenp   evenp)
 (def-assert-ch ch-oddp     oddp)
 
-(defun fixnum-nat-p (n)
-  (and (typep n 'fixnum)
-       (>= (the fixnum n) 0)))
-
-(defun integer-nat-p (n)
-  (and (typep n 'integer)
-       (>= (the integer n) 0)))
-
-(defun fixnum-pos-p (n)
-  (and (typep n 'fixnum)
-       (> (the fixnum n) 0)))
-
-(defun integer-pos-p (n)
-  (and (typep n 'integer)
-       (> (the integer n) 0)))
-
-(def-assert-ch ch-fixnum-nat   fixnum-nat-p)
-(def-assert-ch ch-fixnum-pos   fixnum-pos-p)
-(def-assert-ch ch-integer-nat integer-nat-p)
-(def-assert-ch ch-integer-pos integer-pos-p)
+(def-assert-ch ch-fixnum-nat  non-negative-fixnum-p)
+(def-assert-ch ch-fixnum-pos      positive-fixnum-p)
+(def-assert-ch ch-integer-nat non-negative-integer-p)
+(def-assert-ch ch-integer-pos     positive-integer-p)
 
 (defun fixnum-in-p (n start end)
   (check-type n     fixnum)
