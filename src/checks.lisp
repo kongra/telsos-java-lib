@@ -2,6 +2,8 @@
 
 (in-package #:telsos)
 
+(named-readtables:in-readtable lol:lol-syntax)
+
 ;; ABSTRACTION / MACROS
 (defmacro def-check-type-ch (name typespec)
   (let ((x 'x))
@@ -48,10 +50,10 @@
   (check-type n     fixnum)
   (check-type start fixnum)
   (check-type end   fixnum)
-
-  (<= (the fixnum start)
-      (the fixnum     n)
-      (the fixnum   end)))
+  (lol:fast-progn
+   (<= (the fixnum start)
+       (the fixnum     n)
+       (the fixnum   end))))
 
 (defmacro ch-fixnum-in ((start end) &body body)
   (with-gensyms (n)
@@ -70,15 +72,16 @@
 (def-check-type-ch ch-string               string)
 
 (defun unsafe-whitespace-p (c)
-  (declare (character c))
-  (or (eq c #\Space)
-      (eq c #\Newline)
-      (eq c #\Backspace)
-      (eq c #\Tab)
-      (eq c #\Linefeed)
-      (eq c #\Page)
-      (eq c #\Return)
-      (eq c #\Rubout)))
+  (lol:fast-progn
+   (declare (character c))
+   (or (eq c #\Space)
+       (eq c #\Newline)
+       (eq c #\Backspace)
+       (eq c #\Tab)
+       (eq c #\Linefeed)
+       (eq c #\Page)
+       (eq c #\Return)
+       (eq c #\Rubout))))
 
 (defun unsafe-blank-p (s)
   (iter (for c :in-string s)

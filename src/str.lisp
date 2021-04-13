@@ -2,6 +2,8 @@
 
 (in-package #:telsos)
 
+(named-readtables:in-readtable lol:lol-syntax)
+
 ;; STRING UTILS
 (defvar *whitespaces*
   '(#\Space
@@ -27,7 +29,7 @@
 
 (defun str-replace-first (old new s)
   (let* ((ppcre:*allow-quoting* t)
-         (old (concatenate 'string  "\\Q" old)))
+         (old (concatenate 'string "\\Q" old)))
     (ppcre:regex-replace old s (list new))))
 
 (defun str-replace-all (old new s)
@@ -46,7 +48,9 @@
 
 (defun str-repeat (n s)
   (ch-fixnum-nat n)
-  (let ((result nil))
-    (dotimes (i n)
-      (setf result (cons s result)))
-    (apply #'str-concat result)))
+  (lol:fast-progn
+   (declare (fixnum n))
+   (let ((result nil))
+     (dotimes (i n)
+       (setf result (cons s result)))
+     (apply #'str-concat result))))
