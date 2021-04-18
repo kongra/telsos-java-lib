@@ -2,8 +2,6 @@
 
 (in-package #:telsos)
 
-(named-readtables:in-readtable lol:lol-syntax)
-
 ;; STRING UTILS
 (defvar *whitespaces*
   '(#\Space
@@ -47,10 +45,9 @@
   (apply #'concatenate 'string strings))
 
 (defun str-repeat (n s)
+  (declare (fixnum n) (optimize (speed 3)))
   (ch-fixnum-nat n)
-  (lol:fast-progn
-   (declare (fixnum n))
-   (let ((result nil))
-     (dotimes (i n)
-       (setf result (cons s result)))
-     (apply #'str-concat result))))
+  (let ((result nil))
+    (dotimes (i n)
+      (setf result (cons s result)))
+    (apply #'str-concat result)))

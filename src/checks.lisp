@@ -2,8 +2,6 @@
 
 (in-package #:telsos)
 
-(named-readtables:in-readtable lol:lol-syntax)
-
 ;; ABSTRACTION / MACROS
 (defmacro def-check-type-ch (name typespec)
   (let ((x 'x))
@@ -46,14 +44,15 @@
 (def-assert-ch ch-integer-nat non-negative-integer-p)
 (def-assert-ch ch-integer-pos     positive-integer-p)
 
+(declaim (inline fixnum-in-p))
 (defun fixnum-in-p (n start end)
+  (declare (optimize (speed 3)))
   (check-type n     fixnum)
   (check-type start fixnum)
   (check-type end   fixnum)
-  (lol:fast-progn
-   (<= (the fixnum start)
-       (the fixnum     n)
-       (the fixnum   end))))
+  (<= (the fixnum start)
+      (the fixnum     n)
+      (the fixnum   end)))
 
 (defmacro ch-fixnum-in ((start end) &body body)
   (with-gensyms (n)
@@ -71,34 +70,41 @@
 (def-check-type-ch ch-simple-string simple-string)
 (def-check-type-ch ch-string               string)
 
+(declaim (inline unsafe-whitespace-p))
 (defun unsafe-whitespace-p (c)
-  (lol:fast-progn
-   (declare (character c))
-   (or (eq c #\Space)
-       (eq c #\Newline)
-       (eq c #\Backspace)
-       (eq c #\Tab)
-       (eq c #\Linefeed)
-       (eq c #\Page)
-       (eq c #\Return)
-       (eq c #\Rubout))))
+  (declare (character c) (optimize (speed 3)))
+  (or (eq c #\Space)
+      (eq c #\Newline)
+      (eq c #\Backspace)
+      (eq c #\Tab)
+      (eq c #\Linefeed)
+      (eq c #\Page)
+      (eq c #\Return)
+      (eq c #\Rubout)))
 
+(declaim (inline unsafe-blank-p))
 (defun unsafe-blank-p (s)
+  (declare (optimize (speed 3)))
   (iter (for c :in-string s)
     (unless (unsafe-whitespace-p c)
       (return-from unsafe-blank-p nil)))
   t)
 
+(declaim (inline unsafe-non-blank-p))
 (defun unsafe-non-blank-p (s)
+  (declare (optimize (speed 3)))
   (not (unsafe-blank-p s)))
 
 (defun whitespace-p (c)
+  (declare (optimize (speed 3)))
   (unsafe-whitespace-p (ch-character c)))
 
 (defun blank-p (s)
+  (declare (optimize (speed 3)))
   (unsafe-blank-p (ch-string s)))
 
 (defun non-blank-p (s)
+  (declare (optimize (speed 3)))
   (unsafe-non-blank-p (ch-string s)))
 
 (def-assert-ch ch-blank         blank-p)

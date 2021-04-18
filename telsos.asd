@@ -7,9 +7,7 @@
   :serial t
   :depends-on (#:alexandria
                #:iterate
-               #:cl-ppcre
-               #:let-over-lambda
-               #:named-readtables)
+               #:cl-ppcre)
 
   :components ((:module "src"
                 :components
