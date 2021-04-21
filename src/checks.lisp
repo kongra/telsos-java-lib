@@ -46,7 +46,7 @@
 
 (declaim (inline fixnum-in-p))
 (defun fixnum-in-p (n start end)
-  (declare (fixnum n start end) (optimize (speed 3)))
+  (declare (fixnum n start end))
   (<= start n end))
 
 (defmacro ch-fixnum-in ((start end) &body body)
@@ -67,7 +67,7 @@
 
 (declaim (inline whitespace-p))
 (defun whitespace-p (c)
-  (declare (character c) (optimize (speed 3)))
+  (declare (character c))
   (or (eq c #\Space)
       (eq c #\Newline)
       (eq c #\Backspace)
@@ -78,7 +78,7 @@
       (eq c #\Rubout)))
 
 (defun blank-p (s)
-  (declare (type (simple-array character) s) (optimize (speed 3)))
+  (declare (type (simple-array character) s))
   (let ((n (the fixnum (length s))))
    (dotimes (i n)
      (declare (fixnum i))
