@@ -13,15 +13,19 @@
     #\Return
     #\Rubout))
 
+(declaim (inline str-trim-left))
 (defun str-trim-left (s)
   (string-left-trim *whitespaces* s))
 
+(declaim (inline str-trim-right))
 (defun str-trim-right (s)
   (string-right-trim *whitespaces* s))
 
+(declaim (inline str-trim))
 (defun str-trim (s)
   (string-trim *whitespaces* s))
 
+(declaim (inline str-collapse-whitespaces))
 (defun str-collapse-whitespaces (s)
   (ppcre:regex-replace-all "\\s+" s " "))
 
@@ -41,11 +45,11 @@
             (concatenate 'string "~{~a~^" sep "~}")
             strings)))
 
+(declaim (inline str-concat))
 (defun str-concat (&rest strings)
   (apply #'concatenate 'string strings))
 
 (defun str-repeat (n s)
-  (declare (fixnum n) (optimize (speed 3)))
   (ch-fixnum-nat n)
   (let ((result nil))
     (dotimes (i n)
