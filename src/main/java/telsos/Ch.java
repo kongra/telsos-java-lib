@@ -12,62 +12,74 @@ public final class Ch {
   }
 
   public static byte chPos(byte b) {
-    if (b > 0) return b;
+    if (b > 0)
+      return b;
     throw new AssertionError();
   }
 
   public static short chPos(short s) {
-    if (s > 0) return s;
+    if (s > 0)
+      return s;
     throw new AssertionError();
   }
 
   public static int chPos(int i) {
-    if (i > 0) return i;
+    if (i > 0)
+      return i;
     throw new AssertionError();
   }
 
   public static long chPos(long l) {
-    if (l > 0) return l;
+    if (l > 0)
+      return l;
     throw new AssertionError();
   }
 
   public static byte chNat(byte b) {
-    if (b >= 0) return b;
+    if (b >= 0)
+      return b;
     throw new AssertionError();
   }
 
   public static short chNat(short s) {
-    if (s >= 0) return s;
+    if (s >= 0)
+      return s;
     throw new AssertionError();
   }
 
   public static int chNat(int i) {
-    if (i >= 0) return i;
+    if (i >= 0)
+      return i;
     throw new AssertionError();
   }
 
   public static long chNat(long l) {
-    if (l >= 0) return l;
+    if (l >= 0)
+      return l;
     throw new AssertionError();
   }
 
   public static void validateRange(long start, long end) {
-    if (start > end) throw new IllegalArgumentException(
-        "start > end with start=" + start + ", end=" + end);
+    if (start > end)
+      throw new IllegalArgumentException(
+          "start > end with start=" + start + ", end=" + end);
   }
 
   public static void validateRange(int start, int end) {
-    if (start > end) throw new IllegalArgumentException(
-        "start > end with start=" + start + ", end=" + end);
+    if (start > end)
+      throw new IllegalArgumentException(
+          "start > end with start=" + start + ", end=" + end);
   }
 
   private static long chRange0(long start, long end, long l) {
-    if(start <= l && l <= end) return l;
+    if (start <= l && l <= end)
+      return l;
     throw new AssertionError();
   }
 
   private static int chRange0(int start, int end, int i) {
-    if(start <= i && i <= end) return i;
+    if (start <= i && i <= end)
+      return i;
     throw new AssertionError();
   }
 
@@ -92,7 +104,8 @@ public final class Ch {
   }
 
   public static String chNonBlank(String s) {
-    if (s == null || s.isBlank()) throw new AssertionError();
+    if (s == null || s.isBlank())
+      throw new AssertionError();
     return s;
   }
 
