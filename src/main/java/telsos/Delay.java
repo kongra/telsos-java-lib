@@ -10,7 +10,9 @@ import telsos.unchecked.UncheckedSupplier;
 public final class Delay<T> implements Supplier<T>, Deref<T>, Pending {
 
   private volatile T value;
+
   private volatile Throwable exception;
+
   private volatile Supplier<T> supplier;
 
   private Delay(Supplier<T> supplier) {
@@ -41,7 +43,7 @@ public final class Delay<T> implements Supplier<T>, Deref<T>, Pending {
       }
     }
     if (exception != null)
-      throw Objects.requireNonNull(Utils.sneakyThrow(exception));
+      throw Utils.sneakyThrow(exception);
 
     return value;
   }
