@@ -4,10 +4,10 @@ package telsos;
 
 public interface Pending {
 
-  boolean isRealized();
+  boolean isPending();
 
-  default boolean isPending() {
-    return !isRealized();
+  default boolean isRealized() {
+    return !isPending();
   }
 
 }

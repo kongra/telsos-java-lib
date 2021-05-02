@@ -54,8 +54,8 @@ public final class Delay<T> implements Supplier<T>, Deref<T>, Pending {
   }
 
   @Override
-  public boolean isRealized() {
-    return supplier == null;
+  public boolean isPending() {
+    return supplier != null;
   }
 
   @Override

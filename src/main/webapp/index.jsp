@@ -6,10 +6,5 @@
 </head>
 <body>
   <h2>Test polskich czcionek: ąęśćółżźń</h2>
-  
-  <c:forEach var="sample" items="some">
-    <c:out value="sample"></c:out>
-  </c:forEach>
-  
 </body>
 </html>
