@@ -5,6 +5,6 @@
 <meta charset="utf-8">
 </head>
 <body>
-  <h2>Test polskich czcionek: ąęśćółżźń</h2>
+  <h2>Test polskich czcionek: ąęśćółżźń !!!</h2>
 </body>
 </html>
