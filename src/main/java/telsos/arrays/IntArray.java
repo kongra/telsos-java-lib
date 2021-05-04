@@ -24,7 +24,7 @@ public final class IntArray {
 
   private IntArray(int length, int initialValue) {
     this(length);
-    for (int i = 0; i < length; i++) {
+    for (var i = 0; i < length; i++) {
       data[i] = initialValue;
     }
   }
@@ -42,9 +42,8 @@ public final class IntArray {
   }
 
   public void setFillPointer(int fillPointer) {
-    if (fillPointer >= data.length) {
+    if (fillPointer >= data.length)
       throw new IllegalArgumentException();
-    }
     this.fillPointer = fillPointer;
   }
 
@@ -57,19 +56,21 @@ public final class IntArray {
   }
 
   public int get(int i) {
-    if (i >= fillPointer) throw new ArrayIndexOutOfBoundsException();
+    if (i >= fillPointer)
+      throw new ArrayIndexOutOfBoundsException();
     return data[i];
   }
 
   public IntArray set(int i, int e) {
-    if (i >= fillPointer) throw new ArrayIndexOutOfBoundsException();
+    if (i >= fillPointer)
+      throw new ArrayIndexOutOfBoundsException();
     data[i] = e;
     return this;
   }
 
   @Override
   public String toString() {
-    StringBuilder s = new StringBuilder("#").append(data.length).append("(");
+    var s = new StringBuilder("#").append(data.length).append("(");
     forEach((i, e) -> {
       s.append(get(i));
       if (i != fillPointer() - 1) {
@@ -80,65 +81,72 @@ public final class IntArray {
   }
 
   public void forEach(Worker w) {
-    for (int i = 0; i < fillPointer(); i++) {
+    for (var i = 0; i < fillPointer(); i++) {
       w.work(data[i]);
     }
   }
 
   public void forEach(IndexedWorker w) {
-    for (int i = 0; i < fillPointer(); i++) {
+    for (var i = 0; i < fillPointer(); i++) {
       w.work(i, data[i]);
     }
   }
 
   public IntArray map(Mapper m) {
-    IntArray result = new IntArray(data.length);
+    var result = new IntArray(data.length);
     forEach(e -> result.push(m.map(e)));
     return result;
   }
 
   public IntArray map(IndexedMapper m) {
-    IntArray result = new IntArray(data.length);
+    var result = new IntArray(data.length);
     forEach((i, e) -> result.push(m.map(i, e)));
     return result;
   }
 
   public IntArray filter(Pred pred) {
-    IntArray result = new IntArray(data.length);
+    var result = new IntArray(data.length);
     forEach(e -> {
-      if (pred.call(e)) result.push(e);
+      if (pred.call(e)) {
+        result.push(e);
+      }
     });
     return result;
   }
 
   public IntArray filter(IndexedPred pred) {
-    IntArray result = new IntArray(data.length);
+    var result = new IntArray(data.length);
     forEach((i, e) -> {
-      if (pred.call(i, e)) result.push(e);
+      if (pred.call(i, e)) {
+        result.push(e);
+      }
     });
     return result;
   }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    IntArray other = (IntArray) o;
-    if (fillPointer() != other.fillPointer()) return false;
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
+    var other = (IntArray) o;
+    if (fillPointer() != other.fillPointer())
+      return false;
 
-    for (int i = 0; i < fillPointer(); i++) {
-      if (data[i] != other.data[i]) {
+    for (var i = 0; i < fillPointer(); i++) {
+      if (data[i] != other.data[i])
         return false;
-      }
     }
     return true;
   }
 
   @Override
   public int hashCode() {
-    if (fillPointer() == 0) return 0;
-    int result = 1;
-    for (int i = 0; i < fillPointer(); i++) {
+    if (fillPointer() == 0)
+      return 0;
+    var result = 1;
+    for (var i = 0; i < fillPointer(); i++) {
       result = 31 * result + data[i];
     }
     result = 31 * result + fillPointer;

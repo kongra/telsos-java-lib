@@ -65,7 +65,7 @@ public final class Delay<T> implements Supplier<T>, Deref<T>, Pending {
   }
 
   @Override
-  public final boolean equals(Object o) {
+  public boolean equals(Object o) {
     if (this == o)
       return true;
     if (o == null || getClass() != o.getClass())
@@ -75,7 +75,7 @@ public final class Delay<T> implements Supplier<T>, Deref<T>, Pending {
   }
 
   @Override
-  public final int hashCode() {
+  public int hashCode() {
     return Objects.hash(deref());
   }
 
