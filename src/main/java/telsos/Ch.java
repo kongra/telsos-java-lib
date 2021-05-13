@@ -98,6 +98,14 @@ public final class Ch {
     return chRange0(start, end, i);
   }
 
+  public static int chIn(int i, int... values) {
+    for (var v : values) {
+      if (i == v)
+        return i;
+    }
+    throw new AssertionError();
+  }
+
   public static IntUnaryOperator chRange(int start, int end) {
     validateRange(start, end);
     return i -> chRange0(start, end, i);
