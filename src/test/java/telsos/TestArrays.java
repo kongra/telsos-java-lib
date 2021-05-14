@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
+import telsos.db.MAAS;
+
 class TestArrays {
 
   @Test
@@ -11,6 +13,13 @@ class TestArrays {
     assertThat(2 <= 2).isTrue();
     assertThat(2 <= 20).isTrue();
     assertThat(2 <= 1).isFalse();
+  }
+
+  @Test
+  void testDB() {
+    MAAS.get().inReadCommitted(ctx -> {
+      // ctx.create().select().fetch();
+    });
   }
 
 }
