@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-import telsos.db.MAAS;
+import telsos.db.maas.MAAS;
 
 class TestArrays {
 

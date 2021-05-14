@@ -1,4 +1,4 @@
-package telsos.db;
+package telsos.db.maas;
 
 import static telsos.Delay.delay;
 
@@ -10,6 +10,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 import telsos.Delay;
+import telsos.db.DBI;
 
 public class MAAS extends DBI {
 
