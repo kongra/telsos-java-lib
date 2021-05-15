@@ -22,7 +22,7 @@ public final class Utils {
    * <p>
    * <code>throw sneakyThrow( some exception );</code>
    */
-  static RuntimeException sneakyThrow(Throwable t) {
+  public static RuntimeException sneakyThrow(Throwable t) {
     // http://www.mail-archive.com/javaposse@googlegroups.com/msg05984.html
     if (t == null)
       throw new NullPointerException();

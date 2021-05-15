@@ -20,6 +20,11 @@ class TestArrays {
     MAAS.get().inReadCommitted(ctx -> {
       System.out.println("It works");
     });
+
+    int i = MAAS.get().inSerializable1(ctx -> {
+      return 1;
+    });
+    System.out.println("The returned value is " + i);
   }
 
 }

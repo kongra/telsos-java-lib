@@ -15,6 +15,8 @@ import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
+import telsos.Utils;
+
 public class Tools {
 
   @FunctionalInterface
@@ -47,7 +49,7 @@ public class Tools {
 
   public static class TxCtx {
 
-    public final Connection conn;
+    private final Connection conn;
 
     public final int isolationLevel;
 
@@ -59,27 +61,38 @@ public class Tools {
 
     private int restartsCount;
 
+    private final Thread thread;
+
     private TxCtx(Connection conn, int isolationLevel, int allowedRestartsCount,
         SQLDialect dialect) {
       this.conn = Objects.requireNonNull(conn);
       this.isolationLevel = chIsolationLevel(isolationLevel);
       this.allowedRestartsCount = chNat(allowedRestartsCount);
       this.dialect = Objects.requireNonNull(dialect);
+      thread = Thread.currentThread();
     }
 
     public synchronized DSLContext create() {
+      assertSingleThreadUse();
+
       if (dslContext == null) {
         dslContext = DSL.using(conn, dialect);
       }
       return dslContext;
     }
 
-    public synchronized void markRestart() {
+    private synchronized void markRestart() {
       restartsCount++;
     }
 
     public synchronized int restartsCount() {
       return restartsCount;
+    }
+
+    private void assertSingleThreadUse() throws IllegalAccessError {
+      if (thread != Thread.currentThread())
+        throw new IllegalAccessError(
+            "You can't call TxCtx from another thread!");
     }
   }
 
@@ -98,32 +111,34 @@ public class Tools {
     });
   }
 
-  public static <T> T inTransaction(TxCtx ctx, TxExpr<T> expr) {
+  private static <T> T inTransaction(TxCtx ctx, TxExpr<T> expr) {
+    final var conn = ctx.conn;
+    boolean autoCommit;
     try {
-      final var conn = ctx.conn;
-      final var autoCommit = conn.getAutoCommit();
-      try {
-        conn.setAutoCommit(false);
-        conn.setTransactionIsolation(ctx.isolationLevel);
-        final var result = expr.eval(ctx);
-        conn.commit();
-        return result;
-      } catch (Throwable e) {
-        conn.rollback();
-        throw e;
-      } finally {
-        conn.setAutoCommit(autoCommit);
-      }
+      autoCommit = conn.getAutoCommit();
     } catch (SQLException e) {
-      throw new RuntimeException(e);
+      throw Utils.sneakyThrow(e);
     }
-  }
-
-  public static void inTransaction(TxCtx ctx, TxStmt stmt) {
-    inTransaction(ctx, ctx1 -> {
-      stmt.exec(ctx1);
-      return null;
-    });
+    try {
+      conn.setAutoCommit(false);
+      conn.setTransactionIsolation(ctx.isolationLevel);
+      final var result = expr.eval(ctx);
+      conn.commit();
+      return result;
+    } catch (Throwable e) {
+      try {
+        conn.rollback();
+      } catch (SQLException e1) {
+        e1.printStackTrace();
+      }
+      throw Utils.sneakyThrow(e);
+    } finally {
+      try {
+        conn.setAutoCommit(autoCommit);
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
   }
 
   public static SQLException asSQLException(Throwable t) {
