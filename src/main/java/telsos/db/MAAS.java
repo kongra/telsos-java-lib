@@ -27,7 +27,7 @@ public class MAAS implements DBI {
     return ds.get();
   }
 
-  private static final Delay<DataSource> ds = delay(() -> {
+  private final Delay<DataSource> ds = delay(() -> {
     var config = new HikariConfig();
     config.setJdbcUrl("jdbc:postgresql://localhost/MAAS");
     config.setUsername("jee");
@@ -35,7 +35,18 @@ public class MAAS implements DBI {
     config.addDataSourceProperty("cachePrepStmts", "true");
     config.addDataSourceProperty("prepStmtCacheSize", "250");
     config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
-    return new HikariDataSource(config);
+
+    config.setMaximumPoolSize(100);
+    config.setAutoCommit(true);
+    config.setValidationTimeout(5000);
+
+    var hikari = new HikariDataSource(config);
+
+    Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+      hikari.close();
+    }));
+
+    return hikari;
   });
 
   private static final MAAS INSTANCE = new MAAS();
