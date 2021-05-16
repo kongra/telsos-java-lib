@@ -17,9 +17,7 @@ public abstract class HikariPool {
 
   private final Delay<HikariDataSource> dataSource = delay(() -> {
     var hikari = new HikariDataSource(hikariConfig());
-    Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-      hikari.close();
-    }));
+    Runtime.getRuntime().addShutdownHook(new Thread(hikari::close));
     return hikari;
   });
 
