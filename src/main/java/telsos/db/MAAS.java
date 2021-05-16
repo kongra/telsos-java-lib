@@ -1,17 +1,10 @@
 package telsos.db;
 
-import static telsos.Delay.delay;
-
-import javax.sql.DataSource;
-
 import org.jooq.SQLDialect;
 
 import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 
-import telsos.Delay;
-
-public class MAAS implements DBI {
+public class MAAS extends HikariPool implements DBI {
 
   public static MAAS get() {
     return INSTANCE;
@@ -23,11 +16,7 @@ public class MAAS implements DBI {
   }
 
   @Override
-  public DataSource dataSource() {
-    return ds.get();
-  }
-
-  private final Delay<DataSource> ds = delay(() -> {
+  public HikariConfig hikariConfig() {
     var config = new HikariConfig();
     config.setJdbcUrl("jdbc:postgresql://localhost/MAAS");
     config.setUsername("jee");
@@ -40,14 +29,8 @@ public class MAAS implements DBI {
     config.setAutoCommit(true);
     config.setValidationTimeout(5000);
 
-    var hikari = new HikariDataSource(config);
-
-    Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-      hikari.close();
-    }));
-
-    return hikari;
-  });
+    return config;
+  }
 
   private static final MAAS INSTANCE = new MAAS();
 
