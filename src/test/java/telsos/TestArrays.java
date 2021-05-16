@@ -1,6 +1,7 @@
 package telsos;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static telsos.db.maas.tables.Profiles.PROFILES;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,10 +22,15 @@ class TestArrays {
       System.out.println("It works");
     });
 
-    int i = MAAS.get().inSerializable1(ctx -> {
-      return 1;
+    var email = MAAS.get().inSerializable1(ctx -> {
+      var result = ctx.create().select(PROFILES.EMAIL).from(PROFILES)
+          .where(PROFILES.ID.eq(1L)).fetch();
+
+      System.out.println(result);
+      return result.get(0).get(PROFILES.EMAIL);
     });
-    System.out.println("The returned value is " + i);
+
+    assertThat(email).isEqualTo("kongra@gmail.com");
   }
 
 }

@@ -11,7 +11,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 import telsos.Delay;
 
-public class MAAS extends DBI {
+public class MAAS implements DBI {
 
   public static MAAS get() {
     return INSTANCE;

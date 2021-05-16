@@ -15,6 +15,7 @@ import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
+import telsos.TelsosException;
 import telsos.Utils;
 
 public class Tools {
@@ -100,7 +101,7 @@ public class Tools {
     try (var conn = ds.getConnection()) {
       return expr.eval(conn);
     } catch (SQLException e) {
-      throw new RuntimeException(e);
+      throw new TelsosException(e);
     }
   }
 
@@ -125,18 +126,18 @@ public class Tools {
       final var result = expr.eval(ctx);
       conn.commit();
       return result;
-    } catch (Throwable e) {
+    } catch (Exception e) {
       try {
         conn.rollback();
       } catch (SQLException e1) {
-        e1.printStackTrace();
+        // In the future: maybe log
       }
       throw Utils.sneakyThrow(e);
     } finally {
       try {
         conn.setAutoCommit(autoCommit);
       } catch (SQLException e) {
-        e.printStackTrace();
+        // In the future: maybe log
       }
     }
   }
@@ -168,17 +169,17 @@ public class Tools {
     for (var i = 0;; i++) {
       try {
         return supplier.get();
-      } catch (Throwable t) {
+      } catch (Exception e) {
         if (i == ctx.allowedRestartsCount)
-          throw t;
+          throw e;
 
         var isRestarting = RESTARTS_FINDERS.get(ctx.dialect);
         if (null == isRestarting)
           // No way to perform a check for this dialect
-          throw t;
+          throw e;
 
-        if (!isRestarting.eval(t))
-          throw t;
+        if (!isRestarting.eval(e))
+          throw e;
 
         // We continue the restarting iterations
         ctx.markRestart();

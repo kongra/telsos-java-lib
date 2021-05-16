@@ -5,15 +5,13 @@ package telsos;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-import telsos.unchecked.UncheckedSupplier;
-
 public final class Delay<T> implements Supplier<T>, Deref<T>, Pending {
 
-  private volatile T value;
+  private T value;
 
-  private volatile Throwable exception;
+  private Exception exception;
 
-  private volatile Supplier<T> supplier;
+  private Supplier<T> supplier;
 
   private Delay(Supplier<T> supplier) {
     this.supplier = supplier;
@@ -23,25 +21,17 @@ public final class Delay<T> implements Supplier<T>, Deref<T>, Pending {
     return new Delay<>(supplier);
   }
 
-  public static <T> Delay<T> delayUnchecked(UncheckedSupplier<T> supplier) {
-    return new Delay<>(supplier);
-  }
-
   @Override
-  public T deref() {
+  public synchronized T deref() {
     if (supplier != null) {
-      synchronized (this) {
-        // double check
-        if (supplier != null) {
-          try {
-            value = supplier.get();
-          } catch (Throwable t) {
-            exception = t;
-          }
-          supplier = null;
-        }
+      try {
+        value = supplier.get();
+      } catch (Exception t) {
+        exception = t;
       }
+      supplier = null;
     }
+
     if (exception != null)
       throw Utils.sneakyThrow(exception);
 
@@ -54,14 +44,14 @@ public final class Delay<T> implements Supplier<T>, Deref<T>, Pending {
   }
 
   @Override
-  public boolean isPending() {
+  public synchronized boolean isPending() {
     return supplier != null;
   }
 
   @Override
-  public String toString() {
+  public synchronized String toString() {
     return "Delay{" + "pending=" + isPending() + ", value="
-        + (isPending() ? "..." : String.valueOf(value)) + '}';
+        + (isPending() ? "..." : String.valueOf(deref())) + '}';
   }
 
   @Override
