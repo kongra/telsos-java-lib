@@ -114,7 +114,7 @@ public class Tools {
 
   private static <T> T inTransaction(TxCtx ctx, TxExpr<T> expr) {
     final var conn = ctx.conn;
-    boolean autoCommit;
+    final boolean autoCommit;
     try {
       autoCommit = conn.getAutoCommit();
     } catch (SQLException e) {
