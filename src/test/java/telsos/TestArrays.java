@@ -32,5 +32,4 @@ class TestArrays {
 
     assertThat(email).isEqualTo("kongra@gmail.com");
   }
-
 }
