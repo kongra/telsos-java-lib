@@ -18,7 +18,7 @@ import org.jooq.impl.DSL;
 import telsos.TelsosException;
 import telsos.Utils;
 
-public class Tools {
+public class Transactions {
 
   @FunctionalInterface
   public interface Expr<T> {
@@ -266,6 +266,6 @@ public class Tools {
     });
   }
 
-  private Tools() {
+  private Transactions() {
   }
 }

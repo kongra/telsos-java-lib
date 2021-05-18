@@ -6,9 +6,9 @@ import org.jooq.SQLDialect;
 
 import com.zaxxer.hikari.HikariConfig;
 
-public class MAAS implements DBI {
+public class Maas implements Dbi {
 
-  public static MAAS get() {
+  public static Maas get() {
     return instance;
   }
 
@@ -41,8 +41,8 @@ public class MAAS implements DBI {
     }
   };
 
-  private static final MAAS instance = new MAAS();
+  private static final Maas instance = new Maas();
 
-  private MAAS() {
+  private Maas() {
   }
 }

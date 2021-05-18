@@ -5,7 +5,7 @@ import static telsos.db.maas.tables.Profiles.PROFILES;
 
 import org.junit.jupiter.api.Test;
 
-import telsos.db.MAAS;
+import telsos.db.Maas;
 
 class TestArrays {
 
@@ -18,11 +18,11 @@ class TestArrays {
 
   @Test
   void test2() {
-    MAAS.get().inReadCommitted(ctx -> {
+    Maas.get().inReadCommitted(ctx -> {
       System.out.println("It works");
     });
 
-    var email = MAAS.get().inSerializable1(ctx -> {
+    var email = Maas.get().inSerializable1(ctx -> {
       var result = ctx.create().select(PROFILES.EMAIL).from(PROFILES)
           .where(PROFILES.ID.eq(1L)).fetch();
 

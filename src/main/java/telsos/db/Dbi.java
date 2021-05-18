@@ -4,22 +4,23 @@ import javax.sql.DataSource;
 
 import org.jooq.SQLDialect;
 
-import telsos.db.Tools.TxExpr;
-import telsos.db.Tools.TxStmt;
+import telsos.db.Transactions.TxExpr;
+import telsos.db.Transactions.TxStmt;
 
-public interface DBI {
+public interface Dbi {
 
   SQLDialect dialect();
 
   DataSource dataSource();
 
   default <T> T inSerializable(int allowedRestartsCount, TxExpr<T> expr) {
-    return Tools.inSerializable(dialect(), dataSource(), allowedRestartsCount,
-        expr);
+    return Transactions.inSerializable(dialect(), dataSource(),
+        allowedRestartsCount, expr);
   }
 
   default void inSerializable(int allowedRestartsCount, TxStmt stmt) {
-    Tools.inSerializable(dialect(), dataSource(), allowedRestartsCount, stmt);
+    Transactions.inSerializable(dialect(), dataSource(), allowedRestartsCount,
+        stmt);
   }
 
   default <T> T inSerializable1(TxExpr<T> expr) {
@@ -63,11 +64,11 @@ public interface DBI {
   }
 
   default <T> T inReadCommitted(TxExpr<T> expr) {
-    return Tools.inReadCommitted(dialect(), dataSource(), expr);
+    return Transactions.inReadCommitted(dialect(), dataSource(), expr);
   }
 
   default void inReadCommitted(TxStmt stmt) {
-    Tools.inReadCommitted(dialect(), dataSource(), stmt);
+    Transactions.inReadCommitted(dialect(), dataSource(), stmt);
   }
 
 }
