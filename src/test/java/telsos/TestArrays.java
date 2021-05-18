@@ -1,11 +1,10 @@
 package telsos;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static telsos.db.Dbs.maas;
 import static telsos.db.maas.tables.Profiles.PROFILES;
 
 import org.junit.jupiter.api.Test;
-
-import telsos.db.Maas;
 
 class TestArrays {
 
@@ -18,11 +17,11 @@ class TestArrays {
 
   @Test
   void test2() {
-    Maas.get().inReadCommitted(ctx -> {
+    maas.inReadCommitted(ctx -> {
       System.out.println("It works");
     });
 
-    var email = Maas.get().inSerializable1(ctx -> {
+    var email = maas.inSerializable1(ctx -> {
       var result = ctx.create().select(PROFILES.EMAIL).from(PROFILES)
           .where(PROFILES.ID.eq(1L)).fetch();
 

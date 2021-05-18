@@ -7,7 +7,7 @@ import org.jooq.SQLDialect;
 import telsos.db.tools.Transactions.TxExpr;
 import telsos.db.tools.Transactions.TxStmt;
 
-public interface Dbi {
+public interface Db {
 
   SQLDialect dialect();
 
