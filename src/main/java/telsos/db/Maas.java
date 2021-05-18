@@ -6,6 +6,9 @@ import org.jooq.SQLDialect;
 
 import com.zaxxer.hikari.HikariConfig;
 
+import telsos.db.tools.Dbi;
+import telsos.db.tools.HikariPool;
+
 public class Maas implements Dbi {
 
   public static Maas get() {

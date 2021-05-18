@@ -1,11 +1,11 @@
-package telsos.db;
+package telsos.db.tools;
 
 import javax.sql.DataSource;
 
 import org.jooq.SQLDialect;
 
-import telsos.db.Transactions.TxExpr;
-import telsos.db.Transactions.TxStmt;
+import telsos.db.tools.Transactions.TxExpr;
+import telsos.db.tools.Transactions.TxStmt;
 
 public interface Dbi {
 

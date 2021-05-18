@@ -1,4 +1,4 @@
-package telsos.db;
+package telsos.db.tools;
 
 import static telsos.Delay.delay;
 
