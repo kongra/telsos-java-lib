@@ -41,7 +41,6 @@ public class Dbs {
     public DataSource dataSource() {
       return pool.dataSource();
     }
-
   };
 
   private Dbs() {

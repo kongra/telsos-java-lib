@@ -10,13 +10,6 @@ class TestArrays {
 
   @Test
   void test1() {
-    assertThat(2 <= 2).isTrue();
-    assertThat(2 <= 20).isTrue();
-    assertThat(2 <= 1).isFalse();
-  }
-
-  @Test
-  void test2() {
     maas.inReadCommitted(ctx -> {
       System.out.println("It works");
     });
