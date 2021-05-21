@@ -1,3 +1,4 @@
+
 package telsos.db.tools;
 
 import static telsos.Ch.chIn;
@@ -18,12 +19,12 @@ import org.jooq.impl.DSL;
 import telsos.TelsosException;
 import telsos.Utils;
 
-public class Transactions {
+public final class Transactions {
 
   @FunctionalInterface
   public interface Expr<T> {
 
-    T eval(Connection conn);
+    T eval(Connection conn);  
 
   }
 
@@ -48,7 +49,7 @@ public class Transactions {
 
   }
 
-  public static class TxCtx {
+  public final static class TxCtx {
 
     private final Connection conn;
 
