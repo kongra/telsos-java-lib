@@ -24,7 +24,7 @@ public final class Transactions {
   @FunctionalInterface
   public interface Expr<T> {
 
-    T eval(Connection conn);  
+    T eval(Connection conn);
 
   }
 
@@ -49,7 +49,7 @@ public final class Transactions {
 
   }
 
-  public final static class TxCtx {
+  public static final class TxCtx {
 
     private final Connection conn;
 

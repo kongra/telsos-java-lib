@@ -26,10 +26,10 @@ public class NotifResource {
 
   @POST
   @Path("/pong")
-  @Consumes("application/json")
-  @Produces("application/json")
-  public User pong(@Valid User user) {
-    return user;
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  public @Valid User pong(@Valid User user) {
+    return user.incrementAge();
   }
 
 }

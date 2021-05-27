@@ -16,4 +16,11 @@ public class User {
   @NotNull
   private String email;
 
+  private int age;
+
+  public User incrementAge() {
+    age++;
+    return this;
+  }
+
 }
