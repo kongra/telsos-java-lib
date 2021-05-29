@@ -1,2 +1,4 @@
-var t1 = new telsos.TelsosException();
+maas.inReadCommitted(ctx -> {
+      System.out.println("It works");
+    });
 /exit

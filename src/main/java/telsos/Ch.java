@@ -35,6 +35,12 @@ public final class Ch {
     throw new AssertionError();
   }
 
+  public static double chPos(double d) {
+    if (d > 0)
+      return d;
+    throw new AssertionError();
+  }
+
   public static byte chNat(byte b) {
     if (b >= 0)
       return b;
