@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 mvn sonar:sonar \
   -Dsonar.projectKey=telsos \
   -Dsonar.host.url=http://localhost:9000 \

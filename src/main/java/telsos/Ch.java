@@ -35,12 +35,6 @@ public final class Ch {
     throw new AssertionError();
   }
 
-  public static double chPos(double d) {
-    if (d > 0)
-      return d;
-    throw new AssertionError();
-  }
-
   public static byte chNat(byte b) {
     if (b >= 0)
       return b;
@@ -115,6 +109,18 @@ public final class Ch {
   public static IntUnaryOperator chRange(int start, int end) {
     validateRange(start, end);
     return i -> chRange0(start, end, i);
+  }
+
+  public static double chNonNeg(double d) {
+    if (d >= 0)
+      return d;
+    throw new AssertionError();
+  }
+
+  public static float chNonNeg(float f) {
+    if (f >= 0)
+      return f;
+    throw new AssertionError();
   }
 
   public static String chNonBlank(String s) {

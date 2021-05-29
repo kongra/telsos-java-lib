@@ -38,7 +38,7 @@
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
       <version>3.19.0</version>
-      <scope>test</scope>
+      <!-- <scope>test</scope> it's needed in jShell -->
     </dependency>
 
     <dependency>
@@ -195,7 +195,7 @@
           <configuration>
             <tomeeVersion>1.7.1</tomeeVersion>
             <tomeeClassifier>plus</tomeeClassifier>
-            <path>/home/kongra/Javasoft/apache-tomee-9.0.0-M3</path>
+            <path>/home/kongra/Javasoft/apache-tomee-9.0.0-M7</path>
           </configuration>
         </plugin>
 
