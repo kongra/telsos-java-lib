@@ -49,8 +49,8 @@ public class Profile {
 
   @Override
   public final int hashCode() {
-    final var id = getId();
-    return 31 + (int) (id ^ id >>> 32);
+    final var theId = getId();
+    return 31 + (int) (theId ^ theId >>> 32);
   }
 
   @Override

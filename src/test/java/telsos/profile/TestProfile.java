@@ -34,8 +34,10 @@ class TestProfile {
     assertThatExceptionOfType(ChError.class).isThrownBy(() -> {
       profile.hashCode();
     });
+
+    var otherProfile = new Profile();
     assertThatExceptionOfType(ChError.class).isThrownBy(() -> {
-      profile.equals(new Profile());
+      profile.equals(otherProfile);
     });
     assertThatExceptionOfType(ChError.class).isThrownBy(() -> {
       profile.setId(-1);
