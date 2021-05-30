@@ -48,17 +48,19 @@ class TestProfile {
     assertThat(profile.getId()).isEqualTo(1);
   }
 
-  @SuppressWarnings("unused")
   @Test
   void testProfileConstructor3() {
     assertThatExceptionOfType(ChError.class).isThrownBy(() -> {
-      new Profile(-1, "kongra@gmail.com", "Konrad Grzanek");
+      @SuppressWarnings("unused")
+      var profile = new Profile(-1, "kongra@gmail.com", "Konrad Grzanek");
     });
     assertThatExceptionOfType(ChError.class).isThrownBy(() -> {
-      new Profile(1, "kongra@gmail.com_", "Konrad Grzanek");
+      @SuppressWarnings("unused")
+      var profile = new Profile(1, "kongra@gmail.com_", "Konrad Grzanek");
     });
     assertThatExceptionOfType(ChError.class).isThrownBy(() -> {
-      new Profile(1, "kongra@gmail.com", "   ");
+      @SuppressWarnings("unused")
+      var profile = new Profile(1, "kongra@gmail.com", "   ");
     });
 
     var profile = new Profile(1, "kongra@gmail.com", "Konrad Grzanek");
