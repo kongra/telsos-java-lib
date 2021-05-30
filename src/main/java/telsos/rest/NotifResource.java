@@ -2,7 +2,6 @@ package telsos.rest;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -28,8 +27,8 @@ public class NotifResource {
   @Path("/pong")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public @Valid User pong(@Valid User user) {
-    return user.incrementAge();
+  public Response pong(String user) {
+    return Response.ok().entity("{}").build();
   }
 
 }
