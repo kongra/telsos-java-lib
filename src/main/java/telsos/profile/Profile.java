@@ -4,53 +4,37 @@ import static telsos.Ch.chEmail;
 import static telsos.Ch.chNat;
 import static telsos.Ch.chNonBlank;
 
-import java.util.Objects;
+import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectReader;
+import com.fasterxml.jackson.databind.ObjectWriter;
+
+import lombok.Getter;
+import telsos.JSON;
+
+@Getter
 public class Profile {
 
-  private long id = -1;
+  private final long id;
 
-  private String email;
+  private final String email;
 
-  private String name;
+  private final String name;
 
-  public Profile() {
-  }
-
-  public Profile(long id, String email, String name) {
-    setId(id);
-    setEmail(email);
-    setName(name);
-  }
-
-  public final long getId() {
-    return chNat(id);
-  }
-
-  public final void setId(long id) {
+  @JsonCreator
+  public Profile(@JsonProperty("id") long id,
+      @JsonProperty("email") String email, @JsonProperty("name") String name) {
     this.id = chNat(id);
-  }
-
-  public final String getEmail() {
-    return Objects.requireNonNull(email);
-  }
-
-  public final void setEmail(String email) {
     this.email = chEmail(email);
-  }
-
-  public final String getName() {
-    return Objects.requireNonNull(name);
-  }
-
-  public final void setName(String name) {
     this.name = chNonBlank(name);
   }
 
   @Override
   public final int hashCode() {
-    final var theId = getId();
-    return 31 + (int) (theId ^ theId >>> 32);
+    return 31 + (int) (id ^ id >>> 32);
   }
 
   @Override
@@ -60,7 +44,26 @@ public class Profile {
     if (!(obj instanceof Profile))
       return false;
     var other = (Profile) obj;
-    return getId() == other.getId();
+    return id == other.id;
+  }
+
+  private static final ObjectReader PROFILE_JSON_READER = JSON.OBJECT_MAPPER
+      .readerFor(Profile.class);
+
+  private static final ObjectWriter PROFILE_JSON_WRITER = JSON.OBJECT_MAPPER
+      .writerFor(Profile.class);
+
+  public static Profile fromJSONString(String json) throws IOException {
+    return PROFILE_JSON_READER.readValue(json, Profile.class);
+  }
+
+  public static String toJSONString(Profile profile)
+      throws JsonProcessingException {
+    return PROFILE_JSON_WRITER.writeValueAsString(profile);
+  }
+
+  public String toJSONString() throws JsonProcessingException {
+    return toJSONString(this);
   }
 
 }

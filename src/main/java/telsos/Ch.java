@@ -7,6 +7,13 @@ import java.util.function.LongUnaryOperator;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
+/**
+ * type Ch T = T -> T
+ *
+ * @author kongra
+ *
+ * @param <T>
+ */
 @FunctionalInterface
 public interface Ch<T> {
 
@@ -15,49 +22,49 @@ public interface Ch<T> {
   static byte chPos(byte b) {
     if (b > 0)
       return b;
-    throw new ChError();
+    throw new ChError(b);
   }
 
   static short chPos(short s) {
     if (s > 0)
       return s;
-    throw new ChError();
+    throw new ChError(s);
   }
 
   static int chPos(int i) {
     if (i > 0)
       return i;
-    throw new ChError();
+    throw new ChError(i);
   }
 
   static long chPos(long l) {
     if (l > 0)
       return l;
-    throw new ChError();
+    throw new ChError(l);
   }
 
   static byte chNat(byte b) {
     if (b >= 0)
       return b;
-    throw new ChError();
+    throw new ChError(b);
   }
 
   static short chNat(short s) {
     if (s >= 0)
       return s;
-    throw new ChError();
+    throw new ChError(s);
   }
 
   static int chNat(int i) {
     if (i >= 0)
       return i;
-    throw new ChError();
+    throw new ChError(i);
   }
 
   static long chNat(long l) {
     if (l >= 0)
       return l;
-    throw new ChError();
+    throw new ChError(l);
   }
 
   static void validateRange(long start, long end) {
@@ -75,13 +82,13 @@ public interface Ch<T> {
   private static long chRange0(long start, long end, long l) {
     if (start <= l && l <= end)
       return l;
-    throw new ChError();
+    throw new ChError(l);
   }
 
   private static int chRange0(int start, int end, int i) {
     if (start <= i && i <= end)
       return i;
-    throw new ChError();
+    throw new ChError(i);
   }
 
   static long chRange(long start, long end, long l) {
@@ -115,34 +122,34 @@ public interface Ch<T> {
   static double chNonNeg(double d) {
     if (d >= 0)
       return d;
-    throw new ChError();
+    throw new ChError(d);
   }
 
   static float chNonNeg(float f) {
     if (f >= 0)
       return f;
-    throw new ChError();
+    throw new ChError(f);
   }
 
   static double chPos(double d) {
     if (d > 0)
       return d;
-    throw new ChError();
+    throw new ChError(d);
   }
 
   static float chPos(float f) {
     if (f > 0)
       return f;
-    throw new ChError();
+    throw new ChError(f);
   }
 
   static String chNonBlank(String s) {
     if (s == null || s.isBlank())
-      throw new ChError();
+      throw new ChError(s);
     return s;
   }
 
-  Ch<String> nonBlank = Ch::chNonBlank;
+  Ch<String> nonBlank = Ch::chNonBlank; // s -> chNonBlank(s)
 
   EmailValidator emailValidator = EmailValidator.getInstance();
 
