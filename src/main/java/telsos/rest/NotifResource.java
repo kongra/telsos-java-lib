@@ -34,12 +34,15 @@ public class NotifResource {
   @Produces(MediaType.APPLICATION_JSON)
   public Response pong(String profileJSON) {
     try {
-      var profile1 = Profile.fromJSONString(profileJSON);
-      return Response.ok().entity(profile1.toJSONString()).build();
+      return pongImpl(profileJSON);
     } catch (IOException e) {
-      System.out.println(e);
       return Response.status(Status.INTERNAL_SERVER_ERROR).build();
     }
+  }
+
+  private static Response pongImpl(String profileJSON) throws IOException {
+    var profile1 = Profile.fromJSONString(profileJSON);
+    return Response.ok().entity(profile1.toJSONString()).build();
   }
 
   @POST

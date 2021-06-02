@@ -4,13 +4,10 @@ import static telsos.Ch.chEmail;
 import static telsos.Ch.chNat;
 import static telsos.Ch.chNonBlank;
 
-import java.io.IOException;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectReader;
-import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 import lombok.Getter;
 import telsos.JSON;
@@ -47,19 +44,14 @@ public class Profile {
     return id == other.id;
   }
 
-  private static final ObjectReader PROFILE_JSON_READER = JSON.OBJECT_MAPPER
-      .readerFor(Profile.class);
-
-  private static final ObjectWriter PROFILE_JSON_WRITER = JSON.OBJECT_MAPPER
-      .writerFor(Profile.class);
-
-  public static Profile fromJSONString(String json) throws IOException {
-    return PROFILE_JSON_READER.readValue(json, Profile.class);
+  public static Profile fromJSONString(String json)
+      throws JsonMappingException, JsonProcessingException {
+    return JSON.readValue(Profile.class, json);
   }
 
   public static String toJSONString(Profile profile)
       throws JsonProcessingException {
-    return PROFILE_JSON_WRITER.writeValueAsString(profile);
+    return JSON.writeValue(profile);
   }
 
   public String toJSONString() throws JsonProcessingException {
