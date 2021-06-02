@@ -41,18 +41,4 @@ public class Profile {
     return id == other.id;
   }
 
-  // public static Profile fromJSONString(String json)
-  // throws JsonProcessingException {
-  // return JSON.readValue(Profile.class, json);
-  // }
-  //
-  // public static String toJSONString(Profile profile)
-  // throws JsonProcessingException {
-  // return JSON.writeValueAsString(profile);
-  // }
-  //
-  // public String toJSONString() throws JsonProcessingException {
-  // return toJSONString(this);
-  // }
-
 }
