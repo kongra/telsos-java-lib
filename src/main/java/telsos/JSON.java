@@ -11,11 +11,11 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 public class JSON {
 
   public static synchronized ObjectReader readerFor(Class<?> c) {
-    return readers.computeIfAbsent(c, k -> mapper.readerFor(k));
+    return readers.computeIfAbsent(c, mapper::readerFor);
   }
 
   public static synchronized ObjectWriter writerFor(Class<?> c) {
-    return writers.computeIfAbsent(c, k -> mapper.writerFor(k));
+    return writers.computeIfAbsent(c, mapper::writerFor);
   }
 
   public static <T> T readValue(Class<?> c, String json)
