@@ -7,7 +7,6 @@ import static telsos.Ch.chNonBlank;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 
 import lombok.Getter;
 import telsos.JSON;
@@ -45,7 +44,7 @@ public class Profile {
   }
 
   public static Profile fromJSONString(String json)
-      throws JsonMappingException, JsonProcessingException {
+      throws JsonProcessingException {
     return JSON.readValue(Profile.class, json);
   }
 

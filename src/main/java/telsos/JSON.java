@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -12,25 +11,15 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 public class JSON {
 
   public static synchronized ObjectReader readerFor(Class<?> c) {
-    var reader = readers.get(c);
-    if (null == reader) {
-      reader = mapper.readerFor(c);
-      readers.put(c, reader);
-    }
-    return reader;
+    return readers.computeIfAbsent(c, k -> mapper.readerFor(k));
   }
 
   public static synchronized ObjectWriter writerFor(Class<?> c) {
-    var writer = writers.get(c);
-    if (null == writer) {
-      writer = mapper.writerFor(c);
-      writers.put(c, writer);
-    }
-    return writer;
+    return writers.computeIfAbsent(c, k -> mapper.writerFor(k));
   }
 
   public static <T> T readValue(Class<?> c, String json)
-      throws JsonMappingException, JsonProcessingException {
+      throws JsonProcessingException {
     return readerFor(c).readValue(json);
   }
 
