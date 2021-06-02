@@ -11,6 +11,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import telsos.ChError;
+import telsos.JSON;
 
 class TestProfile {
 
@@ -40,7 +41,7 @@ class TestProfile {
   @Test
   void testProfileJsonSerialization() throws JsonProcessingException {
     var profile = new Profile(1, "kongra@gmail.com", "Konrad Grzanek");
-    var json = profile.toJSONString();
+    var json = JSON.writeValueAsString(profile);
     var str = "{" + "\"id\":1," + "\"email\":\"kongra@gmail.com\""
         + ",\"name\":\"Konrad Grzanek\"" + "}";
     assertThat(json).isEqualTo(str);
@@ -50,7 +51,7 @@ class TestProfile {
   void testProfileJsonDeserialization() throws IOException {
     var str = "{" + "\"id\":1," + "\"email\":\"kongra@gmail.com\""
         + ",\"name\":\"Konrad Grzanek\"" + "}";
-    var profile = Profile.fromJSONString(str);
+    var profile = JSON.readValue(Profile.class, str);
     var profile1 = new Profile(1, "kongra@gmail.com", "Konrad Grzanek");
     assertThat(profile).usingRecursiveComparison().isEqualTo(profile1);
   }

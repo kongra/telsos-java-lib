@@ -6,10 +6,8 @@ import static telsos.Ch.chNonBlank;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 import lombok.Getter;
-import telsos.JSON;
 
 @Getter
 public class Profile {
@@ -43,18 +41,18 @@ public class Profile {
     return id == other.id;
   }
 
-  public static Profile fromJSONString(String json)
-      throws JsonProcessingException {
-    return JSON.readValue(Profile.class, json);
-  }
-
-  public static String toJSONString(Profile profile)
-      throws JsonProcessingException {
-    return JSON.writeValue(profile);
-  }
-
-  public String toJSONString() throws JsonProcessingException {
-    return toJSONString(this);
-  }
+  // public static Profile fromJSONString(String json)
+  // throws JsonProcessingException {
+  // return JSON.readValue(Profile.class, json);
+  // }
+  //
+  // public static String toJSONString(Profile profile)
+  // throws JsonProcessingException {
+  // return JSON.writeValueAsString(profile);
+  // }
+  //
+  // public String toJSONString() throws JsonProcessingException {
+  // return toJSONString(this);
+  // }
 
 }

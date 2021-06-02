@@ -14,6 +14,7 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
+import telsos.JSON;
 import telsos.Utils;
 import telsos.profile.Profile;
 
@@ -41,8 +42,8 @@ public class NotifResource {
   }
 
   private static Response pongImpl(String profileJSON) throws IOException {
-    var profile1 = Profile.fromJSONString(profileJSON);
-    return Response.ok().entity(profile1.toJSONString()).build();
+    var profile1 = JSON.readValue(Profile.class, profileJSON);
+    return Response.ok().entity(JSON.writeValueAsString(profile1)).build();
   }
 
   @POST

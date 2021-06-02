@@ -23,13 +23,14 @@ public class JSON {
     return readerFor(c).readValue(json);
   }
 
-  public static String writeValue(Class<?> c, Object obj)
+  public static String writeValueAsString(Class<?> c, Object obj)
       throws JsonProcessingException {
     return writerFor(c).writeValueAsString(obj);
   }
 
-  public static String writeValue(Object obj) throws JsonProcessingException {
-    return writeValue(obj.getClass(), obj);
+  public static String writeValueAsString(Object obj)
+      throws JsonProcessingException {
+    return writeValueAsString(obj.getClass(), obj);
   }
 
   private static final ObjectMapper mapper = new ObjectMapper();
