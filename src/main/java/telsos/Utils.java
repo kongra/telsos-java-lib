@@ -4,11 +4,14 @@ package telsos;
 
 import java.io.IOException;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
+import telsos.function.ThrowingSupplier;
 
 public final class Utils {
 
@@ -35,10 +38,22 @@ public final class Utils {
       HttpServletResponse response) {
     try {
       request.getRequestDispatcher(path).forward(request, response);
+      return null;
     } catch (ServletException | IOException e) {
       return Response.status(Status.INTERNAL_SERVER_ERROR).build();
     }
-    return null;
+  }
+
+  public static Response endPoint(
+      ThrowingSupplier<Response, JsonProcessingException> supplier) {
+    try {
+      return supplier.get();
+    } catch (JsonProcessingException e) {
+      return Response.status(Status.BAD_REQUEST).build();
+    } catch (TelsosException e) {
+      e.printStackTrace(System.err);
+      return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+    }
   }
 
   private Utils() {

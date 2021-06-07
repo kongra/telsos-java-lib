@@ -1,6 +1,6 @@
 package telsos.rest;
 
-import java.io.IOException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,7 +13,6 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.Response.Status;
 import telsos.JSON;
 import telsos.Utils;
 import telsos.profile.Profile;
@@ -34,16 +33,13 @@ public class NotifResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response pong(String profileJSON) {
-    try {
-      return pongImpl(profileJSON);
-    } catch (IOException e) {
-      return Response.status(Status.INTERNAL_SERVER_ERROR).build();
-    }
+    return Utils.endPoint(() -> pongImpl(profileJSON));
   }
 
-  private static Response pongImpl(String profileJSON) throws IOException {
-    var profile1 = JSON.readValue(Profile.class, profileJSON);
-    return Response.ok().entity(JSON.writeValueAsString(profile1)).build();
+  private static Response pongImpl(String profileJSON)
+      throws JsonProcessingException {
+    var profile = JSON.readValue(Profile.class, profileJSON);
+    return Response.ok().entity(JSON.writeValueAsString(profile)).build();
   }
 
   @POST
