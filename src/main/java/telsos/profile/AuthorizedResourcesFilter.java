@@ -29,7 +29,4 @@ public class AuthorizedResourcesFilter implements Filter {
     chain.doFilter(request, response);
   }
 
-  public AuthorizedResourcesFilter() {
-  }
-
 }

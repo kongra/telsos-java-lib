@@ -51,7 +51,7 @@ public final class Utils {
     } catch (JsonProcessingException e) {
       return Response.status(Status.BAD_REQUEST).build();
     } catch (TelsosException e) {
-      e.printStackTrace(System.err);
+      // TODO: add logging
       return Response.status(Status.INTERNAL_SERVER_ERROR).build();
     }
   }
