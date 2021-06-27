@@ -10,16 +10,16 @@ import lombok.Getter;
 @Getter
 public final class Passwd {
 
-  private final String passwd;
+  private final String value;
 
   @JsonCreator
-  public Passwd(@JsonProperty("passwd") String passwd) {
-    this.passwd = chNonBlank(passwd);
+  public Passwd(@JsonProperty("passwd") String value) {
+    this.value = chNonBlank(value);
   }
 
   @Override
   public int hashCode() {
-    return 31 + passwd.hashCode();
+    return 31 + value.hashCode();
   }
 
   @Override
@@ -29,7 +29,7 @@ public final class Passwd {
     if (obj == null || getClass() != obj.getClass())
       return false;
     var other = (Passwd) obj;
-    return passwd.equals(other.passwd);
+    return value.equals(other.value);
   }
 
 }

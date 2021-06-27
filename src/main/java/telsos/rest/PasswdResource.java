@@ -30,7 +30,7 @@ public class PasswdResource {
   private static Response strengthImpl(String passwdJSON)
       throws JsonProcessingException {
     var passwd = JSON.readValue(Passwd.class, passwdJSON);
-    var result = NBVCXZ.estimate(passwd.getPasswd());
+    var result = NBVCXZ.estimate(passwd.getValue());
 
     var basicScore = result.getBasicScore();
     var entropy = result.getEntropy();

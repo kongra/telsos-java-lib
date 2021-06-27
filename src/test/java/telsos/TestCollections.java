@@ -81,10 +81,10 @@ class TestCollections {
   void test1() {
     Status s1 = Status.OK;
 
-    assertThat(s1 == Status.OK).isTrue();
-    assertThat(s1 == Status.ERROR).isFalse();
+    assertThat(s1).isSameAs(Status.OK);
+    assertThat(s1).isNotSameAs(Status.ERROR);
 
-    assertThat(s1.equals(Status.OK)).isTrue();
+    assertThat(s1).isEqualTo(Status.OK);
     assertThat(s1.toIntCode()).isEqualTo(Integer.MAX_VALUE);
   }
 
@@ -105,9 +105,8 @@ class TestCollections {
   @Test
   void test3() {
     Map<Status, String> m1 = new EnumMap<>(Status.class);
-    m1.put(Status.OK, "It's OK.");
-    m1.put(Status.ERROR, "It's NOT OK.");
-
+    assertThat(m1.put(Status.OK, "It's OK.")).isNull();
+    assertThat(m1.put(Status.ERROR, "It's NOT OK.")).isNull();
   }
 
 }

@@ -59,11 +59,11 @@ class TestIdentity {
     var p3 = new Point2D(1, 1);
     var p4 = new ColoredPoint2D(1, 1, "A kind of blue");
 
-    assertThat(p1 == p2).isFalse();
-    assertThat(p1.equals(p3)).isTrue();
+    assertThat(p1).isNotSameAs(p2);
+    assertThat(p1).isEqualTo(p3);
 
-    assertThat(p3.equals(p4)).isTrue();
-    assertThat(p4.equals(p3)).isTrue();
+    assertThat(p3).isEqualTo(p4);
+    assertThat(p4).isEqualTo(p3);
   }
 
 }
