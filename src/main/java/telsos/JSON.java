@@ -22,7 +22,7 @@ public class JSON {
     }
   }
 
-  public static <T> T readValue(Class<?> c, String json)
+  public static <T> T readValue(Class<? extends T> c, String json)
       throws JsonProcessingException {
     return readerFor(c).readValue(json);
   }

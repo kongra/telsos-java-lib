@@ -175,11 +175,7 @@ public final class Transactions {
           throw e;
 
         var isRestarting = RESTARTS_FINDERS.get(ctx.dialect);
-        if (null == isRestarting)
-          // No way to perform a check for this dialect
-          throw e;
-
-        if (!isRestarting.eval(e))
+        if (null == isRestarting || !isRestarting.eval(e))
           throw e;
 
         // We continue the restarting iterations
