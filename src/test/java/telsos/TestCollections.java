@@ -81,8 +81,8 @@ class TestCollections {
   void test1() {
     Status s1 = Status.OK;
 
-    assertThat(s1).isSameAs(Status.OK).isNotSameAs(Status.ERROR);
-    assertThat(s1).isEqualTo(Status.OK);
+    assertThat(s1).isSameAs(Status.OK).isNotSameAs(Status.ERROR)
+    .isEqualTo(Status.OK);
     assertThat(s1.toIntCode()).isEqualTo(Integer.MAX_VALUE);
   }
 
