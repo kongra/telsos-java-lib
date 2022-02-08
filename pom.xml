@@ -101,7 +101,7 @@
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
-      <version>42.3.1</version>
+      <version>42.3.2</version>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
@@ -178,7 +178,7 @@
 
   <build>
     <finalName>telsos</finalName>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven 
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven
         defaults (may be moved to parent pom) -->
       <plugins>
         <plugin>
