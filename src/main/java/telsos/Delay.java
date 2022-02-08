@@ -2,7 +2,6 @@
 // Created 18.07.19
 package telsos;
 
-import java.util.Objects;
 import java.util.function.Supplier;
 
 public final class Delay<T> implements Supplier<T>, Deref<T>, Pending {
@@ -22,18 +21,32 @@ public final class Delay<T> implements Supplier<T>, Deref<T>, Pending {
   }
 
   @Override
-  public synchronized T deref() {
-    if (supplier != null) {
-      try {
-        value = supplier.get();
-      } catch (Exception t) {
-        exception = t;
+  public T deref() {
+    final Supplier<T> supplier;
+    synchronized (this) {
+      if (!isPending()) {
+        if (this.exception != null)
+          throw Utils.sneakyThrow(this.exception);
+
+        return this.value;
+      } else {
+        supplier = this.supplier;
       }
-      supplier = null;
     }
 
-    if (exception != null)
-      throw Utils.sneakyThrow(exception);
+    T value = null;
+    Exception exception = null;
+    try {
+      value = supplier.get();
+    } catch (Exception t) {
+      exception = t;
+    }
+
+    synchronized (this) {
+      this.supplier = null;
+      this.value = value;
+      this.exception = exception;
+    }
 
     return value;
   }
@@ -54,19 +67,19 @@ public final class Delay<T> implements Supplier<T>, Deref<T>, Pending {
         + (isPending() ? "..." : String.valueOf(deref())) + '}';
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o)
-      return true;
-    if (o == null || getClass() != o.getClass())
-      return false;
-    Delay<?> delay = (Delay<?>) o;
-    return Objects.equals(deref(), delay.deref());
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(deref());
-  }
+  // @Override
+  // public boolean equals(Object o) {
+  // if (this == o)
+  // return true;
+  // if (o == null || getClass() != o.getClass())
+  // return false;
+  // Delay<?> delay = (Delay<?>) o;
+  // return Objects.equals(deref(), delay.deref());
+  // }
+  //
+  // @Override
+  // public int hashCode() {
+  // return Objects.hash(deref());
+  // }
 
 }
