@@ -22,7 +22,7 @@ public final class Delay<T> implements Supplier<T>, Deref<T>, Pending {
 
   @Override
   public T deref() {
-    final Supplier<T> supplier;
+    final Supplier<T> supplier1;
     synchronized (this) {
       if (!isPending()) {
         if (this.exception != null)
@@ -30,22 +30,22 @@ public final class Delay<T> implements Supplier<T>, Deref<T>, Pending {
 
         return this.value;
       } else {
-        supplier = this.supplier;
+        supplier1 = this.supplier;
       }
     }
 
-    T value = null;
-    Exception exception = null;
+    T value1 = null;
+    Exception exception1 = null;
     try {
-      value = supplier.get();
+      value1 = supplier1.get();
     } catch (Exception t) {
-      exception = t;
+      exception1 = t;
     }
 
     synchronized (this) {
       this.supplier = null;
-      this.value = value;
-      this.exception = exception;
+      this.value = value1;
+      this.exception = exception1;
     }
 
     return value;
@@ -66,20 +66,5 @@ public final class Delay<T> implements Supplier<T>, Deref<T>, Pending {
     return "Delay{" + "pending=" + isPending() + ", value="
         + (isPending() ? "..." : String.valueOf(deref())) + '}';
   }
-
-  // @Override
-  // public boolean equals(Object o) {
-  // if (this == o)
-  // return true;
-  // if (o == null || getClass() != o.getClass())
-  // return false;
-  // Delay<?> delay = (Delay<?>) o;
-  // return Objects.equals(deref(), delay.deref());
-  // }
-  //
-  // @Override
-  // public int hashCode() {
-  // return Objects.hash(deref());
-  // }
 
 }

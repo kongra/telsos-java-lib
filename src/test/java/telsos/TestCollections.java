@@ -18,15 +18,14 @@ class TestCollections {
   @Test
   void test() {
     List<String> l1 = new ArrayList<>();
-    assertThat(l1.isEmpty()).isTrue();
-
+    assertThat(l1).isEmpty();
     assertThatExceptionOfType(IndexOutOfBoundsException.class)
-    .isThrownBy(() -> {
-      l1.get(0);
-    });
+        .isThrownBy(() -> {
+          l1.get(0);
+        });
 
     l1.add("xyz");
-    assertThat(l1.isEmpty()).isFalse();
+    assertThat(l1).isNotEmpty();
     assertThat(l1.get(0)).isEqualTo("xyz");
 
     // var iter1 = l1.iterator();
@@ -39,12 +38,12 @@ class TestCollections {
     // }
 
     var l2 = List.of(123, 145, -3);
-    assertThat(l2.size()).isEqualTo(3);
+    assertThat(l2).hasSize(3);
 
     assertThatExceptionOfType(UnsupportedOperationException.class)
-    .isThrownBy(() -> {
-      l2.add(45);
-    });
+        .isThrownBy(() -> {
+          l2.add(45);
+        });
   }
 
   enum Status {
@@ -79,10 +78,10 @@ class TestCollections {
 
   @Test
   void test1() {
-    Status s1 = Status.OK;
+    var s1 = Status.OK;
 
     assertThat(s1).isSameAs(Status.OK).isNotSameAs(Status.ERROR)
-    .isEqualTo(Status.OK);
+        .isEqualTo(Status.OK);
     assertThat(s1.toIntCode()).isEqualTo(Integer.MAX_VALUE);
   }
 
@@ -90,14 +89,10 @@ class TestCollections {
   void test2() {
     Set<Status> statuses1 = new HashSet<>();
     statuses1.add(Status.OK);
-
-    assertThat(statuses1.contains(Status.OK)).isTrue();
-    assertThat(statuses1.contains(Status.ERROR)).isFalse();
+    assertThat(statuses1).contains(Status.OK).doesNotContain(Status.ERROR);
 
     EnumSet<Status> statuses2 = EnumSet.of(Status.OK);
-    assertThat(statuses2.contains(Status.OK)).isTrue();
-    assertThat(statuses2.contains(Status.ERROR)).isFalse();
-
+    assertThat(statuses2).contains(Status.OK).doesNotContain(Status.ERROR);
   }
 
   @Test

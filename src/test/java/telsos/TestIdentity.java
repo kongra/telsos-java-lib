@@ -2,6 +2,8 @@ package telsos;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Objects;
+
 import org.junit.jupiter.api.Test;
 
 class TestIdentity {
@@ -17,14 +19,7 @@ class TestIdentity {
 
     @Override
     public final int hashCode() {
-      final int prime = 31;
-      int result = 1;
-      long temp;
-      temp = Double.doubleToLongBits(x);
-      result = prime * result + (int) (temp ^ (temp >>> 32));
-      temp = Double.doubleToLongBits(y);
-      result = prime * result + (int) (temp ^ (temp >>> 32));
-      return result;
+      return Objects.hash(x, y);
     }
 
     @Override
@@ -33,10 +28,8 @@ class TestIdentity {
         return true;
       if (!(obj instanceof Point2D))
         return false;
-      Point2D other = (Point2D) obj;
-      if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x))
-        return false;
-      if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))
+      var other = (Point2D) obj;
+      if ((Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x)) || (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y)))
         return false;
       return true;
     }

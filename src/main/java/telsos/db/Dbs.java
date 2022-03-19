@@ -18,8 +18,8 @@ public class Dbs {
       public HikariConfig hikariConfig() {
         var config = new HikariConfig();
         config.setJdbcUrl("jdbc:postgresql://localhost/MAAS");
-        config.setUsername("jee");
-        config.setPassword("jee");
+        config.setUsername("jee1");
+        config.setPassword("jee12345");
         config.addDataSourceProperty("cachePrepStmts", "true");
         config.addDataSourceProperty("prepStmtCacheSize", "250");
         config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
