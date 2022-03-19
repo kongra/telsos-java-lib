@@ -28,15 +28,6 @@ class TestCollections {
     assertThat(l1).isNotEmpty();
     assertThat(l1.get(0)).isEqualTo("xyz");
 
-    // var iter1 = l1.iterator();
-    // while (iter1.hasNext()) {
-    // System.out.println(iter1.next());
-    // }
-    //
-    // for (String s1 : l1) {
-    // System.out.println(s1);
-    // }
-
     var l2 = List.of(123, 145, -3);
     assertThat(l2).hasSize(3);
 
