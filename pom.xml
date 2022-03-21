@@ -1,113 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <groupId>kongra</groupId>
   <artifactId>telsos</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
   <name>telsos</name>
+  <url>http://www.example.com</url>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
-  </properties>
+  <modules>
+    <module>telsos-core</module>
+  </modules>
 
-  <dependencies>
-
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>5.8.2</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.8.2</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.assertj</groupId>
-      <artifactId>assertj-core</artifactId>
-      <version>3.22.0</version>
-      <!-- <scope>test</scope> it's needed in jShell -->
-    </dependency>
-
-    <dependency>
-      <groupId>org.openjdk.jmh</groupId>
-      <artifactId>jmh-core</artifactId>
-      <version>1.34</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.openjdk.jmh</groupId>
-      <artifactId>jmh-generator-annprocess</artifactId>
-      <version>1.34</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>me.gosimple</groupId>
-      <artifactId>nbvcxz</artifactId>
-      <version>1.5.0</version>
-    </dependency>
-
-    <dependency>
-      <groupId>commons-validator</groupId>
-      <artifactId>commons-validator</artifactId>
-      <version>1.7</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>2.13.2</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.zaxxer</groupId>
-      <artifactId>HikariCP</artifactId>
-      <version>5.0.1</version>
-    </dependency>
-
-  </dependencies>
-
-  <build>
-    <finalName>telsos</finalName>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>3.1.0</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.0.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.0.0-M3</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-failsafe-plugin</artifactId>
-          <version>3.0.0-M3</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-install-plugin</artifactId>
-          <version>2.5.2</version>
-        </plugin>
-        <plugin>
-          <groupId>com.github.johnpoth</groupId>
-          <artifactId>jshell-maven-plugin</artifactId>
-          <version>1.3</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
 </project>
