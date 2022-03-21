@@ -94,15 +94,4 @@ class TestCollections {
     assertThat(m1.put(Status.ERROR, "It's NOT OK.")).isNull();
   }
 
-  // static record Bar (Object obj) {}
-
-  // void foo(Bar bar) {
-  // System.out.println(bar.obj.hashCode());
-  // }
-
-  // @Test
-  // void test4() {
-  // foo(new Bar(null));
-  // }
-
 }
