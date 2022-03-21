@@ -12,10 +12,6 @@ import java.util.function.Supplier;
 
 import javax.sql.DataSource;
 
-import org.jooq.DSLContext;
-import org.jooq.SQLDialect;
-import org.jooq.impl.DSL;
-
 import telsos.TelsosException;
 import telsos.Utils;
 
@@ -59,8 +55,6 @@ public final class Transactions {
 
     public final SQLDialect dialect;
 
-    private DSLContext dslContext;
-
     private int restartsCount;
 
     private final Thread thread;
@@ -74,15 +68,6 @@ public final class Transactions {
       thread = Thread.currentThread();
     }
 
-    public synchronized DSLContext create() {
-      assertSingleThreadUse();
-
-      if (dslContext == null) {
-        dslContext = DSL.using(conn, dialect);
-      }
-      return dslContext;
-    }
-
     private synchronized void markRestart() {
       restartsCount++;
     }
@@ -91,7 +76,7 @@ public final class Transactions {
       return restartsCount;
     }
 
-    private void assertSingleThreadUse() throws IllegalAccessError {
+    public void assertSingleThreadUse() throws IllegalAccessError {
       if (thread != Thread.currentThread())
         throw new IllegalAccessError(
             "You can't call TxCtx from another thread!");
@@ -147,8 +132,9 @@ public final class Transactions {
     while (true) {
       if (t == null)
         return null;
-      if (t instanceof SQLException)
-        return (SQLException) t;
+
+      if (t instanceof SQLException sqlE)
+        return sqlE;
 
       t = t.getCause();
     }

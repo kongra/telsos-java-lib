@@ -2,8 +2,6 @@ package telsos.db.tools;
 
 import javax.sql.DataSource;
 
-import org.jooq.SQLDialect;
-
 import telsos.db.tools.Transactions.TxExpr;
 import telsos.db.tools.Transactions.TxStmt;
 

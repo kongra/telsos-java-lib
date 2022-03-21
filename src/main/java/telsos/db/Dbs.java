@@ -2,12 +2,11 @@ package telsos.db;
 
 import javax.sql.DataSource;
 
-import org.jooq.SQLDialect;
-
 import com.zaxxer.hikari.HikariConfig;
 
 import telsos.db.tools.Db;
 import telsos.db.tools.HikariPool;
+import telsos.db.tools.SQLDialect;
 
 public class Dbs {
 
