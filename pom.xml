@@ -53,18 +53,6 @@
     </dependency>
 
     <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>31.1-jre</version>
-    </dependency>
-
-    <dependency>
-      <groupId>net.sf.trove4j</groupId>
-      <artifactId>trove4j</artifactId>
-      <version>3.0.3</version>
-    </dependency>
-
-    <dependency>
       <groupId>me.gosimple</groupId>
       <artifactId>nbvcxz</artifactId>
       <version>1.5.0</version>
@@ -83,13 +71,6 @@
     </dependency>
 
     <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <version>42.3.3</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
-    <dependency>
       <groupId>com.zaxxer</groupId>
       <artifactId>HikariCP</artifactId>
       <version>5.0.1</version>
@@ -100,14 +81,11 @@
   <build>
     <finalName>telsos</finalName>
     <pluginManagement>
-      <!-- lock down plugins versions to avoid using Maven
-                           defaults (may be moved to parent pom) -->
       <plugins>
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.1.0</version>
         </plugin>
-        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.0.2</version>
@@ -123,10 +101,6 @@
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
           <version>2.5.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>2.8.2</version>
         </plugin>
         <plugin>
           <groupId>com.github.johnpoth</groupId>
