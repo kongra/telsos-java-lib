@@ -149,8 +149,7 @@ public final class IntArray {
     for (var i = 0; i < fillPointer(); i++) {
       result = 31 * result + data[i];
     }
-    result = 31 * result + fillPointer;
-    return result;
+    return 31 * result + fillPointer;
   }
 
   @FunctionalInterface

@@ -13,6 +13,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+@SuppressWarnings("static-method")
 class TestCollections {
 
   @Test
@@ -92,5 +93,16 @@ class TestCollections {
     assertThat(m1.put(Status.OK, "It's OK.")).isNull();
     assertThat(m1.put(Status.ERROR, "It's NOT OK.")).isNull();
   }
+
+  // static record Bar (Object obj) {}
+
+  // void foo(Bar bar) {
+  // System.out.println(bar.obj.hashCode());
+  // }
+
+  // @Test
+  // void test4() {
+  // foo(new Bar(null));
+  // }
 
 }

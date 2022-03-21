@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import org.junit.jupiter.api.Test;
 
+@SuppressWarnings("static-method")
 class TestIdentity {
 
   static class Point2D {
@@ -26,10 +27,10 @@ class TestIdentity {
     public final boolean equals(Object obj) {
       if (this == obj)
         return true;
-      if (!(obj instanceof Point2D))
+      if (!(obj instanceof Point2D other))
         return false;
-      var other = (Point2D) obj;
-      if ((Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x)) || (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y)))
+      if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x)
+          || Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))
         return false;
       return true;
     }

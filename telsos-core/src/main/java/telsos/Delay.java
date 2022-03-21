@@ -29,9 +29,8 @@ public final class Delay<T> implements Supplier<T>, Deref<T>, Pending {
           throw Utils.sneakyThrow(this.exception);
 
         return this.value;
-      } else {
-        supplier1 = this.supplier;
       }
+      supplier1 = this.supplier;
     }
 
     T value1 = null;
