@@ -1,9 +1,9 @@
-package telsos.db.tools;
+package telsos.jdbc.tools;
 
 import javax.sql.DataSource;
 
-import telsos.db.tools.Transactions.TxExpr;
-import telsos.db.tools.Transactions.TxStmt;
+import telsos.jdbc.tools.Transactions.TxExpr;
+import telsos.jdbc.tools.Transactions.TxStmt;
 
 public interface Db {
 

@@ -2,6 +2,7 @@
 // Created 2019-07-22
 package telsos;
 
+import java.util.Objects;
 import java.util.function.IntUnaryOperator;
 import java.util.function.LongUnaryOperator;
 
@@ -18,6 +19,10 @@ import org.apache.commons.validator.routines.EmailValidator;
 public interface Ch<T> {
 
   T ch(T obj);
+
+  static <S> S chSome(S obj) {
+    return Objects.requireNonNull(obj);
+  }
 
   static byte chPos(byte b) {
     if (b > 0)

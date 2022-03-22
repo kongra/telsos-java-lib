@@ -1,12 +1,12 @@
-package telsos.db;
+package telsos.jdbc;
 
 import javax.sql.DataSource;
 
 import com.zaxxer.hikari.HikariConfig;
 
-import telsos.db.tools.Db;
-import telsos.db.tools.HikariPool;
-import telsos.db.tools.SQLDialect;
+import telsos.jdbc.tools.Db;
+import telsos.jdbc.tools.HikariPool;
+import telsos.jdbc.tools.SQLDialect;
 
 public class Dbs {
 

@@ -1,5 +1,5 @@
 
-package telsos.db.tools;
+package telsos.jdbc.tools;
 
 import static telsos.Ch.chIn;
 import static telsos.Ch.chNat;
