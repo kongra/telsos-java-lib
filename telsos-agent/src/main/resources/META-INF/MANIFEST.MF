@@ -1,0 +1,2 @@
+Agent-Class: telsos.InstrumentationAgent
+Premain-Class: telsos.InstrumentationAgent

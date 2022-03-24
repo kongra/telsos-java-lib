@@ -12,6 +12,7 @@
   <url>http://www.example.com</url>
 
   <modules>
+    <module>telsos-agent</module>
     <module>telsos-core</module>
   </modules>
 
