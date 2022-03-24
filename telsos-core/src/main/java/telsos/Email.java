@@ -12,9 +12,4 @@ public record Email(String value) {
     chEmail(value);
   }
 
-  @Override
-  public String toString() {
-    return value;
-  }
-
 }
