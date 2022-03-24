@@ -1,4 +1,4 @@
-package telsos.jdbc.tools;
+package telsos.jdbc;
 
 import static telsos.Delay.delay;
 
@@ -7,7 +7,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 import telsos.Delay;
 
-public abstract class HikariPool {
+public abstract class Hp {
 
   public abstract HikariConfig hikariConfig();
 

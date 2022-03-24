@@ -1,24 +1,23 @@
-package telsos.jdbc.tools;
+package telsos.jdbc;
 
 import javax.sql.DataSource;
 
-import telsos.jdbc.tools.Transactions.TxExpr;
-import telsos.jdbc.tools.Transactions.TxStmt;
+import telsos.jdbc.Tx.TxExpr;
+import telsos.jdbc.Tx.TxStmt;
 
-public interface Db {
+public interface Ds {
 
-  SQLDialect dialect();
+  Dialect dialect();
 
   DataSource dataSource();
 
   default <T> T inSerializable(int allowedRestartsCount, TxExpr<T> expr) {
-    return Transactions.inSerializable(dialect(), dataSource(),
-        allowedRestartsCount, expr);
+    return Tx.inSerializable(dialect(), dataSource(), allowedRestartsCount,
+        expr);
   }
 
   default void inSerializable(int allowedRestartsCount, TxStmt stmt) {
-    Transactions.inSerializable(dialect(), dataSource(), allowedRestartsCount,
-        stmt);
+    Tx.inSerializable(dialect(), dataSource(), allowedRestartsCount, stmt);
   }
 
   default <T> T inSerializable1(TxExpr<T> expr) {
@@ -62,11 +61,11 @@ public interface Db {
   }
 
   default <T> T inReadCommitted(TxExpr<T> expr) {
-    return Transactions.inReadCommitted(dialect(), dataSource(), expr);
+    return Tx.inReadCommitted(dialect(), dataSource(), expr);
   }
 
   default void inReadCommitted(TxStmt stmt) {
-    Transactions.inReadCommitted(dialect(), dataSource(), stmt);
+    Tx.inReadCommitted(dialect(), dataSource(), stmt);
   }
 
 }

@@ -1,5 +1,5 @@
 
-package telsos.jdbc.tools;
+package telsos.jdbc;
 
 import static telsos.Ch.chIn;
 import static telsos.Ch.chNat;
@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 import telsos.TelsosException;
 import telsos.Utils;
 
-public final class Transactions {
+public final class Tx {
 
   @FunctionalInterface
   public interface Expr<T> {
@@ -53,14 +53,14 @@ public final class Transactions {
 
     public final int allowedRestartsCount;
 
-    public final SQLDialect dialect;
+    public final Dialect dialect;
 
     private int restartsCount;
 
     private final Thread thread;
 
     private TxCtx(Connection conn, int isolationLevel, int allowedRestartsCount,
-        SQLDialect dialect) {
+        Dialect dialect) {
       this.conn = Objects.requireNonNull(conn);
       this.isolationLevel = chIsolationLevel(isolationLevel);
       this.allowedRestartsCount = chNat(allowedRestartsCount);
@@ -147,9 +147,9 @@ public final class Transactions {
 
   }
 
-  private static final EnumMap<SQLDialect, IsRestarting> RESTARTS_FINDERS;
+  private static final EnumMap<Dialect, IsRestarting> RESTARTS_FINDERS;
   static {
-    RESTARTS_FINDERS = new EnumMap<>(SQLDialect.class);
+    RESTARTS_FINDERS = new EnumMap<>(Dialect.class);
   }
 
   public static <T> T restartingTx(TxCtx ctx, Supplier<T> supplier) {
@@ -181,14 +181,14 @@ public final class Transactions {
       Connection.TRANSACTION_REPEATABLE_READ,
       Connection.TRANSACTION_SERIALIZABLE };
 
-  public static <T> T inSerializable(SQLDialect dialect, Connection conn,
+  public static <T> T inSerializable(Dialect dialect, Connection conn,
       int allowedRestartsCount, TxExpr<T> expr) {
     var ctx = new TxCtx(conn, Connection.TRANSACTION_SERIALIZABLE,
         allowedRestartsCount, dialect);
     return restartingTx(ctx, () -> inTransaction(ctx, expr));
   }
 
-  public static void inSerializable(SQLDialect dialect, Connection conn,
+  public static void inSerializable(Dialect dialect, Connection conn,
       int allowedRestartsCount, TxStmt stmt) {
     inSerializable(dialect, conn, allowedRestartsCount, ctx -> {
       stmt.exec(ctx);
@@ -196,14 +196,14 @@ public final class Transactions {
     });
   }
 
-  public static <T> T inSerializable(SQLDialect dialect, DataSource ds,
+  public static <T> T inSerializable(Dialect dialect, DataSource ds,
       int allowedRestartsCount, TxExpr<T> expr) {
     Expr<T> expr1 = conn -> inSerializable(dialect, conn, allowedRestartsCount,
         expr);
     return withConn(ds, expr1);
   }
 
-  public static void inSerializable(SQLDialect dialect, DataSource ds,
+  public static void inSerializable(Dialect dialect, DataSource ds,
       int allowedRestartsCount, TxStmt stmt) {
     inSerializable(dialect, ds, allowedRestartsCount, ctx -> {
       stmt.exec(ctx);
@@ -211,7 +211,7 @@ public final class Transactions {
     });
   }
 
-  public static <T> T inReadCommitted(SQLDialect dialect, Connection conn,
+  public static <T> T inReadCommitted(Dialect dialect, Connection conn,
       TxExpr<T> expr) {
     var allowedRestartsCount = 0;
     var ctx = new TxCtx(conn, Connection.TRANSACTION_READ_COMMITTED,
@@ -219,7 +219,7 @@ public final class Transactions {
     return restartingTx(ctx, () -> inTransaction(ctx, expr));
   }
 
-  public static void inReadCommitted(SQLDialect dialect, Connection conn,
+  public static void inReadCommitted(Dialect dialect, Connection conn,
       TxStmt stmt) {
     inReadCommitted(dialect, conn, ctx -> {
       stmt.exec(ctx);
@@ -227,13 +227,13 @@ public final class Transactions {
     });
   }
 
-  public static <T> T inReadCommitted(SQLDialect dialect, DataSource ds,
+  public static <T> T inReadCommitted(Dialect dialect, DataSource ds,
       TxExpr<T> expr) {
     Expr<T> expr1 = conn -> inReadCommitted(dialect, conn, expr);
     return withConn(ds, expr1);
   }
 
-  public static void inReadCommitted(SQLDialect dialect, DataSource ds,
+  public static void inReadCommitted(Dialect dialect, DataSource ds,
       TxStmt stmt) {
     inReadCommitted(dialect, ds, ctx -> {
       stmt.exec(ctx);
@@ -243,12 +243,12 @@ public final class Transactions {
 
   // POSTGRESQL
   static {
-    RESTARTS_FINDERS.put(SQLDialect.POSTGRES, t -> {
+    RESTARTS_FINDERS.put(Dialect.POSTGRES, t -> {
       var e = asSQLException(t);
       return null != e && "40001".equals(e.getSQLState());
     });
   }
 
-  private Transactions() {
+  private Tx() {
   }
 }
