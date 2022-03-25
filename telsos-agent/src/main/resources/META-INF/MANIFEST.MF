@@ -1,2 +1,2 @@
-Agent-Class: telsos.InstrumentationAgent
-Premain-Class: telsos.InstrumentationAgent
+Agent-Class: telsos.Agent
+Premain-Class: telsos.Agent
