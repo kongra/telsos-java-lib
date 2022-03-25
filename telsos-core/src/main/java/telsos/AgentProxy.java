@@ -57,7 +57,7 @@ public class AgentProxy {
         try {
           jvm.detach();
         } catch (IOException e) {
-          e.printStackTrace();
+          log.error(e);
         }
       }
     }
