@@ -2,8 +2,7 @@ package telsos;
 
 public class TelsosException extends RuntimeException {
 
-  public TelsosException() {
-  }
+  public TelsosException() {}
 
   public TelsosException(String message, Throwable cause,
       boolean enableSuppression, boolean writableStackTrace) {

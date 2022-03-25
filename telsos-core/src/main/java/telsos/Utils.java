@@ -52,6 +52,5 @@ public final class Utils {
     return HumanReadable.nanosecs(elapsedNanosecs(swatch), 2);
   }
 
-  private Utils() {
-  }
+  private Utils() {}
 }

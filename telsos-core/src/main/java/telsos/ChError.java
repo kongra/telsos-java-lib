@@ -2,8 +2,7 @@ package telsos;
 
 public class ChError extends AssertionError {
 
-  public ChError() {
-  }
+  public ChError() {}
 
   public ChError(Object detailMessage) {
     super(detailMessage);

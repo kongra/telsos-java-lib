@@ -4,8 +4,7 @@ package telsos;
 
 public final class HumanReadable {
 
-  private HumanReadable() {
-  }
+  private HumanReadable() {}
 
   private static final String[] BYTES_MULTIPLIES_POSTFIXES = { "bytes", "KB",
       "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };

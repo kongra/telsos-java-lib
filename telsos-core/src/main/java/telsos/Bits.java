@@ -14,8 +14,7 @@ public final class Bits {
   private static final Long ZERO = 0L;
   private static final Long ONE = 1L;
 
-  private Bits() {
-  }
+  private Bits() {}
 
   public static boolean getBoolean(byte[] b, int off) {
     return b[off] != 0;

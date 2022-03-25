@@ -41,7 +41,6 @@ public class JSON {
   private static final Map<Class<?>, ObjectReader> readers = new HashMap<>();
   private static final Map<Class<?>, ObjectWriter> writers = new HashMap<>();
 
-  private JSON() {
-  }
+  private JSON() {}
 
 }

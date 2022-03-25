@@ -249,6 +249,5 @@ public final class Tx {
     });
   }
 
-  private Tx() {
-  }
+  private Tx() {}
 }
