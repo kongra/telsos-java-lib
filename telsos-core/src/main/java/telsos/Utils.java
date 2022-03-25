@@ -52,5 +52,9 @@ public final class Utils {
     return HumanReadable.nanosecs(elapsedNanosecs(swatch), 2);
   }
 
+  public static long objSize(Object obj) {
+    return AgentProxy.instrumentation().getObjectSize(obj);
+  }
+
   private Utils() {}
 }

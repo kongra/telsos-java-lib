@@ -10,12 +10,10 @@ public class Agent {
   }
 
   public static void premain(String agentArgs, Instrumentation instr) {
-    System.out.println("telsos.Agent::premain");
     init(agentArgs, instr);
   }
 
   public static void agentmain(String agentArgs, Instrumentation instr) {
-    System.out.println("telsos.Agent::agentmain");
     init(agentArgs, instr);
   }
 
