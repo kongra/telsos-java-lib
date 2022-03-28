@@ -39,6 +39,8 @@ public class TreePrinter<T> {
   private void impl(T node, int depth, int level, boolean isFirst,
       LinkedList<Boolean> lastChildInfos, Worker worker) {
 
+    chNat(level);
+
     var s = repr.apply(node);
     var pfx = isFirst ? EMPTY : EOL;
     var r = level == 0 ? pfx + s : pfx + indent(lastChildInfos) + s;
@@ -68,6 +70,7 @@ public class TreePrinter<T> {
     var prefix = new StringBuilder();
 
     var n = lastChildInfos.size();
+
     var iter = lastChildInfos.listIterator(n);
 
     // We skip the last one
