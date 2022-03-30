@@ -1,3 +1,4 @@
+// © 2019 Konrad Grzanek <kongra@gmail.com>
 package telsos;
 
 public class TelsosException extends RuntimeException {

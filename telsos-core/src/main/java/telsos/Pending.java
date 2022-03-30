@@ -1,5 +1,4 @@
-// Copyright (c) Konrad Grzanek
-// Created 20.07.19
+// © 2019 Konrad Grzanek <kongra@gmail.com>
 package telsos;
 
 public interface Pending {

@@ -1,5 +1,4 @@
-// Copyright (c) kongra
-// Created 18.07.19
+// © 2019 Konrad Grzanek <kongra@gmail.com>
 package telsos;
 
 import java.util.function.Supplier;

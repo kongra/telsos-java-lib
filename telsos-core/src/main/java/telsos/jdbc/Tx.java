@@ -1,4 +1,4 @@
-
+// © 2021 Konrad Grzanek <kongra@gmail.com>
 package telsos.jdbc;
 
 import static telsos.Ch.chIn;

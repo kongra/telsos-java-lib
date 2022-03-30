@@ -1,3 +1,4 @@
+// © 2021 Konrad Grzanek <kongra@gmail.com>
 package telsos;
 
 import java.util.HashMap;

@@ -1,5 +1,4 @@
 // © 2016 Konrad Grzanek <kongra@gmail.com>
-// Created 2016-02-25
 package telsos;
 
 import java.util.Objects;

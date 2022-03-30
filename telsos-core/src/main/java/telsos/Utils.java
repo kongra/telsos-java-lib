@@ -1,5 +1,4 @@
-// Copyright (c) kongra
-// Created 18.07.19
+// © 2019 Konrad Grzanek <kongra@gmail.com>
 package telsos;
 
 public final class Utils {

@@ -1,3 +1,4 @@
+// © 2022 Konrad Grzanek <kongra@gmail.com>
 package telsos.pprint;
 
 import static telsos.Ch.chNat;
@@ -25,15 +26,15 @@ public class TreePrinter<T> {
     return new TreePrinter<>(adjs, repr);
   }
 
-  public void pprint(T node, int depth, Worker worker) {
+  public void print(T node, int depth, Worker worker) {
     chNat(depth);
     var lastChildInfos = new LinkedList<Boolean>();
     lastChildInfos.add(true);
     impl(node, depth, 0, true, lastChildInfos, worker);
   }
 
-  public void pprint(T node, Worker worker) {
-    pprint(node, Integer.MAX_VALUE, worker);
+  public void print(T node, Worker worker) {
+    print(node, Integer.MAX_VALUE, worker);
   }
 
   private void impl(T node, int depth, int level, boolean isFirst,

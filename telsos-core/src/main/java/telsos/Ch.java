@@ -1,5 +1,4 @@
-// Copyright (c) Konrad Grzanek
-// Created 2019-07-22
+// © 2019 Konrad Grzanek <kongra@gmail.com>package telsos;
 package telsos;
 
 import java.util.Objects;

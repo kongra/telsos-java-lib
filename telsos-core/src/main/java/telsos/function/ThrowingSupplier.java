@@ -1,3 +1,4 @@
+// © 2019 Konrad Grzanek <kongra@gmail.com>
 package telsos.function;
 
 import telsos.TelsosException;
