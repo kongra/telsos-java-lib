@@ -55,5 +55,13 @@ public final class Utils {
     return AgentProxy.instrumentation().getObjectSize(obj);
   }
 
+  public static boolean isEffectivelyInt(double d) {
+    return d == Math.rint(d);
+  }
+
+  public static boolean isEffectivelyInt(float f) {
+    return f == Math.rint(f);
+  }
+
   private Utils() {}
 }

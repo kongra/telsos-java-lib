@@ -28,7 +28,8 @@ class TestIdentity {
     public final boolean equals(Object obj) {
       if (this == obj)
         return true;
-      if (!(obj instanceof Point2D other) || Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x)
+      if (!(obj instanceof Point2D other)
+          || Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x)
           || Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))
         return false;
       return true;
