@@ -1,6 +1,8 @@
 // © 2022 Konrad Grzanek <kongra@gmail.com>
 package telsos.paip;
 
+import static telsos.Ch.chSome;
+
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,7 +41,7 @@ public class BreadthFirstSearch<T> {
         if (goal.test(e))
           return Optional.of(e);
 
-        carrier.addLast(adjs.apply(e));
+        carrier.addLast(chSome(adjs.apply(e)));
       }
 
       // No more elements in it, let's remove it
