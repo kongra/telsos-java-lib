@@ -14,6 +14,7 @@ public class BreadthFirstSearch<T> {
   @FunctionalInterface
   public interface Adjs<T> extends Function<T, Iterable<T>> {}
 
+  @FunctionalInterface
   public interface CarrierSupplier<T> extends Supplier<Deque<Iterable<T>>> {}
 
   public static <T> BreadthFirstSearch<T> of(Adjs<T> adjs, Predicate<T> goal) {
