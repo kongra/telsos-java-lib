@@ -5,11 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -86,13 +84,6 @@ class TestCollections {
 
     EnumSet<Status> statuses2 = EnumSet.of(Status.OK);
     assertThat(statuses2).contains(Status.OK).doesNotContain(Status.ERROR);
-  }
-
-  @Test
-  void test3() {
-    Map<Status, String> m1 = new EnumMap<>(Status.class);
-    assertThat(m1.put(Status.OK, "It's OK.")).isNull();
-    assertThat(m1.put(Status.ERROR, "It's NOT OK.")).isNull();
   }
 
 }

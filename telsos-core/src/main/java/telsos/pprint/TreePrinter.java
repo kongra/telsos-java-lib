@@ -4,23 +4,19 @@ package telsos.pprint;
 import static telsos.Ch.chNat;
 
 import java.util.LinkedList;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class TreePrinter<T> {
 
   @FunctionalInterface
-  public interface Adjs<T> {
-    Iterable<T> apply(T obj);
-  }
+  public interface Adjs<T> extends Function<T, Iterable<T>> {}
 
   @FunctionalInterface
-  public interface Repr<T> {
-    String apply(T obj);
-  }
+  public interface Repr<T> extends Function<T, String> {}
 
   @FunctionalInterface
-  public interface Worker {
-    void work(String repr);
-  }
+  public interface Worker extends Consumer<String> {}
 
   public static <T> TreePrinter<T> of(Adjs<T> adjs, Repr<T> repr) {
     return new TreePrinter<>(adjs, repr);
@@ -46,7 +42,7 @@ public class TreePrinter<T> {
     var pfx = isFirst ? EMPTY : EOL;
     var r = level == 0 ? pfx + s : pfx + indent(lastChildInfos) + s;
 
-    worker.work(r);
+    worker.accept(r);
 
     if (level != depth) {
       var children = adjs.apply(node);
