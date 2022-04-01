@@ -33,6 +33,19 @@ class TestBreadthFirstSearch {
         ArrayDeque::new);
   }
 
+  Iterable<String> children1(String s) {
+    return m1.getOrDefault(s, null);
+  }
+
+  Optional<String> search1(String start, String goal) {
+    return BreadthFirstSearch.of(this::children1, goal::equals).search(start);
+  }
+
+  Optional<String> searchWithArray1(String start, String goal) {
+    return BreadthFirstSearch.of(this::children1, goal::equals).search(start,
+        ArrayDeque::new);
+  }
+
   @Test
   final void testSearch() {
     assertThat(search("a", "a")).isEqualTo(Optional.of("a"));
@@ -45,6 +58,17 @@ class TestBreadthFirstSearch {
   }
 
   @Test
+  final void testSearch1() {
+    assertThat(search1("a", "a")).isEqualTo(Optional.of("a"));
+    assertThat(search1("a", "k")).isEqualTo(Optional.of("k"));
+    assertThat(search1("k", "k")).isEqualTo(Optional.of("k"));
+
+    assertThat(search1("d", "a")).isNotPresent();
+    assertThat(search1("www", "a")).isNotPresent();
+    assertThat(search1("a", "www")).isNotPresent();
+  }
+
+  @Test
   final void testSearchWithArray() {
     assertThat(searchWithArray("a", "a")).isEqualTo(Optional.of("a"));
     assertThat(searchWithArray("a", "k")).isEqualTo(Optional.of("k"));
@@ -53,6 +77,17 @@ class TestBreadthFirstSearch {
     assertThat(searchWithArray("d", "a")).isNotPresent();
     assertThat(searchWithArray("www", "a")).isNotPresent();
     assertThat(searchWithArray("a", "www")).isNotPresent();
+  }
+
+  @Test
+  final void testSearchWithArray1() {
+    assertThat(searchWithArray1("a", "a")).isEqualTo(Optional.of("a"));
+    assertThat(searchWithArray1("a", "k")).isEqualTo(Optional.of("k"));
+    assertThat(searchWithArray1("k", "k")).isEqualTo(Optional.of("k"));
+
+    assertThat(searchWithArray1("d", "a")).isNotPresent();
+    assertThat(searchWithArray1("www", "a")).isNotPresent();
+    assertThat(searchWithArray1("a", "www")).isNotPresent();
   }
 
 }
