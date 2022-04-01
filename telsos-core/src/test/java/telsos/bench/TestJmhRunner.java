@@ -1,12 +1,10 @@
-// Copyright (c) Konrad Grzanek
-// Created 22.07.19
+// © 2019 Konrad Grzanek <kongra@gmail.com>
 package telsos.bench;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
@@ -19,10 +17,11 @@ class TestJmhRunner {
       // BenchStreams.class,
       BenchBreadthFirstSearch.class);
 
-  @Test
+  // Uncomment the annotation below to run the benchmark with mvm test
+  // @Test
   void runJmhBenchmarks() throws RunnerException {
     var opts = new OptionsBuilder().warmupIterations(3).measurementIterations(3)
-        .forks(1).jvmArgsAppend("-server", "-Xms256m", "-Xmx1024m");
+        .forks(1).jvmArgsAppend("-server", "-Xms256m", "-Xmx2G");
 
     BENCH_CLASSES.forEach(c -> opts.include(c.getSimpleName()));
 

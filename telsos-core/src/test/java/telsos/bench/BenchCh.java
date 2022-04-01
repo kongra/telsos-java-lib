@@ -1,5 +1,4 @@
-// Copyright (c) Konrad Grzanek
-// Created 22.07.19
+// © 2019 Konrad Grzanek <kongra@gmail.com>
 package telsos.bench;
 
 import static telsos.Ch.chNonBlank;

@@ -52,6 +52,7 @@ public class BreadthFirstSearch<T> {
   }
 
   private boolean areNonEmpty(Iterable<T> children) {
+    // Returning null when there are no children is good for performance!
     return children != null && children.iterator().hasNext();
   }
 
