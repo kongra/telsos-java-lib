@@ -40,8 +40,9 @@ public class BreadthFirstSearch<T> {
           return Optional.of(e);
 
         var children = adjs.apply(e);
-        if (areNonEmpty(children))
+        if (areNonEmpty(children)) {
           carrier.addLast(children);
+        }
       }
 
       // No more elements in it, let's remove it
