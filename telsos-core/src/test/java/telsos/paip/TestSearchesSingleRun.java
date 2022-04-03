@@ -12,6 +12,7 @@ class TestSearchesSingleRun {
 //  private final TreePrinter<String> treePrinter = TreePrinter
 //      .of(TestBreadthFirstSearch::children, Functions::identity);
 
+  @SuppressWarnings("static-method")
   @Test
   void testBreadthFirstSearch() {
 //    treePrinter.print("a", System.out::print);
