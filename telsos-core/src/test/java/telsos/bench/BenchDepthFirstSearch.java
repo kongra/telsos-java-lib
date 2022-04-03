@@ -1,4 +1,3 @@
-// © 2022 Konrad Grzanek <kongra@gmail.com>
 package telsos.bench;
 
 import java.util.concurrent.TimeUnit;
@@ -9,27 +8,33 @@ import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.infra.Blackhole;
 
-import telsos.paip.TestBreadthFirstSearch;
+import telsos.paip.TestDepthFirstSearch;
 
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
-public class BenchBreadthFirstSearch {
+public class BenchDepthFirstSearch {
 
   @Benchmark
   public static void benchaa(Blackhole blackhole) {
-    var v = TestBreadthFirstSearch.search1("a", "a");
+    var v = TestDepthFirstSearch.search1("a", "a");
+    blackhole.consume(v);
+  }
+
+  @Benchmark
+  public static void benchap(Blackhole blackhole) {
+    var v = TestDepthFirstSearch.search1("a", "p");
     blackhole.consume(v);
   }
 
   @Benchmark
   public static void benchau(Blackhole blackhole) {
-    var v = TestBreadthFirstSearch.search1("a", "u");
+    var v = TestDepthFirstSearch.search1("a", "u");
     blackhole.consume(v);
   }
 
   @Benchmark
   public static void benchax(Blackhole blackhole) {
-    var v = TestBreadthFirstSearch.search1("a", "x");
+    var v = TestDepthFirstSearch.search1("a", "x");
     blackhole.consume(v);
   }
 

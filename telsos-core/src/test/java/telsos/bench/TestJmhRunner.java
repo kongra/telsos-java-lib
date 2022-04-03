@@ -15,7 +15,8 @@ class TestJmhRunner {
   private static final List<Class<?>> BENCH_CLASSES = List.of(
       // BenchCh.class,
       // BenchStreams.class,
-      BenchBreadthFirstSearch.class);
+      // BenchBreadthFirstSearch.class
+      BenchDepthFirstSearch.class);
 
   // Uncomment the annotation below to run the benchmark with mvm test
   // @Test
