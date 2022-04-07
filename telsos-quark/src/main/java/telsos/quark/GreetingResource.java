@@ -19,7 +19,7 @@ public class GreetingResource {
   @Path("/hello")
   @Produces(MediaType.TEXT_PLAIN)
   public String hello() {
-    LOG.debug("Is's ok to be nice");
+    LOG.info("Is's ok to be nice");
     return greetingTools.sayHello("Test");
   }
 
