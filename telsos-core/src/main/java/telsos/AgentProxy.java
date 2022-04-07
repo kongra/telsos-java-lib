@@ -6,14 +6,14 @@ import java.io.IOException;
 import java.lang.instrument.Instrumentation;
 import java.lang.reflect.InvocationTargetException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.sun.tools.attach.VirtualMachine;
 
 public class AgentProxy {
 
-  private static final Logger log = LogManager.getLogger(AgentProxy.class);
+  private static final Logger LOG = LoggerFactory.getLogger(AgentProxy.class);
 
   public static Instrumentation instrumentation() {
     return instr.deref();
@@ -23,7 +23,7 @@ public class AgentProxy {
       .delay(AgentProxy::initialize);
 
   private static Instrumentation initialize() {
-    log.info("AgentProxy::initialize");
+    LOG.info("AgentProxy::initialize");
     loadAgent();
     return getInstrumentation();
   }
@@ -57,7 +57,7 @@ public class AgentProxy {
         try {
           jvm.detach();
         } catch (IOException e) {
-          log.error(e);
+          LOG.error(e.getMessage(), e);
         }
       }
     }

@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.EnumMap;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import javax.sql.DataSource;
@@ -128,13 +129,13 @@ public final class Tx {
     }
   }
 
-  public static SQLException asSQLException(Throwable t) {
+  public static Optional<SQLException> asSQLException(Throwable t) {
     while (true) {
       if (t == null)
-        return null;
+        return Optional.empty();
 
       if (t instanceof SQLException sqlE)
-        return sqlE;
+        return Optional.of(sqlE);
 
       t = t.getCause();
     }
@@ -243,10 +244,8 @@ public final class Tx {
 
   // POSTGRESQL
   static {
-    RESTARTS_FINDERS.put(Dialect.POSTGRES, t -> {
-      var e = asSQLException(t);
-      return null != e && "40001".equals(e.getSQLState());
-    });
+    RESTARTS_FINDERS.put(Dialect.POSTGRES, t -> asSQLException(t)
+        .map(e -> "40001".equals(e.getSQLState())).orElse(false));
   }
 
   private Tx() {}
