@@ -1,3 +1,4 @@
+// © 2022 Konrad Grzanek <kongra@gmail.com>
 package telsos.quark;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
