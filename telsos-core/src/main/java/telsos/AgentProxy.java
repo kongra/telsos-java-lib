@@ -13,8 +13,6 @@ import com.sun.tools.attach.VirtualMachine;
 
 public class AgentProxy {
 
-  private static final Logger LOG = LoggerFactory.getLogger(AgentProxy.class);
-
   public static Instrumentation instrumentation() {
     return instr.deref();
   }
@@ -42,8 +40,7 @@ public class AgentProxy {
 
   private static void loadAgent() {
     var pid = ProcessHandle.current().pid();
-    var agentFile = new File(
-        "../telsos-agent/target/telsos-agent-1.0.jar");
+    var agentFile = new File("../telsos-agent/target/telsos-agent-1.0.jar");
     var agentPath = agentFile.getAbsolutePath();
 
     VirtualMachine jvm = null;
@@ -64,4 +61,6 @@ public class AgentProxy {
   }
 
   private AgentProxy() {}
+
+  private static final Logger LOG = LoggerFactory.getLogger(AgentProxy.class);
 }
