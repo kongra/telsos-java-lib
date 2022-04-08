@@ -1,5 +1,7 @@
 package telsos.quark;
 
+import static telsos.Ch.chRange;
+
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 
@@ -20,16 +22,10 @@ public class GreetingResource {
   @Path("/hello/{id}")
   @Produces(MediaType.TEXT_PLAIN)
   public String hello(@PathParam("id") long id) {
-    if (id > 100) {
-      throw new IllegalArgumentException("The id must be <= 100");
-    }
-
+    chRange(1, 100, id);
     LOG.log(Level.DEBUG, "Is's ok to be nice");
     return greetingTools.sayHello("Test" + id);
   }
-
-//  private static final Logger LOG = LoggerFactory
-//      .getLogger(GreetingResource.class);
 
   private static final Logger LOG = System
       .getLogger(GreetingResource.class.getName());
