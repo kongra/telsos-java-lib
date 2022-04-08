@@ -1,14 +1,14 @@
 package telsos.quark;
 
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Path("/greeting")
 public class GreetingResource {
@@ -24,10 +24,14 @@ public class GreetingResource {
       throw new IllegalArgumentException("The id must be <= 100");
     }
 
-    LOG.debug("Is's ok to be nice");
+    LOG.log(Level.DEBUG, "Is's ok to be nice");
     return greetingTools.sayHello("Test" + id);
   }
 
-  private static final Logger LOG = LoggerFactory
-      .getLogger(GreetingResource.class);
+//  private static final Logger LOG = LoggerFactory
+//      .getLogger(GreetingResource.class);
+
+  private static final Logger LOG = System
+      .getLogger(GreetingResource.class.getName());
+
 }
