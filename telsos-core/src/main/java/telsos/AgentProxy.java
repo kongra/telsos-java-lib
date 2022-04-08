@@ -43,7 +43,7 @@ public class AgentProxy {
   private static void loadAgent() {
     var pid = ProcessHandle.current().pid();
     var agentFile = new File(
-        "../telsos-agent/target/telsos-agent-1.0-SNAPSHOT.jar");
+        "../telsos-agent/target/telsos-agent-1.0.jar");
     var agentPath = agentFile.getAbsolutePath();
 
     VirtualMachine jvm = null;
