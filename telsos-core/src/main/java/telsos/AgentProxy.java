@@ -3,11 +3,9 @@ package telsos;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.System.Logger.Level;
 import java.lang.instrument.Instrumentation;
 import java.lang.reflect.InvocationTargetException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.sun.tools.attach.VirtualMachine;
 
@@ -21,7 +19,7 @@ public class AgentProxy {
       .delay(AgentProxy::initialize);
 
   private static Instrumentation initialize() {
-    LOG.info("AgentProxy::initialize");
+    LOG.log(Level.INFO, "AgentProxy::initialize");
     loadAgent();
     return getInstrumentation();
   }
@@ -54,7 +52,7 @@ public class AgentProxy {
         try {
           jvm.detach();
         } catch (IOException e) {
-          LOG.error(e.getMessage(), e);
+          LOG.log(Level.ERROR, e);
         }
       }
     }
@@ -62,5 +60,6 @@ public class AgentProxy {
 
   private AgentProxy() {}
 
-  private static final Logger LOG = LoggerFactory.getLogger(AgentProxy.class);
+  private static final System.Logger LOG = System
+      .getLogger(AgentProxy.class.getName());
 }
