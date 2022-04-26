@@ -9,7 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import com.sun.tools.attach.VirtualMachine;
 
-public class AgentProxy {
+public final class AgentProxy {
 
   public static Instrumentation instrumentation() {
     return instr.deref();

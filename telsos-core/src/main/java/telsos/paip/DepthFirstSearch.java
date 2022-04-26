@@ -10,7 +10,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-public class DepthFirstSearch<T> {
+public final class DepthFirstSearch<T> {
 
   @FunctionalInterface
   public interface Adjs<T> extends Function<T, Iterable<T>> {}

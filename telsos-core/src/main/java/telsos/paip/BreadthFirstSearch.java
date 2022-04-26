@@ -9,7 +9,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-public class BreadthFirstSearch<T> {
+public final class BreadthFirstSearch<T> {
 
   @FunctionalInterface
   public interface Adjs<T> extends Function<T, Iterable<T>> {}

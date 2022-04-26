@@ -4,7 +4,7 @@ package telsos;
 import java.lang.instrument.Instrumentation;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class Agent {
+public final class Agent {
 
   public static Instrumentation instrumentation() {
     return premained.get().instr();

@@ -40,7 +40,7 @@ public class TreePrinter<T> {
 
     var s = repr.apply(node);
     var pfx = isFirst ? EMPTY : EOL;
-    var r = level == 0 ? pfx + s : pfx + indent(lastChildInfos) + s;
+    var r = level == 0 ? (pfx + s) : (pfx + indent(lastChildInfos) + s);
 
     worker.accept(r);
 

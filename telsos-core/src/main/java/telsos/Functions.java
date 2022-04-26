@@ -3,7 +3,7 @@ package telsos;
 
 public interface Functions {
 
-  public static <T> T identity(T obj) {
+  static <T> T identity(T obj) {
     return obj;
   }
 
