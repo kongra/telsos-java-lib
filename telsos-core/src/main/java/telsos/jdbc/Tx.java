@@ -27,7 +27,7 @@ public final class Tx {
 
   @FunctionalInterface
   public interface Stmt extends CheckedConsumer<Connection> {
-    default void acceptNothrow(Connection ctx) {
+    default void acceptThrowingUnchecked(Connection ctx) {
       try {
         accept(ctx);
       } catch (Throwable t) {
@@ -41,7 +41,7 @@ public final class Tx {
 
   @FunctionalInterface
   public interface TxStmt extends CheckedConsumer<TxCtx> {
-    default void acceptNothrow(TxCtx ctx) {
+    default void acceptThrowingUnchecked(TxCtx ctx) {
       try {
         accept(ctx);
       } catch (Throwable t) {
@@ -98,7 +98,7 @@ public final class Tx {
 
   public static void withConn(DataSource ds, Stmt stmt) {
     withConn(ds, conn -> {
-      stmt.acceptNothrow(conn);
+      stmt.acceptThrowingUnchecked(conn);
       return null;
     });
   }
@@ -192,7 +192,7 @@ public final class Tx {
   public static void inSerializable(Dialect dialect, Connection conn,
       int allowedRestartsCount, TxStmt stmt) {
     inSerializable(dialect, conn, allowedRestartsCount, ctx -> {
-      stmt.acceptNothrow(ctx);
+      stmt.acceptThrowingUnchecked(ctx);
       return null;
     });
   }
@@ -207,7 +207,7 @@ public final class Tx {
   public static void inSerializable(Dialect dialect, DataSource ds,
       int allowedRestartsCount, TxStmt stmt) {
     inSerializable(dialect, ds, allowedRestartsCount, ctx -> {
-      stmt.acceptNothrow(ctx);
+      stmt.acceptThrowingUnchecked(ctx);
       return null;
     });
   }
@@ -223,7 +223,7 @@ public final class Tx {
   public static void inReadCommitted(Dialect dialect, Connection conn,
       TxStmt stmt) {
     inReadCommitted(dialect, conn, ctx -> {
-      stmt.acceptNothrow(ctx);
+      stmt.acceptThrowingUnchecked(ctx);
       return null;
     });
   }
@@ -237,7 +237,7 @@ public final class Tx {
   public static void inReadCommitted(Dialect dialect, DataSource ds,
       TxStmt stmt) {
     inReadCommitted(dialect, ds, ctx -> {
-      stmt.acceptNothrow(ctx);
+      stmt.acceptThrowingUnchecked(ctx);
       return null;
     });
   }
