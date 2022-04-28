@@ -47,7 +47,7 @@ class TestIdentity {
   }
 
   @Test
-  void test() {
+  void testA() {
     var p1 = new Point2D(1, 1);
     var p2 = new Point2D(-3, 4);
     var p3 = new Point2D(1, 1);

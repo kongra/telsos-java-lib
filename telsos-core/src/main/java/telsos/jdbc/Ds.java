@@ -22,35 +22,43 @@ public interface Ds {
   }
 
   default <T> T inSerializable1(TxExpr<T> expr) {
-    return inSerializable(1, expr);
+    final var restartsCount = 2;
+    return inSerializable(restartsCount, expr);
   }
 
   default void inSerializable1(TxStmt stmt) {
-    inSerializable(1, stmt);
+    final var restartsCount = 1;
+    inSerializable(restartsCount, stmt);
   }
 
   default <T> T inSerializable2(TxExpr<T> expr) {
-    return inSerializable(2, expr);
+    final var restartsCount = 2;
+    return inSerializable(restartsCount, expr);
   }
 
   default void inSerializable2(TxStmt stmt) {
-    inSerializable(2, stmt);
+    final var restartsCount = 2;
+    inSerializable(restartsCount, stmt);
   }
 
   default <T> T inSerializable5(TxExpr<T> expr) {
-    return inSerializable(5, expr);
+    final var restartsCount = 5;
+    return inSerializable(restartsCount, expr);
   }
 
   default void inSerializable5(TxStmt stmt) {
-    inSerializable(5, stmt);
+    final var restartsCount = 5;
+    inSerializable(restartsCount, stmt);
   }
 
   default <T> T inSerializable8(TxExpr<T> expr) {
-    return inSerializable(8, expr);
+    final var restartsCount = 8;
+    return inSerializable(restartsCount, expr);
   }
 
   default void inSerializable8(TxStmt stmt) {
-    inSerializable(8, stmt);
+    final var restartsCount = 8;
+    inSerializable(restartsCount, stmt);
   }
 
   default <T> T inSerializable(TxExpr<T> expr) {

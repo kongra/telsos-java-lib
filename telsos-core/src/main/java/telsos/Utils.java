@@ -24,12 +24,12 @@ public final class Utils {
   }
 
   public static String room() {
-    var rt = Runtime.getRuntime();
-    var free = rt.freeMemory();
-    var total = rt.totalMemory();
-    var mx = rt.maxMemory();
-    var used = total - free;
-    var digits = 2;
+    final var rt = Runtime.getRuntime();
+    final var free = rt.freeMemory();
+    final var total = rt.totalMemory();
+    final var mx = rt.maxMemory();
+    final var used = total - free;
+    final var digits = 2;
 
     return "Used: %s | Free: %s | Total :%s | Max: %s".formatted(
         HumanReadable.bytes(used, digits), HumanReadable.bytes(free, digits),
@@ -49,7 +49,8 @@ public final class Utils {
   }
 
   public static String elapstr(long swatch) {
-    return HumanReadable.nanosecs(elapsedNanosecs(swatch), 2);
+    final var digits = 2;
+    return HumanReadable.nanosecs(elapsedNanosecs(swatch), digits);
   }
 
   public static long objSize(Object obj) {

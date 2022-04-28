@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
-public class JSON {
+public final class JSON {
 
   public static ObjectReader readerFor(Class<?> c) {
     synchronized (readers) {

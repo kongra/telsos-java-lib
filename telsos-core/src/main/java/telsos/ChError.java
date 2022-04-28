@@ -25,6 +25,4 @@ public class ChError extends RuntimeException {
     super(message, cause);
   }
 
-  private static final long serialVersionUID = 1L;
-
 }

@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 class TestCollections {
 
   @Test
-  void test() {
+  void testA() {
     List<String> l1 = new ArrayList<>();
     assertThat(l1).isEmpty();
     assertThatExceptionOfType(IndexOutOfBoundsException.class)
@@ -68,7 +68,7 @@ class TestCollections {
   }
 
   @Test
-  void test1() {
+  void testB() {
     var s1 = Status.OK;
 
     assertThat(s1).isSameAs(Status.OK).isNotSameAs(Status.ERROR)
@@ -77,7 +77,7 @@ class TestCollections {
   }
 
   @Test
-  void test2() {
+  void testC() {
     Set<Status> statuses1 = new HashSet<>();
     statuses1.add(Status.OK);
     assertThat(statuses1).contains(Status.OK).doesNotContain(Status.ERROR);

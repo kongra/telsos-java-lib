@@ -9,10 +9,13 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.EnumMap;
 import java.util.Objects;
-import java.util.function.Supplier;
+import java.util.function.Predicate;
 
 import javax.sql.DataSource;
 
+import io.vavr.CheckedConsumer;
+import io.vavr.CheckedFunction0;
+import io.vavr.Function1;
 import io.vavr.control.Option;
 import telsos.TelsosException;
 import telsos.Utils;
@@ -20,31 +23,31 @@ import telsos.Utils;
 public final class Tx {
 
   @FunctionalInterface
-  public interface Expr<T> {
+  public interface Expr<T> extends Function1<Connection, T> {}
 
-    T eval(Connection conn);
-
+  @FunctionalInterface
+  public interface Stmt extends CheckedConsumer<Connection> {
+    default void acceptNothrow(Connection ctx) {
+      try {
+        accept(ctx);
+      } catch (Throwable t) {
+        throw new TelsosException(t);
+      }
+    }
   }
 
   @FunctionalInterface
-  public interface Stmt {
-
-    void exec(Connection conn);
-
-  }
+  public interface TxExpr<T> extends Function1<TxCtx, T> {}
 
   @FunctionalInterface
-  public interface TxExpr<T> {
-
-    T eval(TxCtx ctx);
-
-  }
-
-  @FunctionalInterface
-  public interface TxStmt {
-
-    void exec(TxCtx ctx);
-
+  public interface TxStmt extends CheckedConsumer<TxCtx> {
+    default void acceptNothrow(TxCtx ctx) {
+      try {
+        accept(ctx);
+      } catch (Throwable t) {
+        throw new TelsosException(t);
+      }
+    }
   }
 
   public static final class TxCtx {
@@ -87,7 +90,7 @@ public final class Tx {
 
   public static <T> T withConn(DataSource ds, Expr<T> expr) {
     try (var conn = ds.getConnection()) {
-      return expr.eval(conn);
+      return expr.apply(conn);
     } catch (SQLException e) {
       throw new TelsosException(e);
     }
@@ -95,7 +98,7 @@ public final class Tx {
 
   public static void withConn(DataSource ds, Stmt stmt) {
     withConn(ds, conn -> {
-      stmt.exec(conn);
+      stmt.acceptNothrow(conn);
       return null;
     });
   }
@@ -111,7 +114,7 @@ public final class Tx {
     try {
       conn.setAutoCommit(false);
       conn.setTransactionIsolation(ctx.isolationLevel);
-      final var result = expr.eval(ctx);
+      final var result = expr.apply(ctx);
       conn.commit();
       return result;
     } catch (SQLException e) {
@@ -143,28 +146,24 @@ public final class Tx {
   }
 
   @FunctionalInterface
-  private interface IsRestarting {
-
-    boolean eval(Throwable e);
-
-  }
+  private interface IsRestarting extends Predicate<Throwable> {}
 
   private static final EnumMap<Dialect, IsRestarting> RESTARTS_FINDERS;
   static {
     RESTARTS_FINDERS = new EnumMap<>(Dialect.class);
   }
 
-  public static <T> T restartingTx(TxCtx ctx, Supplier<T> supplier) {
+  public static <T> T restartingTx(TxCtx ctx, CheckedFunction0<T> supplier) {
     for (var i = 0;; i++) {
       try {
-        return supplier.get();
+        return supplier.apply();
       } catch (Throwable e) {
         if (i == ctx.allowedRestartsCount)
-          throw e;
+          throw new TelsosException(e);
 
         var isRestarting = RESTARTS_FINDERS.get(ctx.dialect);
-        if (null == isRestarting || !isRestarting.eval(e))
-          throw e;
+        if (null == isRestarting || !isRestarting.test(e))
+          throw new TelsosException(e);
 
         // We continue the restarting iterations
         ctx.markRestart();
@@ -193,7 +192,7 @@ public final class Tx {
   public static void inSerializable(Dialect dialect, Connection conn,
       int allowedRestartsCount, TxStmt stmt) {
     inSerializable(dialect, conn, allowedRestartsCount, ctx -> {
-      stmt.exec(ctx);
+      stmt.acceptNothrow(ctx);
       return null;
     });
   }
@@ -208,7 +207,7 @@ public final class Tx {
   public static void inSerializable(Dialect dialect, DataSource ds,
       int allowedRestartsCount, TxStmt stmt) {
     inSerializable(dialect, ds, allowedRestartsCount, ctx -> {
-      stmt.exec(ctx);
+      stmt.acceptNothrow(ctx);
       return null;
     });
   }
@@ -224,7 +223,7 @@ public final class Tx {
   public static void inReadCommitted(Dialect dialect, Connection conn,
       TxStmt stmt) {
     inReadCommitted(dialect, conn, ctx -> {
-      stmt.exec(ctx);
+      stmt.acceptNothrow(ctx);
       return null;
     });
   }
@@ -238,7 +237,7 @@ public final class Tx {
   public static void inReadCommitted(Dialect dialect, DataSource ds,
       TxStmt stmt) {
     inReadCommitted(dialect, ds, ctx -> {
-      stmt.exec(ctx);
+      stmt.acceptNothrow(ctx);
       return null;
     });
   }

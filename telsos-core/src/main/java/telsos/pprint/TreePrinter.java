@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public class TreePrinter<T> {
+public final class TreePrinter<T> {
 
   @FunctionalInterface
   public interface Adjs<T> extends Function<T, Iterable<T>> {}
@@ -40,7 +40,7 @@ public class TreePrinter<T> {
 
     var s = repr.apply(node);
     var pfx = isFirst ? EMPTY : EOL;
-    var r = level == 0 ? (pfx + s) : (pfx + indent(lastChildInfos) + s);
+    var r = level == 0 ? pfx + s : pfx + indent(lastChildInfos) + s;
 
     worker.accept(r);
 

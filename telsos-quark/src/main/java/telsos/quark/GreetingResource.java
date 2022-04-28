@@ -1,8 +1,6 @@
 // © 2022 Konrad Grzanek <kongra@gmail.com>
 package telsos.quark;
 
-import static telsos.Ch.chRange;
-
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -38,7 +36,6 @@ public class GreetingResource {
   @Produces(MediaType.TEXT_PLAIN)
   public String hello(@PathParam("id") long id) {
     greetingCounter.inc();
-    chRange(1, 100, id);
     LOG.debug("Is's ok to be nice");
 
     return greetingTools.sayHello("Test" + id);
