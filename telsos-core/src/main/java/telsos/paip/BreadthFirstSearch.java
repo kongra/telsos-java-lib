@@ -4,10 +4,11 @@ package telsos.paip;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+
+import io.vavr.control.Option;
 
 public final class BreadthFirstSearch<T> {
 
@@ -21,23 +22,23 @@ public final class BreadthFirstSearch<T> {
     return new BreadthFirstSearch<>(adjs, goal);
   }
 
-  public Optional<T> search(T start) {
+  public Option<T> search(T start) {
     return search(start, LinkedList::new);
   }
 
-  public Optional<T> search(T start, CarrierSupplier<T> cs) {
+  public Option<T> search(T start, CarrierSupplier<T> cs) {
     final var carrier = cs.get();
     carrier.addFirst(List.of(start));
     return searchImpl(carrier);
   }
 
-  private Optional<T> searchImpl(Deque<Iterable<T>> carrier) {
+  private Option<T> searchImpl(Deque<Iterable<T>> carrier) {
     while (!carrier.isEmpty()) {
       final var it = carrier.getFirst().iterator();
       while (it.hasNext()) {
         final var e = it.next();
         if (goal.test(e))
-          return Optional.of(e);
+          return Option.of(e);
 
         var children = adjs.apply(e);
         if (areNonEmpty(children)) {
@@ -49,7 +50,7 @@ public final class BreadthFirstSearch<T> {
       carrier.removeFirst();
     }
 
-    return Optional.empty();
+    return Option.none();
   }
 
   private boolean areNonEmpty(Iterable<T> children) {

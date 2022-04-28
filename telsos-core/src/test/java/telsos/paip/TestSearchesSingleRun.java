@@ -3,9 +3,9 @@ package telsos.paip;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
+
+import io.vavr.control.Option;
 
 class TestSearchesSingleRun {
 
@@ -19,14 +19,13 @@ class TestSearchesSingleRun {
 //    System.out.println();
 
     assertThat(TestBreadthFirstSearch.search("a", "u"))
-        .isEqualTo(Optional.of("u"));
+        .isEqualTo(Option.of("u"));
   }
 
   @SuppressWarnings("static-method")
   @Test
   void testDepthFirstSearch() {
-    assertThat(TestDepthFirstSearch.search("a", "u"))
-        .isEqualTo(Optional.of("u"));
+    assertThat(TestDepthFirstSearch.search("a", "u")).isEqualTo(Option.of("u"));
   }
 
 }

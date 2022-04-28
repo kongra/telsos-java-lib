@@ -9,11 +9,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.EnumMap;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.function.Supplier;
 
 import javax.sql.DataSource;
 
+import io.vavr.control.Option;
 import telsos.TelsosException;
 import telsos.Utils;
 
@@ -130,13 +130,13 @@ public final class Tx {
     }
   }
 
-  public static Optional<SQLException> asSQLException(Throwable t) {
+  public static Option<SQLException> asSQLException(Throwable t) {
     while (true) {
       if (t == null)
-        return Optional.empty();
+        return Option.none();
 
       if (t instanceof SQLException sqlE)
-        return Optional.of(sqlE);
+        return Option.of(sqlE);
 
       t = t.getCause();
     }
@@ -243,10 +243,14 @@ public final class Tx {
     });
   }
 
+  private static boolean isPostgres40001(SQLException e) {
+    return "40001".equals(e.getSQLState());
+  }
+
   // POSTGRESQL
   static {
-    RESTARTS_FINDERS.put(Dialect.POSTGRES, t -> asSQLException(t)
-        .map(e -> "40001".equals(e.getSQLState())).orElse(false));
+    RESTARTS_FINDERS.put(Dialect.POSTGRES,
+        t -> asSQLException(t).map(Tx::isPostgres40001).getOrElse(false));
   }
 
   private static final Logger LOG = System.getLogger(Tx.class.getName());

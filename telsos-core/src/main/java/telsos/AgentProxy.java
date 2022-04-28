@@ -12,14 +12,16 @@ import com.sun.tools.attach.AgentLoadException;
 import com.sun.tools.attach.AttachNotSupportedException;
 import com.sun.tools.attach.VirtualMachine;
 
+import io.vavr.Lazy;
+
 public final class AgentProxy {
 
   public static Instrumentation instrumentation() {
-    return instr.deref();
+    return instr.get();
   }
 
-  private static final Delay<Instrumentation> instr = Delay
-      .delay(AgentProxy::initialize);
+  private static final Lazy<Instrumentation> instr = Lazy
+      .of(AgentProxy::initialize);
 
   private static Instrumentation initialize() {
     LOG.log(Level.INFO, "AgentProxy::initialize");
