@@ -92,7 +92,8 @@ public class Randist {
    *         probability 1/2
    */
   public boolean bernoulli() {
-    return bernoulli(0.5);
+    final var half = 0.5;
+    return bernoulli(half);
   }
 
   /**
@@ -206,7 +207,8 @@ public class Randist {
    * @return a random real number from the Cauchy distribution.
    */
   public double cauchy() {
-    return Math.tan(Math.PI * (uniform() - 0.5));
+    final var half = 0.5;
+    return Math.tan(Math.PI * (uniform() - half));
   }
 
   /**
@@ -222,7 +224,6 @@ public class Randist {
    *                                  for each index <tt>i</tt>
    */
   public int discrete(double[] probabilities) {
-    var epsilon = 1E-14;
     var sum = 0.0;
     for (var i = 0; i < probabilities.length; i++) {
       if (probabilities[i] < 0.0)
@@ -230,6 +231,8 @@ public class Randist {
             "array entry " + i + " must be nonnegative: " + probabilities[i]);
       sum += probabilities[i];
     }
+
+    final var epsilon = 1E-14;
     if (sum > 1.0 + epsilon || sum < 1.0 - epsilon)
       throw new IllegalArgumentException(
           "sum of array entries does not approximately equal 1.0: " + sum);

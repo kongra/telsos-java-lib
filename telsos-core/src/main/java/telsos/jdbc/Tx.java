@@ -48,7 +48,7 @@ public final class Tx {
 
   public static final class TxCtx {
 
-    private final Connection conn;
+    public final Connection conn;
 
     public final int isolationLevel;
 

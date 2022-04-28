@@ -1,6 +1,8 @@
 // © 2019 Konrad Grzanek <kongra@gmail.com>
 package telsos;
 
+import java.util.Objects;
+
 public final class Utils {
 
   /**
@@ -11,8 +13,7 @@ public final class Utils {
    */
   public static TelsosException sneakyThrow(Throwable t) {
     // http://www.mail-archive.com/javaposse@googlegroups.com/msg05984.html
-    if (t == null)
-      throw new NullPointerException();
+    Objects.requireNonNull(t);
     Utils.sneakyThrow0(t);
     return new TelsosException();
   }

@@ -11,12 +11,13 @@ public final class HumanReadable {
 
   public static String bytes(double bytes, int digits) {
     var index = 0;
+    final var KB = 1024;
     for (index = 0; index < BYTES_MULTIPLIES_POSTFIXES.length; index++) {
-      if (bytes < 1024) {
+      if (bytes < KB) {
         break;
       }
 
-      bytes = bytes / 1024;
+      bytes = bytes / KB;
     }
 
     return "%%.%df %%s".formatted(digits).formatted(bytes,
