@@ -56,12 +56,14 @@ public final class Utils {
     return AgentProxy.instrumentation().getObjectSize(obj);
   }
 
-  public static boolean isEffectivelyInt(double d) {
-    return d == Math.rint(d);
+  public static boolean areEqual(double x, double y, double epsilon) {
+    return Math.abs(x - y) < epsilon;
   }
 
-  public static boolean isEffectivelyInt(float f) {
-    return f == Math.rint(f);
+  public static final double EPSILON = 0.0000000000001D;
+
+  public static boolean isEffectivelyInt(double d) {
+    return areEqual(d, Math.rint(d), EPSILON);
   }
 
   private Utils() {}

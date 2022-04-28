@@ -4,6 +4,7 @@ package telsos.jdbc;
 import static telsos.Ch.chIn;
 import static telsos.Ch.chNat;
 
+import java.lang.System.Logger;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.EnumMap;
@@ -113,18 +114,18 @@ public final class Tx {
       final var result = expr.eval(ctx);
       conn.commit();
       return result;
-    } catch (Exception e) {
+    } catch (SQLException e) {
       try {
         conn.rollback();
       } catch (SQLException e1) {
-        // In the future: maybe log
+        LOG.log(Logger.Level.ERROR, e1);
       }
       throw Utils.sneakyThrow(e);
     } finally {
       try {
         conn.setAutoCommit(autoCommit);
       } catch (SQLException e) {
-        // In the future: maybe log
+        LOG.log(Logger.Level.ERROR, e);
       }
     }
   }
@@ -157,7 +158,7 @@ public final class Tx {
     for (var i = 0;; i++) {
       try {
         return supplier.get();
-      } catch (Exception e) {
+      } catch (Throwable e) {
         if (i == ctx.allowedRestartsCount)
           throw e;
 
@@ -247,6 +248,8 @@ public final class Tx {
     RESTARTS_FINDERS.put(Dialect.POSTGRES, t -> asSQLException(t)
         .map(e -> "40001".equals(e.getSQLState())).orElse(false));
   }
+
+  private static final Logger LOG = System.getLogger(Tx.class.getName());
 
   private Tx() {}
 }

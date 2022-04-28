@@ -7,6 +7,9 @@ import java.lang.System.Logger.Level;
 import java.lang.instrument.Instrumentation;
 import java.lang.reflect.InvocationTargetException;
 
+import com.sun.tools.attach.AgentInitializationException;
+import com.sun.tools.attach.AgentLoadException;
+import com.sun.tools.attach.AttachNotSupportedException;
 import com.sun.tools.attach.VirtualMachine;
 
 public final class AgentProxy {
@@ -45,7 +48,8 @@ public final class AgentProxy {
     try {
       jvm = VirtualMachine.attach(String.valueOf(pid));
       jvm.loadAgent(agentPath);
-    } catch (Exception e) {
+    } catch (IOException | AgentLoadException | AgentInitializationException
+        | AttachNotSupportedException e) {
       throw new TelsosException(e);
     } finally {
       if (jvm != null) {

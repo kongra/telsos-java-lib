@@ -4,6 +4,7 @@ package telsos;
 import java.util.Objects;
 import java.util.function.IntUnaryOperator;
 import java.util.function.LongUnaryOperator;
+import java.util.function.UnaryOperator;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
@@ -15,9 +16,7 @@ import org.apache.commons.validator.routines.EmailValidator;
  * @param <T>
  */
 @FunctionalInterface
-public interface Ch<T> {
-
-  T ch(T obj);
+public interface Ch<T> extends UnaryOperator<T> {
 
   static <S> S chSome(S obj) {
     return Objects.requireNonNull(obj);
@@ -164,4 +163,5 @@ public interface Ch<T> {
   }
 
   Ch<String> email = Ch::chEmail;
+
 }

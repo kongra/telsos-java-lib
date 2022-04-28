@@ -22,4 +22,6 @@ public class TelsosException extends RuntimeException {
     super(cause);
   }
 
+  private static final long serialVersionUID = 1L;
+
 }
