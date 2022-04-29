@@ -5,16 +5,16 @@ import java.util.Deque;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+import io.vavr.Function1;
 import io.vavr.control.Option;
 
 public final class DepthFirstSearch<T> {
 
   @FunctionalInterface
-  public interface Adjs<T> extends Function<T, Iterable<T>> {}
+  public interface Adjs<T> extends Function1<T, Iterable<T>> {}
 
   @FunctionalInterface
   public interface CarrierSupplier<T> extends Supplier<Deque<Iterator<T>>> {}
