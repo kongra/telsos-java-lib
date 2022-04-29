@@ -15,4 +15,10 @@ public class Profile extends PanacheEntity {
   @Column(nullable = false, unique = true)
   public String email;
 
+  public Profile() {}
+
+  public Profile(@Email @NotNull String email) {
+    this.email = email;
+  }
+
 }
