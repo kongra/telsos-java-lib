@@ -11,11 +11,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import telsos.Ch;
-import telsos.quark.GreetingResource;
 
 @ApplicationScoped
 @Path("/profiles")
@@ -28,9 +24,8 @@ public class ProfileResource {
   @Path("/{id}")
   public Response getProfile(@PathParam("id") long id) {
     var profile = profileTools.findById(id).getOrNull();
-    if (profile == null) {
+    if (profile == null)
       return Response.status(Status.BAD_REQUEST).build();
-    }
     return Response.ok(Map.of("profile", profile)).build();
   }
 
@@ -38,21 +33,16 @@ public class ProfileResource {
   @Path("/{email}")
   public Response addProfile(@PathParam("email") String email) {
     if (!Ch.emailValidator.isValid(email)) {
-      log.info("--1");
       return Response
           .status(Status.BAD_REQUEST.getStatusCode(), "Malformed email")
           .build();
     }
 
     var profile = profileTools.addProfile(email);
-    if (profile.isDefined()) {
+    if (profile.isDefined())
       return Response.ok(profile.get()).status(Status.CREATED).build();
-    }
     return Response.status(Status.BAD_REQUEST.getStatusCode(), "Email in use")
         .build();
   }
-
-  private static final Logger log = LoggerFactory
-      .getLogger(GreetingResource.class);
 
 }

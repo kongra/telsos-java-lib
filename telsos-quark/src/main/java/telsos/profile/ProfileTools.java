@@ -23,9 +23,8 @@ public class ProfileTools {
 
   @Transactional
   public Option<Profile> addProfile(String email) {
-    if (findByEmail(email).isDefined()) {
+    if (findByEmail(email).isDefined())
       return Option.none();
-    }
 
     var profile = new Profile(email);
     profile.persist();
