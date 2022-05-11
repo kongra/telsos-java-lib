@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.sql.DataSource;
+import javax.transaction.Transactional;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -17,6 +18,8 @@ import javax.ws.rs.core.Response.Status;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import telsos.profile.Test1;
 
 @ApplicationScoped
 @Path("/greeting")
@@ -85,6 +88,21 @@ public class GreetingResource {
         return Response.status(Status.INTERNAL_SERVER_ERROR).build();
       }
     });
+  }
+
+  @GET
+  @Path("/hello-jpa/{id}")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Transactional
+  public Response helloJPA(@PathParam("id") long id) {
+    var result = (Test1) Test1.findById(id);
+    if (result != null) {
+      var firstName = result.firstName;
+      var json = Map.of(id, firstName);
+      return Response.ok(json).build();
+    }
+
+    return Response.status(Status.BAD_REQUEST).build();
   }
 
   public GreetingResource() {

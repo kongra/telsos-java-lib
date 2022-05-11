@@ -1,5 +1,6 @@
 package telsos.profile;
 
+import java.time.LocalDate;
 import java.util.Map;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -26,7 +27,7 @@ public class ProfileTools {
     if (findByEmail(email).isDefined())
       return Option.none();
 
-    var profile = new Profile(email);
+    var profile = new Profile(email, LocalDate.now());
     profile.persist();
     return Option.of(profile);
   }
