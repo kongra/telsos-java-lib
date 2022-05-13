@@ -6,6 +6,7 @@ import java.time.temporal.ChronoUnit;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
@@ -20,6 +21,7 @@ public class Profile extends PanacheEntity {
   public String email;
 
   @NotNull
+  @Transient
   public LocalDate registrationDate;
 
   public Profile() {}
