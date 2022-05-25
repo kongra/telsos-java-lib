@@ -96,9 +96,8 @@ public class GreetingResource {
   @Transactional
   public Response helloJPA(@PathParam("id") long id) {
     var result = (Test1) Test1.findById(id);
-    if (result == null) {
+    if (result == null)
       return Response.status(Status.BAD_REQUEST).build();
-    }
 
     var firstName = result.firstName;
     var json = Map.of(id, firstName);
