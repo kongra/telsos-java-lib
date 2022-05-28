@@ -26,7 +26,7 @@ class ProfileTest {
   @Test
   void testDaysSinceRegistration1() {
     profile.registrationDate = LocalDate.of(2022, 5, 9);
-    assertThat(profile.daysSinceRegistration()).isEqualTo(2);
+    assertThat(profile.daysSinceRegistration()).isEqualTo(19);
   }
 
   @Test

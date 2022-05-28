@@ -32,9 +32,9 @@ public class ProfileTools {
     return Option.of(profile);
   }
 
-  @SuppressWarnings("static-method")
-  @Transactional
-  private int foo(int n) {
+  // @SuppressWarnings("static-method")
+  // @Transactional
+  int foo(int n) {
     return n + n;
   }
 
