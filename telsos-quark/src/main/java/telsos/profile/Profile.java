@@ -43,10 +43,7 @@ public class Profile extends PanacheEntity {
 
   @Override
   public final int hashCode() {
-    final var prime = 31;
-    var result = 1;
-    result = prime * result + ((uid == null) ? 0 : uid.hashCode());
-    return result;
+    return 31 + uid.hashCode();
   }
 
   @Override
@@ -54,18 +51,7 @@ public class Profile extends PanacheEntity {
     if (this == obj) {
       return true;
     }
-    if (!(obj instanceof Profile)) {
-      return false;
-    }
-    Profile other = (Profile) obj;
-    if (uid == null) {
-      if (other.uid != null) {
-        return false;
-      }
-    } else if (!uid.equals(other.uid)) {
-      return false;
-    }
-    return true;
+    return obj instanceof Profile p && uid.equals(p.uid);
   }
 
 }

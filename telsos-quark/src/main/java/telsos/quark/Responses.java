@@ -16,7 +16,7 @@ public final class Responses {
   }
 
   public static Supplier<Response> badRequestSupplier() {
-    return () -> Response.status(Status.BAD_REQUEST).build();
+    return Responses::badRequest;
   }
 
   public static Response internalServerError() {
