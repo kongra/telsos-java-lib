@@ -40,7 +40,7 @@ public final class BreadthFirstSearch<T> {
         if (goal.test(e))
           return Option.of(e);
 
-        var children = adjs.apply(e);
+        final var children = adjs.apply(e);
         if (areNonEmpty(children)) {
           carrier.addLast(children);
         }

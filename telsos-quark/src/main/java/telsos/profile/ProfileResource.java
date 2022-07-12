@@ -37,7 +37,7 @@ public class ProfileResource {
           .status(Status.BAD_REQUEST.getStatusCode(), "Malformed email")
           .build();
 
-    var profile = profileTools.addProfile(email);
+    final var profile = profileTools.addProfile(email);
     if (profile.isDefined())
       return Response.ok(profile.get()).status(Status.CREATED).build();
 

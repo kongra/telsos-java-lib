@@ -34,7 +34,7 @@ public class Profile extends PanacheEntity {
       @NotNull LocalDate registrationDate) {
     this.email = email;
     this.registrationDate = registrationDate;
-    this.uid = UUID.randomUUID();
+    uid = UUID.randomUUID();
   }
 
   public long daysSinceRegistration() {
@@ -48,10 +48,9 @@ public class Profile extends PanacheEntity {
 
   @Override
   public final boolean equals(Object obj) {
-    if (this == obj) {
+    if (this == obj)
       return true;
-    }
-    return obj instanceof Profile p && uid.equals(p.uid);
+    return obj instanceof final Profile p && uid.equals(p.uid);
   }
 
 }

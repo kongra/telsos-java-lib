@@ -17,7 +17,7 @@ class TestCollections {
 
   @Test
   void testA() {
-    List<String> l1 = new ArrayList<>();
+    final List<String> l1 = new ArrayList<>();
     assertThat(l1).isEmpty();
     assertThatExceptionOfType(IndexOutOfBoundsException.class)
         .isThrownBy(() -> {
@@ -28,7 +28,7 @@ class TestCollections {
     assertThat(l1).isNotEmpty();
     assertThat(l1.get(0)).isEqualTo("xyz");
 
-    var l2 = List.of(123, 145, -3);
+    final var l2 = List.of(123, 145, -3);
     assertThat(l2).hasSize(3);
 
     assertThatExceptionOfType(UnsupportedOperationException.class)
@@ -69,7 +69,7 @@ class TestCollections {
 
   @Test
   void testB() {
-    var s1 = Status.OK;
+    final var s1 = Status.OK;
 
     assertThat(s1).isSameAs(Status.OK).isNotSameAs(Status.ERROR)
         .isEqualTo(Status.OK);
@@ -78,11 +78,11 @@ class TestCollections {
 
   @Test
   void testC() {
-    Set<Status> statuses1 = new HashSet<>();
+    final Set<Status> statuses1 = new HashSet<>();
     statuses1.add(Status.OK);
     assertThat(statuses1).contains(Status.OK).doesNotContain(Status.ERROR);
 
-    EnumSet<Status> statuses2 = EnumSet.of(Status.OK);
+    final EnumSet<Status> statuses2 = EnumSet.of(Status.OK);
     assertThat(statuses2).contains(Status.OK).doesNotContain(Status.ERROR);
   }
 

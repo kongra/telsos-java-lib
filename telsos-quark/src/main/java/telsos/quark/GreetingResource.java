@@ -50,10 +50,10 @@ public class GreetingResource {
   public Response hello1(@PathParam("id") String id) {
     greetingCounter.inc();
     try {
-      var id1 = Long.parseLong(id);
-      var s = greetingTools.sayHello("Hi-" + id1);
+      final var id1 = Long.parseLong(id);
+      final var s = greetingTools.sayHello("Hi-" + id1);
       return Response.ok(Map.of("result", s)).build();
-    } catch (NumberFormatException e) {
+    } catch (final NumberFormatException e) {
       return Response.status(Response.Status.BAD_REQUEST).build();
     }
   }
@@ -77,13 +77,13 @@ public class GreetingResource {
 
         try (var rs = stmt.executeQuery()) {
           if (rs.next()) {
-            var firstName = rs.getString("first_name");
-            var json = Map.of(id, firstName);
+            final var firstName = rs.getString("first_name");
+            final var json = Map.of(id, firstName);
             return Response.ok(json).build();
           }
           return Response.ok(Map.of()).build();
         }
-      } catch (SQLException e) {
+      } catch (final SQLException e) {
         LOG.error("Problem when executing", e);
         return Response.status(Status.INTERNAL_SERVER_ERROR).build();
       }
@@ -95,12 +95,12 @@ public class GreetingResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Transactional
   public Response helloJPA(@PathParam("id") long id) {
-    var result = (Test1) Test1.findById(id);
+    final var result = (Test1) Test1.findById(id);
     if (result == null)
       return Response.status(Status.BAD_REQUEST).build();
 
-    var firstName = result.firstName;
-    var json = Map.of(id, firstName);
+    final var firstName = result.firstName;
+    final var json = Map.of(id, firstName);
     return Response.ok(json).build();
   }
 

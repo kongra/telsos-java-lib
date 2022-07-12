@@ -23,7 +23,7 @@ public class GreetingCounter {
   private final AtomicLong count = new AtomicLong(0);
 
   public void inc() {
-    var value = count.addAndGet(incDelta);
+    final var value = count.addAndGet(incDelta);
     incEvent.fire(value);
   }
 

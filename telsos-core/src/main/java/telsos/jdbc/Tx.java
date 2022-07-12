@@ -30,7 +30,7 @@ public final class Tx {
     default void acceptThrowingUnchecked(Connection ctx) {
       try {
         accept(ctx);
-      } catch (Throwable t) {
+      } catch (final Throwable t) {
         throw new TelsosException(t);
       }
     }
@@ -44,7 +44,7 @@ public final class Tx {
     default void acceptThrowingUnchecked(TxCtx ctx) {
       try {
         accept(ctx);
-      } catch (Throwable t) {
+      } catch (final Throwable t) {
         throw new TelsosException(t);
       }
     }
@@ -91,7 +91,7 @@ public final class Tx {
   public static <T> T withConn(DataSource ds, Expr<T> expr) {
     try (var conn = ds.getConnection()) {
       return expr.apply(conn);
-    } catch (SQLException e) {
+    } catch (final SQLException e) {
       throw new TelsosException(e);
     }
   }
@@ -108,7 +108,7 @@ public final class Tx {
     final boolean autoCommit;
     try {
       autoCommit = conn.getAutoCommit();
-    } catch (SQLException e) {
+    } catch (final SQLException e) {
       throw Utils.sneakyThrow(e);
     }
     try {
@@ -117,17 +117,17 @@ public final class Tx {
       final var result = expr.apply(ctx);
       conn.commit();
       return result;
-    } catch (SQLException e) {
+    } catch (final SQLException e) {
       try {
         conn.rollback();
-      } catch (SQLException e1) {
+      } catch (final SQLException e1) {
         LOG.log(Logger.Level.ERROR, e1);
       }
       throw Utils.sneakyThrow(e);
     } finally {
       try {
         conn.setAutoCommit(autoCommit);
-      } catch (SQLException e) {
+      } catch (final SQLException e) {
         LOG.log(Logger.Level.ERROR, e);
       }
     }
@@ -138,7 +138,7 @@ public final class Tx {
       if (t == null)
         return Option.none();
 
-      if (t instanceof SQLException sqlE)
+      if (t instanceof final SQLException sqlE)
         return Option.of(sqlE);
 
       t = t.getCause();
@@ -157,11 +157,11 @@ public final class Tx {
     for (var i = 0;; i++) {
       try {
         return supplier.apply();
-      } catch (Throwable e) {
+      } catch (final Throwable e) {
         if (i == ctx.allowedRestartsCount)
           throw new TelsosException(e);
 
-        var isRestarting = RESTARTS_FINDERS.get(ctx.dialect);
+        final var isRestarting = RESTARTS_FINDERS.get(ctx.dialect);
         if (null == isRestarting || !isRestarting.test(e))
           throw new TelsosException(e);
 
@@ -184,7 +184,7 @@ public final class Tx {
 
   public static <T> T inSerializable(Dialect dialect, Connection conn,
       int allowedRestartsCount, TxExpr<T> expr) {
-    var ctx = new TxCtx(conn, Connection.TRANSACTION_SERIALIZABLE,
+    final var ctx = new TxCtx(conn, Connection.TRANSACTION_SERIALIZABLE,
         allowedRestartsCount, dialect);
     return restartingTx(ctx, () -> inTransaction(ctx, expr));
   }
@@ -199,8 +199,8 @@ public final class Tx {
 
   public static <T> T inSerializable(Dialect dialect, DataSource ds,
       int allowedRestartsCount, TxExpr<T> expr) {
-    Expr<T> expr1 = conn -> inSerializable(dialect, conn, allowedRestartsCount,
-        expr);
+    final Expr<T> expr1 = conn -> inSerializable(dialect, conn,
+        allowedRestartsCount, expr);
     return withConn(ds, expr1);
   }
 
@@ -214,8 +214,8 @@ public final class Tx {
 
   public static <T> T inReadCommitted(Dialect dialect, Connection conn,
       TxExpr<T> expr) {
-    var allowedRestartsCount = 0;
-    var ctx = new TxCtx(conn, Connection.TRANSACTION_READ_COMMITTED,
+    final var allowedRestartsCount = 0;
+    final var ctx = new TxCtx(conn, Connection.TRANSACTION_READ_COMMITTED,
         allowedRestartsCount, dialect);
     return restartingTx(ctx, () -> inTransaction(ctx, expr));
   }
@@ -230,7 +230,7 @@ public final class Tx {
 
   public static <T> T inReadCommitted(Dialect dialect, DataSource ds,
       TxExpr<T> expr) {
-    Expr<T> expr1 = conn -> inReadCommitted(dialect, conn, expr);
+    final Expr<T> expr1 = conn -> inReadCommitted(dialect, conn, expr);
     return withConn(ds, expr1);
   }
 

@@ -18,7 +18,7 @@ public class ProfileTools {
 
   @Transactional
   public Option<Profile> findByEmail(String email) {
-    var query = Profile.find("email = :email", Map.of("email", email));
+    final var query = Profile.find("email = :email", Map.of("email", email));
     return Option.ofOptional(query.singleResultOptional());
   }
 
@@ -27,7 +27,7 @@ public class ProfileTools {
     if (findByEmail(email).isDefined())
       return Option.none();
 
-    var profile = new Profile(email, LocalDate.now());
+    final var profile = new Profile(email, LocalDate.now());
     profile.persist();
     return Option.of(profile);
   }

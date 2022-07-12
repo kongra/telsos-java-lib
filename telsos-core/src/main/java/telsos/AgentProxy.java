@@ -31,8 +31,9 @@ public final class AgentProxy {
 
   private static Instrumentation getInstrumentation() {
     try {
-      var agentClass = Class.forName("telsos.Agent");
-      var method = agentClass.getMethod("instrumentation", (Class<?>[]) null);
+      final var agentClass = Class.forName("telsos.Agent");
+      final var method = agentClass.getMethod("instrumentation",
+          (Class<?>[]) null);
       return (Instrumentation) method.invoke(null, (Object[]) null);
     } catch (ClassNotFoundException | NoSuchMethodException | SecurityException
         | IllegalAccessException | IllegalArgumentException
@@ -42,9 +43,10 @@ public final class AgentProxy {
   }
 
   private static void loadAgent() {
-    var pid = ProcessHandle.current().pid();
-    var agentFile = new File("../telsos-agent/target/telsos-agent-1.0.jar");
-    var agentPath = agentFile.getAbsolutePath();
+    final var pid = ProcessHandle.current().pid();
+    final var agentFile = new File(
+        "../telsos-agent/target/telsos-agent-1.0.jar");
+    final var agentPath = agentFile.getAbsolutePath();
 
     VirtualMachine jvm = null;
     try {
@@ -57,7 +59,7 @@ public final class AgentProxy {
       if (jvm != null) {
         try {
           jvm.detach();
-        } catch (IOException e) {
+        } catch (final IOException e) {
           LOG.log(Level.ERROR, e);
         }
       }

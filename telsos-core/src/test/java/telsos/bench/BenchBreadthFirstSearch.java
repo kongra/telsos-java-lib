@@ -17,19 +17,19 @@ public class BenchBreadthFirstSearch {
 
   @Benchmark
   public static void benchaa(Blackhole blackhole) {
-    var v = TestBreadthFirstSearch.search1("a", "a");
+    final var v = TestBreadthFirstSearch.search1("a", "a");
     blackhole.consume(v);
   }
 
   @Benchmark
   public static void benchau(Blackhole blackhole) {
-    var v = TestBreadthFirstSearch.search1("a", "u");
+    final var v = TestBreadthFirstSearch.search1("a", "u");
     blackhole.consume(v);
   }
 
   @Benchmark
   public static void benchax(Blackhole blackhole) {
-    var v = TestBreadthFirstSearch.search1("a", "x");
+    final var v = TestBreadthFirstSearch.search1("a", "x");
     blackhole.consume(v);
   }
 

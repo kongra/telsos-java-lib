@@ -110,7 +110,7 @@ public interface Ch<T> extends UnaryOperator<T> {
   }
 
   static int chIn(int i, int... values) {
-    for (var v : values) {
+    for (final var v : values) {
       if (i == v)
         return i;
     }

@@ -21,12 +21,13 @@ class TestJmhRunner {
   // Uncomment the annotation below to run the benchmark with mvm test
   // @Test
   void runJmhBenchmarks() throws RunnerException {
-    var opts = new OptionsBuilder().warmupIterations(3).measurementIterations(3)
-        .forks(1).jvmArgsAppend("-server", "-Xms256m", "-Xmx2G");
+    final var opts = new OptionsBuilder().warmupIterations(3)
+        .measurementIterations(3).forks(1)
+        .jvmArgsAppend("-server", "-Xms256m", "-Xmx2G");
 
     BENCH_CLASSES.forEach(c -> opts.include(c.getSimpleName()));
 
-    var runResults = new Runner(opts.build()).run();
+    final var runResults = new Runner(opts.build()).run();
     assertFalse(runResults.isEmpty());
   }
 

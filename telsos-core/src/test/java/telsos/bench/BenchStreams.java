@@ -29,7 +29,7 @@ public class BenchStreams {
 
   @Benchmark
   public static void streamBench(MyState state, Blackhole blackhole) {
-    var sum = LongStream.iterate(state.start, i -> i + 1).limit(state.n)
+    final var sum = LongStream.iterate(state.start, i -> i + 1).limit(state.n)
         .reduce(0L, Long::sum);
     state.result = sum;
     blackhole.consume(sum);
@@ -47,8 +47,8 @@ public class BenchStreams {
 
   @Benchmark
   public static void streamLongBench(MyState state, Blackhole blackhole) {
-    long sum = Stream.iterate(state.start, i -> i + 1).limit(state.n).reduce(0L,
-        Long::sum);
+    final long sum = Stream.iterate(state.start, i -> i + 1).limit(state.n)
+        .reduce(0L, Long::sum);
     state.result = sum;
     blackhole.consume(sum);
   }

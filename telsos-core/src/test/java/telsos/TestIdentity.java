@@ -28,7 +28,7 @@ class TestIdentity {
     public final boolean equals(Object obj) {
       if (this == obj)
         return true;
-      if (!(obj instanceof Point2D other)
+      if (!(obj instanceof final Point2D other)
           || Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x)
           || Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))
         return false;
@@ -48,10 +48,10 @@ class TestIdentity {
 
   @Test
   void testA() {
-    var p1 = new Point2D(1, 1);
-    var p2 = new Point2D(-3, 4);
-    var p3 = new Point2D(1, 1);
-    var p4 = new ColoredPoint2D(1, 1, "A kind of blue");
+    final var p1 = new Point2D(1, 1);
+    final var p2 = new Point2D(-3, 4);
+    final var p3 = new Point2D(1, 1);
+    final var p4 = new ColoredPoint2D(1, 1, "A kind of blue");
 
     assertThat(p1).isNotSameAs(p2).isEqualTo(p3).isEqualTo(p4);
   }

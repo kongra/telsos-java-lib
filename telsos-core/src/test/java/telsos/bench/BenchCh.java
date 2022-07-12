@@ -20,43 +20,43 @@ public class BenchCh {
 
   @Benchmark
   public static void chPosBench(MyState state, Blackhole blackhole) {
-    var l = chPos(state.l);
+    final var l = chPos(state.l);
     blackhole.consume(l);
   }
 
   @Benchmark
   public static void chNonBlank1Bench(MyState state, Blackhole blackhole) {
-    var s = chNonBlank(state.s1);
+    final var s = chNonBlank(state.s1);
     blackhole.consume(s);
   }
 
   @Benchmark
   public static void chNonBlank2Bench(MyState state, Blackhole blackhole) {
-    var s = chNonBlank(state.s2);
+    final var s = chNonBlank(state.s2);
     blackhole.consume(s);
   }
 
   @Benchmark
   public static void chNonBlank3Bench(MyState state, Blackhole blackhole) {
-    var s = chNonBlank(state.s3);
+    final var s = chNonBlank(state.s3);
     blackhole.consume(s);
   }
 
   @Benchmark
   public static void chNonBlank4Bench(MyState state, Blackhole blackhole) {
-    var s = chNonBlank(state.s4);
+    final var s = chNonBlank(state.s4);
     blackhole.consume(s);
   }
 
   @Benchmark
   public static void chNonBlank5Bench(MyState state, Blackhole blackhole) {
-    var s = chNonBlank(state.s5);
+    final var s = chNonBlank(state.s5);
     blackhole.consume(s);
   }
 
   @Benchmark
   public static void chNonBlank6Bench(MyState state, Blackhole blackhole) {
-    var s = chNonBlank(state.s6);
+    final var s = chNonBlank(state.s6);
     blackhole.consume(s);
   }
 
