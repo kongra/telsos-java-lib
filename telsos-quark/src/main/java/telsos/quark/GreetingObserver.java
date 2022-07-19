@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 public class GreetingObserver {
 
   public void onIncEvent(@Observes Long n) {
-    LOG.info("GreetingObserver::onIncEvent(" + n + ")");
+    LOG.info("GreetingObserver::onIncEvent({})", n);
   }
 
   private static final Logger LOG = LoggerFactory
