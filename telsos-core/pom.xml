@@ -35,7 +35,7 @@
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <version>3.22.0</version>
+      <version>3.23.1</version>
       <!-- <scope>test</scope> it's needed in jShell -->
     </dependency>
 
@@ -62,15 +62,15 @@
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <version>2.13.2.2</version>
+      <version>2.13.3</version>
     </dependency>
-    
+
     <dependency>
       <groupId>io.vavr</groupId>
       <artifactId>vavr</artifactId>
       <version>0.10.4</version>
     </dependency>
-    
+
   </dependencies>
 
   <build>
