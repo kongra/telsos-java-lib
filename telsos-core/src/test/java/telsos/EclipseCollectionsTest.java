@@ -18,8 +18,11 @@ class EclipseCollectionsTest {
   }
 
   @Test
-  void testListCreation() {
-    assertThat(mutableList).contains(1);
+  void testMutableListConsistency() {
+    assertThat(mutableList)
+        .contains(1)
+        .contains(2)
+        .contains(3);
   }
 
 }
