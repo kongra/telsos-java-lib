@@ -1,4 +1,4 @@
 // © 2022 Konrad Grzanek <kongra@gmail.com>
 package telsos;
 
-class TestTreePrinter {}
+class TreePrinterTest {}
