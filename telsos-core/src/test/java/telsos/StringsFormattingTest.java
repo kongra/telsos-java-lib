@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-class EclipseFormattingTest {
+class StringsFormattingTest {
 
   private boolean isOdd(int n) {
     return n % 2 == 1;
