@@ -13,7 +13,7 @@ class EclipseCollectionsTest {
   MutableList<Integer> mutableList;
 
   @BeforeEach
-  void beforeEach() {
+  void setupEach() {
     mutableList = Lists.mutable.of(1, 2, 3);
   }
 
