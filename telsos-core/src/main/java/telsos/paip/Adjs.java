@@ -1,7 +1,7 @@
 // © 2022 Konrad Grzanek <kongra@gmail.com>
 package telsos.paip;
 
-import io.vavr.Function1;
+import java.util.function.Function;
 
 @FunctionalInterface
-public interface Adjs<T> extends Function1<T, Iterable<T>> {}
+public interface Adjs<T> extends Function<T, Iterable<T>> {}
