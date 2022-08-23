@@ -6,8 +6,6 @@ import java.util.function.IntUnaryOperator;
 import java.util.function.LongUnaryOperator;
 import java.util.function.UnaryOperator;
 
-import org.apache.commons.validator.routines.EmailValidator;
-
 /**
  * type Ch T = T -> T
  *
@@ -153,15 +151,5 @@ public interface Ch<T> extends UnaryOperator<T> {
   }
 
   Ch<String> nonBlank = Ch::chNonBlank; // s -> chNonBlank(s)
-
-  EmailValidator emailValidator = EmailValidator.getInstance();
-
-  static String chEmail(String s) {
-    if (emailValidator.isValid(s))
-      return s;
-    throw new ChError("Invalid email " + s);
-  }
-
-  Ch<String> email = Ch::chEmail;
 
 }

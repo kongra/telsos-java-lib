@@ -11,7 +11,7 @@ public final class NonBlank extends ValidatedString {
     return Str.validOf(s, Ch.nonBlank, NonBlank::new);
   }
 
-  public static Optional<NonBlank> optionally(String s) {
+  public static Optional<NonBlank> optionallyOf(String s) {
     return Str.validOf(s, predicate, NonBlank::new);
   }
 
