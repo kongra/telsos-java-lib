@@ -147,7 +147,7 @@ public interface Ch<T> extends UnaryOperator<T> {
   }
 
   static String chNonBlank(String s) {
-    if (s == null || s.isBlank())
+    if (s.isBlank())
       throw new ChError(s);
     return s;
   }
