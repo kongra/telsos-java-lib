@@ -3,26 +3,44 @@ package telsos;
 
 public class ChError extends RuntimeException {
 
-  public ChError() {}
+  private final transient Object subject;
+
+  public ChError() {
+    this.subject = null;
+  }
 
   public ChError(long detailMessage) {
     super(String.valueOf(detailMessage));
+    this.subject = detailMessage;
   }
 
   public ChError(float detailMessage) {
     super(String.valueOf(detailMessage));
+    this.subject = detailMessage;
   }
 
   public ChError(double detailMessage) {
     super(String.valueOf(detailMessage));
+    this.subject = detailMessage;
   }
 
-  public ChError(String detailMessage) {
+  public ChError(Object subject) {
+    super();
+    this.subject = subject;
+  }
+
+  public ChError(Object subject, String detailMessage) {
     super(detailMessage);
+    this.subject = subject;
   }
 
-  public ChError(String message, Throwable cause) {
+  public ChError(Object subject, String message, Throwable cause) {
     super(message, cause);
+    this.subject = subject;
+  }
+
+  public final Object getSubject() {
+    return subject;
   }
 
 }

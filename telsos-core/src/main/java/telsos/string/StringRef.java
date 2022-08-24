@@ -1,14 +1,17 @@
 package telsos.string;
 
-public class ValidatedString {
+import java.util.Objects;
+
+public class StringRef {
 
   private final String value;
 
-  protected ValidatedString(String value) {
+  protected StringRef(String value) {
+    Objects.requireNonNull(value);
     this.value = value;
   }
 
-  public String value() {
+  public final String value() {
     return value;
   }
 
@@ -29,7 +32,7 @@ public class ValidatedString {
     if (obj == null)
       return false;
     if (this.getClass() == obj.getClass())
-      return value().equals(((ValidatedString) obj).value());
+      return value().equals(((StringRef) obj).value());
 
     return false;
   }

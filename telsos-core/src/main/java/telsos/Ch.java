@@ -1,9 +1,11 @@
-// © 2019 Konrad Grzanek <kongra@gmail.com>package telsos;
+// © 2019 Konrad Grzanek <kongra@gmail.com>
 package telsos;
 
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.function.IntUnaryOperator;
 import java.util.function.LongUnaryOperator;
+import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 
 /**
@@ -16,8 +18,25 @@ import java.util.function.UnaryOperator;
 @FunctionalInterface
 public interface Ch<T> extends UnaryOperator<T> {
 
-  static <S> S chSome(S obj) {
-    return Objects.requireNonNull(obj);
+  static <T> Ch<T> of(Predicate<T> pred) {
+    Objects.requireNonNull(pred);
+    return t -> pred.test(t) ? t : fail(t);
+  }
+
+  static <T> Ch<T> of(Predicate<T> pred, Function<T, String> message) {
+    Objects.requireNonNull(pred);
+    Objects.requireNonNull(message);
+    return t -> pred.test(t) ? t : fail(t, message);
+  }
+
+  static <T> T fail(T t) {
+    Utils.sneakyThrow(new ChError(t));
+    return null;
+  }
+
+  static <T> T fail(T t, Function<T, String> message) {
+    Utils.sneakyThrow(new ChError(t, message.apply(t)));
+    return null;
   }
 
   static byte chPos(byte b) {
@@ -143,13 +162,5 @@ public interface Ch<T> extends UnaryOperator<T> {
       return f;
     throw new ChError(f);
   }
-
-  static String chNonBlank(String s) {
-    if (s.isBlank())
-      throw new ChError(s);
-    return s;
-  }
-
-  Ch<String> nonBlank = Ch::chNonBlank; // s -> chNonBlank(s)
 
 }

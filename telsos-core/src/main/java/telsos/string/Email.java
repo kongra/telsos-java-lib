@@ -9,18 +9,22 @@ import org.apache.commons.validator.routines.EmailValidator;
 import telsos.Ch;
 import telsos.ChError;
 
-public final class Email extends ValidatedString {
+public final class Email extends StringRef {
 
   public static Email of(String s) {
     return Str.validOf(s, ch, Email::new);
   }
 
-  public static Optional<Email> optionally(String s) {
+  public static Optional<Email> optionallyOf(String s) {
     return Str.validOf(s, pred, Email::new);
   }
 
   public static Email ofStripped(String s) {
     return Str.validOfStripped(s, ch, Email::new);
+  }
+
+  public static Optional<Email> optionallyOfStripped(String s) {
+    return Str.validOfStripped(s, pred, Email::new);
   }
 
   public static String chEmail(String s) {
@@ -32,9 +36,10 @@ public final class Email extends ValidatedString {
   public static final EmailValidator validator = EmailValidator
       .getInstance();
 
-  public static final Ch<String> ch = Email::chEmail;
+  public static final Predicate<String> pred = NonBlank.pred
+      .and(validator::isValid);
 
-  public static final Predicate<String> pred = validator::isValid;
+  public static final Ch<String> ch = Ch.of(pred);
 
   private Email(String value) {
     super(value);
