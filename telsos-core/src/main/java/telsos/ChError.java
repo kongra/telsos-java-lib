@@ -6,26 +6,25 @@ public class ChError extends RuntimeException {
   private final transient Object subject;
 
   public ChError() {
-    this.subject = null;
+    subject = null;
   }
 
   public ChError(long detailMessage) {
     super(String.valueOf(detailMessage));
-    this.subject = detailMessage;
+    subject = detailMessage;
   }
 
   public ChError(float detailMessage) {
     super(String.valueOf(detailMessage));
-    this.subject = detailMessage;
+    subject = detailMessage;
   }
 
   public ChError(double detailMessage) {
     super(String.valueOf(detailMessage));
-    this.subject = detailMessage;
+    subject = detailMessage;
   }
 
   public ChError(Object subject) {
-    super();
     this.subject = subject;
   }
 
