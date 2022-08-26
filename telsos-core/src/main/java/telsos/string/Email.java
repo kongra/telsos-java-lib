@@ -34,6 +34,11 @@ public final class Email extends Newtype<String> {
 
   public static final Ch<String> ch = Ch.of(pred);
 
+  @Override
+  public String toString() {
+    return value;
+  }
+
   private Email(String value) {
     super(value);
   }

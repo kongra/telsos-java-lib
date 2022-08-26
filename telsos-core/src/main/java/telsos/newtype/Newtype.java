@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Newtype<T> extends AbstractNewtype<Newtype<T>> {
 
-  private final T value;
+  public final T value;
 
   public Newtype(T value) {
     this.value = Objects.requireNonNull(value);
