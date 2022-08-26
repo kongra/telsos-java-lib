@@ -18,6 +18,11 @@ public final class Utils {
     return new TelsosException();
   }
 
+  public static <T> T fail(Throwable t) {
+    Utils.sneakyThrow(t);
+    return null;
+  }
+
   @SuppressWarnings("unchecked")
   private static <T extends Throwable> void sneakyThrow0(Throwable t) throws T {
     throw (T) t;

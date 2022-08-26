@@ -32,13 +32,13 @@ public interface Ch<T> extends UnaryOperator<T> {
     return t -> pred.test(t) ? t : fail(t, message);
   }
 
-  static <T, S extends Newtype<T>> S checkedOf(T s,
+  static <T, S extends Newtype<T>> S checked(T s,
       Ch<T> ch,
       Function<T, S> constr) {
     return constr.apply(ch.apply(s));
   }
 
-  static <T, S extends Newtype<T>> Optional<S> checkedOf(T s,
+  static <T, S extends Newtype<T>> Optional<S> checkedOptionally(T s,
       Predicate<T> pred,
       Function<T, S> constr) {
     return pred.test(s)
@@ -47,8 +47,7 @@ public interface Ch<T> extends UnaryOperator<T> {
   }
 
   static <T> T fail(T t) {
-    Utils.sneakyThrow(new ChError(t));
-    return null;
+    return Utils.fail(new ChError(t));
   }
 
   static <T> T fail(T t, Function<T, String> message) {

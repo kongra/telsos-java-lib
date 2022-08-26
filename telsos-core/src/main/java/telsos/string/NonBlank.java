@@ -9,11 +9,11 @@ import telsos.newtype.Newtype;
 public final class NonBlank extends Newtype<String> {
 
   public static NonBlank of(String s) {
-    return Ch.checkedOf(s, ch, NonBlank::new);
+    return Ch.checked(s, ch, NonBlank::new);
   }
 
   public static Optional<NonBlank> optionallyOf(String s) {
-    return Ch.checkedOf(s, pred, NonBlank::new);
+    return Ch.checkedOptionally(s, pred, NonBlank::new);
   }
 
   public static boolean isBlank(String s) {
