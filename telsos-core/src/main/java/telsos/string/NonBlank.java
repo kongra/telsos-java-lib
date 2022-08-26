@@ -4,23 +4,16 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import telsos.Ch;
+import telsos.newtype.Newtype;
 
-public final class NonBlank extends StringRef {
+public final class NonBlank extends Newtype<String> {
 
   public static NonBlank of(String s) {
-    return Str.validOf(s, ch, NonBlank::new);
+    return Ch.checkedOf(s, ch, NonBlank::new);
   }
 
   public static Optional<NonBlank> optionallyOf(String s) {
-    return Str.validOf(s, pred, NonBlank::new);
-  }
-
-  public static NonBlank ofStripped(String s) {
-    return Str.validOfStripped(s, ch, NonBlank::new);
-  }
-
-  public static Optional<NonBlank> optionallyOfStripped(String s) {
-    return Str.validOfStripped(s, pred, NonBlank::new);
+    return Ch.checkedOf(s, pred, NonBlank::new);
   }
 
   public static boolean isBlank(String s) {

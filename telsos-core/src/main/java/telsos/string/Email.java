@@ -8,23 +8,16 @@ import org.apache.commons.validator.routines.EmailValidator;
 
 import telsos.Ch;
 import telsos.ChError;
+import telsos.newtype.Newtype;
 
-public final class Email extends StringRef {
+public final class Email extends Newtype<String> {
 
   public static Email of(String s) {
-    return Str.validOf(s, ch, Email::new);
+    return Ch.checkedOf(s, ch, Email::new);
   }
 
   public static Optional<Email> optionallyOf(String s) {
-    return Str.validOf(s, pred, Email::new);
-  }
-
-  public static Email ofStripped(String s) {
-    return Str.validOfStripped(s, ch, Email::new);
-  }
-
-  public static Optional<Email> optionallyOfStripped(String s) {
-    return Str.validOfStripped(s, pred, Email::new);
+    return Ch.checkedOf(s, pred, Email::new);
   }
 
   public static String chEmail(String s) {

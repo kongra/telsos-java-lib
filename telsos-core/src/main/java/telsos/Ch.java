@@ -2,11 +2,14 @@
 package telsos;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.IntUnaryOperator;
 import java.util.function.LongUnaryOperator;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
+
+import telsos.newtype.Newtype;
 
 /**
  * type Ch T = T -> T
@@ -27,6 +30,20 @@ public interface Ch<T> extends UnaryOperator<T> {
     Objects.requireNonNull(pred);
     Objects.requireNonNull(message);
     return t -> pred.test(t) ? t : fail(t, message);
+  }
+
+  static <T, S extends Newtype<T>> S checkedOf(T s,
+      Ch<T> ch,
+      Function<T, S> constr) {
+    return constr.apply(ch.apply(s));
+  }
+
+  static <T, S extends Newtype<T>> Optional<S> checkedOf(T s,
+      Predicate<T> pred,
+      Function<T, S> constr) {
+    return pred.test(s)
+        ? Optional.of(constr.apply(s))
+        : Optional.empty();
   }
 
   static <T> T fail(T t) {
