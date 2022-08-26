@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Newtype<T> extends AbstractNewtype<Newtype<T>> {
 
-  public final T value;
+  private final T value;
 
   public Newtype(T value) {
     this.value = Objects.requireNonNull(value);
@@ -18,6 +18,10 @@ public class Newtype<T> extends AbstractNewtype<Newtype<T>> {
   @Override
   protected final boolean isEqualTo(Newtype<T> other) {
     return value.equals(other.value);
+  }
+
+  public T value() {
+    return value;
   }
 
 }

@@ -29,7 +29,7 @@ public final class Email extends Newtype<String> {
 
   @Override
   public String toString() {
-    return value;
+    return value();
   }
 
   private Email(String value) {

@@ -32,17 +32,17 @@ public interface Ch<T> extends UnaryOperator<T> {
     return t -> pred.test(t) ? t : fail(t, message);
   }
 
-  static <T, S extends Newtype<T>> S checked(T s,
+  static <T, S extends Newtype<T>> S checked(T t,
       Ch<T> ch,
       Function<T, S> constr) {
-    return constr.apply(ch.apply(s));
+    return constr.apply(ch.apply(t));
   }
 
-  static <T, S extends Newtype<T>> Optional<S> checkedOptionally(T s,
+  static <T, S extends Newtype<T>> Optional<S> checkedOptionally(T t,
       Predicate<T> pred,
       Function<T, S> constr) {
-    return pred.test(s)
-        ? Optional.of(constr.apply(s))
+    return pred.test(t)
+        ? Optional.of(constr.apply(t))
         : Optional.empty();
   }
 

@@ -24,6 +24,11 @@ public final class NonBlank extends Newtype<String> {
 
   public static final Ch<String> ch = Ch.of(pred);
 
+  @Override
+  public String toString() {
+    return value();
+  }
+
   private NonBlank(String value) {
     super(value);
   }
