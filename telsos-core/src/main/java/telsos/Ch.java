@@ -38,7 +38,7 @@ public interface Ch<T> extends UnaryOperator<T> {
     return constr.apply(ch.apply(t));
   }
 
-  static <T, S extends Newtype<T>> Optional<S> checkedOptionally(T t,
+  static <T, S extends Newtype<T>> Optional<S> optChecked(T t,
       Predicate<T> pred,
       Function<T, S> constr) {
     return pred.test(t)

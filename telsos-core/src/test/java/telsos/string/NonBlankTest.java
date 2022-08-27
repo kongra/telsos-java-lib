@@ -35,16 +35,16 @@ class NonBlankTest {
   }
 
   @Test
-  void testOptionallyOf() {
-    assertThat(NonBlank.optionallyOf(StrTest.NULL)).isEmpty();
-    assertThat(NonBlank.optionallyOf(StrTest.EMPTY)).isEmpty();
-    assertThat(NonBlank.optionallyOf(StrTest.BLANK)).isEmpty();
+  void testOptOf() {
+    assertThat(NonBlank.optOf(StrTest.NULL)).isEmpty();
+    assertThat(NonBlank.optOf(StrTest.EMPTY)).isEmpty();
+    assertThat(NonBlank.optOf(StrTest.BLANK)).isEmpty();
 
-    assertThat(NonBlank.optionallyOf(StrTest.NO_WHITESPACE))
+    assertThat(NonBlank.optOf(StrTest.NO_WHITESPACE))
         .isNotEmpty()
         .hasValueSatisfying(s -> StrTest.NO_WHITESPACE.equals(s.value()));
 
-    assertThat(NonBlank.optionallyOf(StrTest.HAVING_WHITESPACE))
+    assertThat(NonBlank.optOf(StrTest.HAVING_WHITESPACE))
         .isNotEmpty()
         .hasValueSatisfying(s -> StrTest.HAVING_WHITESPACE.equals(s.value()));
   }

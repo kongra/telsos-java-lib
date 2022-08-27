@@ -12,8 +12,8 @@ public final class NonBlank extends Newtype<String> {
     return Ch.checked(s, ch, NonBlank::new);
   }
 
-  public static Optional<NonBlank> optionallyOf(String s) {
-    return Ch.checkedOptionally(s, pred, NonBlank::new);
+  public static Optional<NonBlank> optOf(String s) {
+    return Ch.optChecked(s, pred, NonBlank::new);
   }
 
   public static boolean isBlank(String s) {

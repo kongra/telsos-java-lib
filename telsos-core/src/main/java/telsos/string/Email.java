@@ -15,8 +15,8 @@ public final class Email extends Newtype<String> {
     return Ch.checked(s, ch, Email::new);
   }
 
-  public static Optional<Email> optionallyOf(String s) {
-    return Ch.checkedOptionally(s, pred, Email::new);
+  public static Optional<Email> optOf(String s) {
+    return Ch.optChecked(s, pred, Email::new);
   }
 
   public static final EmailValidator validator = EmailValidator
