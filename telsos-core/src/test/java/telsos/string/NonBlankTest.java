@@ -59,4 +59,28 @@ class NonBlankTest {
     assertThat(NonBlank.isBlank(StrTest.HAVING_WHITESPACE)).isFalse();
   }
 
+  @Test
+  void testEquality() {
+    final var o1 = NonBlank.of(StrTest.NO_WHITESPACE);
+    final var o11 = NonBlank.of(StrTest.NO_WHITESPACE);
+    final var o2 = NonBlank.of(StrTest.HAVING_WHITESPACE);
+
+    assertThat(o1)
+        .isNotEqualTo(null)
+        .isNotEqualTo(o2)
+        .isEqualTo(o1)
+        .isEqualTo(o11);
+  }
+
+  @Test
+  void testHashCode() {
+    final var h1 = NonBlank.of(StrTest.NO_WHITESPACE).hashCode();
+    final var h11 = NonBlank.of(StrTest.NO_WHITESPACE).hashCode();
+    final var h2 = NonBlank.of(StrTest.HAVING_WHITESPACE).hashCode();
+    final var h22 = NonBlank.of(StrTest.HAVING_WHITESPACE).hashCode();
+
+    assertThat(h1).isEqualTo(h11);
+    assertThat(h2).isEqualTo(h22);
+  }
+
 }
