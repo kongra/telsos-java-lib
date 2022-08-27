@@ -20,7 +20,11 @@ public final class NonBlank extends Newtype<String> {
     return s == null || s.isBlank();
   }
 
-  public static final Predicate<String> pred = s -> !isBlank(s);
+  public static boolean isNonBlank(String s) {
+    return !isBlank(s);
+  }
+
+  public static final Predicate<String> pred = NonBlank::isNonBlank;
 
   public static final Ch<String> ch = Ch.of(pred);
 
