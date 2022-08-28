@@ -1,3 +1,4 @@
+// © 2022 Konrad Grzanek <kongra@gmail.com>
 package telsos.newtype;
 
 public abstract class AbstractNewtype<T extends AbstractNewtype<T>> {

@@ -1,3 +1,4 @@
+// © 2022 Konrad Grzanek <kongra@gmail.com>
 package telsos.newtype;
 
 public class NewInt extends AbstractNewtype<NewInt> {

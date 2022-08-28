@@ -1,62 +1,38 @@
+// © 2022 Konrad Grzanek <kongra@gmail.com>
 package telsos.string;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
-
-import telsos.ChError;
 
 @SuppressWarnings("static-method")
 class NonBlankTest {
 
   @Test
   void testOf() {
-    assertThatThrownBy(() -> {
-      NonBlank.of(StrTest.NULL);
-    }).isInstanceOf(ChError.class);
-
-    assertThatThrownBy(() -> {
-      NonBlank.of(StrTest.EMPTY);
-    }).isInstanceOf(ChError.class);
-
-    assertThatThrownBy(() -> {
-      NonBlank.of(StrTest.BLANK);
-    }).isInstanceOf(ChError.class);
-
-    assertThat(NonBlank.of(StrTest.NO_WHITESPACE).value())
+    assertThat(NonBlank.of(StrTest.NO_WHITESPACE).get().value())
         .isEqualTo(StrTest.NO_WHITESPACE);
 
-    assertThat(NonBlank.of(StrTest.HAVING_WHITESPACE).value())
+    assertThat(NonBlank.of(StrTest.HAVING_WHITESPACE).get().value())
         .isEqualTo(StrTest.HAVING_WHITESPACE);
 
-    assertThat(NonBlank.of(Str.strip(StrTest.HAVING_WHITESPACE)).value())
+    assertThat(NonBlank.of(Str.strip(StrTest.HAVING_WHITESPACE)).get().value())
         .isEqualTo(StrTest.NO_WHITESPACE);
   }
 
   @Test
   void testOptOf() {
-    assertThat(NonBlank.optOf(StrTest.NULL)).isEmpty();
-    assertThat(NonBlank.optOf(StrTest.EMPTY)).isEmpty();
-    assertThat(NonBlank.optOf(StrTest.BLANK)).isEmpty();
+    assertThat(NonBlank.of(StrTest.NULL)).isEmpty();
+    assertThat(NonBlank.of(StrTest.EMPTY)).isEmpty();
+    assertThat(NonBlank.of(StrTest.BLANK)).isEmpty();
 
-    assertThat(NonBlank.optOf(StrTest.NO_WHITESPACE))
+    assertThat(NonBlank.of(StrTest.NO_WHITESPACE))
         .isNotEmpty()
         .hasValueSatisfying(s -> StrTest.NO_WHITESPACE.equals(s.value()));
 
-    assertThat(NonBlank.optOf(StrTest.HAVING_WHITESPACE))
+    assertThat(NonBlank.of(StrTest.HAVING_WHITESPACE))
         .isNotEmpty()
         .hasValueSatisfying(s -> StrTest.HAVING_WHITESPACE.equals(s.value()));
-  }
-
-  @Test
-  void testIsBlank() {
-    assertThat(NonBlank.isBlank(StrTest.NULL)).isTrue();
-    assertThat(NonBlank.isBlank(StrTest.EMPTY)).isTrue();
-    assertThat(NonBlank.isBlank(StrTest.BLANK)).isTrue();
-
-    assertThat(NonBlank.isBlank(StrTest.NO_WHITESPACE)).isFalse();
-    assertThat(NonBlank.isBlank(StrTest.HAVING_WHITESPACE)).isFalse();
   }
 
   @Test

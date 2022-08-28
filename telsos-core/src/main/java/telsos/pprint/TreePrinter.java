@@ -1,8 +1,6 @@
 // © 2022 Konrad Grzanek <kongra@gmail.com>
 package telsos.pprint;
 
-import static telsos.Ch.chNat;
-
 import java.util.LinkedList;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -23,7 +21,7 @@ public final class TreePrinter<T> {
   }
 
   public void print(T node, int depth, Worker worker) {
-    chNat(depth);
+    // TODO: chNat(depth);
     final var lastChildInfos = new LinkedList<Boolean>();
     lastChildInfos.add(true);
     impl(node, depth, 0, true, lastChildInfos, worker);
@@ -36,7 +34,7 @@ public final class TreePrinter<T> {
   private void impl(T node, int depth, int level, boolean isFirst,
       LinkedList<Boolean> lastChildInfos, Worker worker) {
 
-    chNat(level);
+    // TODO: chNat(level);
 
     final var s = repr.apply(node);
     final var pfx = isFirst ? EMPTY : EOL;
