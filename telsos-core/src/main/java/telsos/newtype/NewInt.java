@@ -5,22 +5,27 @@ public class NewInt extends AbstractNewtype<NewInt> {
 
   private final int value;
 
-  public NewInt(int value) {
+  protected NewInt(int value) {
     this.value = value;
-  }
-
-  @Override
-  protected int hash() {
-    return value();
-  }
-
-  @Override
-  protected boolean isEqualTo(NewInt other) {
-    return value() == other.value();
   }
 
   public int value() {
     return value;
+  }
+  
+  @Override
+  protected final int hash() {
+    return value();
+  }
+
+  @Override
+  protected final boolean isEqualTo(NewInt other) {
+    return value() == other.value();
+  }
+  
+  @Override
+  public String toString() {
+    return String.valueOf(value());
   }
 
 }

@@ -28,12 +28,12 @@ public class Newtype<T> extends AbstractNewtype<Newtype<T>> {
 
   @Override
   protected final int hash() {
-    return value.hashCode();
+    return value().hashCode();
   }
 
   @Override
   protected final boolean isEqualTo(Newtype<T> other) {
-    return value.equals(other.value);
+    return value().equals(other.value);
   }
 
   @Override
