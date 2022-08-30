@@ -5,6 +5,10 @@ import java.util.function.DoublePredicate;
 import java.util.function.IntPredicate;
 import java.util.function.LongPredicate;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class Ranges {
 
   private static final String ERROR_MESSAGE_PREFIX = "start > end: ";
@@ -29,6 +33,4 @@ public final class Ranges {
           ERROR_MESSAGE_PREFIX + start + "," + end);
     return n -> start <= n && n <= end;
   }
-
-  private Ranges() {}
 }
