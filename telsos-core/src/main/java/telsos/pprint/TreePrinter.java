@@ -5,6 +5,9 @@ import java.util.LinkedList;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+import telsos.ImpossibleException;
+import telsos.math.newtype.NatInt;
+
 public final class TreePrinter<T> {
 
   @FunctionalInterface
@@ -20,21 +23,20 @@ public final class TreePrinter<T> {
     return new TreePrinter<>(adjs, repr);
   }
 
-  public void print(T node, int depth, Worker worker) {
-    // TODO: chNat(depth);
+  public void print(T node, NatInt depth, Worker worker) {
     final var lastChildInfos = new LinkedList<Boolean>();
     lastChildInfos.add(true);
-    impl(node, depth, 0, true, lastChildInfos, worker);
+    impl(node, depth.value(), 0, true, lastChildInfos, worker);
   }
 
   public void print(T node, Worker worker) {
-    print(node, Integer.MAX_VALUE, worker);
+    final var depth = NatInt.of(Integer.MAX_VALUE)
+        .orElseThrow(ImpossibleException::new);
+    print(node, depth, worker);
   }
 
   private void impl(T node, int depth, int level, boolean isFirst,
       LinkedList<Boolean> lastChildInfos, Worker worker) {
-
-    // TODO: chNat(level);
 
     final var s = repr.apply(node);
     final var pfx = isFirst ? EMPTY : EOL;

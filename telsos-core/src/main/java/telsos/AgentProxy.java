@@ -18,6 +18,10 @@ public final class AgentProxy {
     return Singleton.instance;
   }
 
+  public static long objSize(Object obj) {
+    return AgentProxy.instrumentation().getObjectSize(obj);
+  }
+
   private static class Singleton {
 
     private static final Instrumentation instance;
