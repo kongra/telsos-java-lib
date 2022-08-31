@@ -22,6 +22,11 @@ public final class Stopwatch {
     return HumanReadable.nanosecs(elapsedNanosecs(), digits);
   }
 
+  @Override
+  public String toString() {
+    return elapstr();
+  }
+
   private Stopwatch(long start) {
     this.start = start;
   }
