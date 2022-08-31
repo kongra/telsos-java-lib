@@ -17,7 +17,13 @@ class StopwatchTest {
 
   @Test
   void testElapsedNanosecs() {
-    assertThat(timer.elapsedNanosecs()).isNotNegative();
+    final var t1 = timer.elapsedNanosecs();
+    final var t2 = timer.elapsedNanosecs();
+
+    assertThat(t1).isNotNegative();
+    assertThat(t2)
+        .isNotNegative()
+        .isGreaterThan(t1);
   }
 
   @Test
