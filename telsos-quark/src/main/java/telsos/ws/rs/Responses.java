@@ -1,4 +1,4 @@
-package telsos.quark;
+package telsos.ws.rs;
 
 import java.util.function.Supplier;
 
