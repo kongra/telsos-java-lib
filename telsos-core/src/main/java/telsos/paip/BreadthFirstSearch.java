@@ -29,9 +29,7 @@ public final class BreadthFirstSearch<T> {
 
   private Optional<T> searchImpl(Deque<Iterable<T>> carrier) {
     while (!carrier.isEmpty()) {
-      final var it = carrier.getFirst().iterator();
-      while (it.hasNext()) {
-        final var e = it.next();
+      for (final T e : carrier.getFirst()) {
         if (goal.test(e))
           return Optional.of(e);
 

@@ -37,7 +37,7 @@ class StopwatchTest {
 
     System.out.println("msecs = " + msecs);
     System.out.println("nanos = " + nanos);
-    
+
     final var t1 = timer.elapsedMsecs();
     final var t2 = timer.elapsedMsecs();
 
