@@ -17,6 +17,12 @@ public class NewInt extends AbstractNewtype<NewInt> {
         : Optional.empty();
   }
 
+  protected static <S extends NewInt> Optional<S> ofNullable(Integer n,
+      IntPredicate pred,
+      IntFunction<S> constr) {
+    return null == n ? Optional.empty() : of(n, pred, constr);
+  }
+
   private final int value;
 
   protected NewInt(int value) {
