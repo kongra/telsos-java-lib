@@ -8,7 +8,7 @@ public final class NatLong extends NewLong {
   public static Optional<NatLong> of(long n) {
     return of(n, NatLong::isNat, NatLong::new);
   }
-  
+
   public static Optional<NatLong> ofNullable(Long n) {
     return ofNullable(n, NatLong::isNat, NatLong::new);
   }

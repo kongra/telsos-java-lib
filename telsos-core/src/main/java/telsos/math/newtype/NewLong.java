@@ -16,7 +16,7 @@ public class NewLong extends AbstractNewtype<NewLong> {
         ? Optional.of(constr.apply(n))
         : Optional.empty();
   }
-  
+
   protected static <S extends NewLong> Optional<S> ofNullable(Long n,
       LongPredicate pred,
       LongFunction<S> constr) {
