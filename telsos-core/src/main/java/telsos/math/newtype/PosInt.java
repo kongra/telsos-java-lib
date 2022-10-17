@@ -3,7 +3,7 @@ package telsos.math.newtype;
 
 import java.util.Optional;
 
-public class PosInt extends NewInt {
+public final class PosInt extends NewInt {
 
   public static Optional<PosInt> of(int n) {
     return of(n, PosInt::isPos, PosInt::new);
