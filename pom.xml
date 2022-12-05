@@ -14,7 +14,6 @@
   <modules>
     <module>telsos-agent</module>
     <module>telsos-core</module>
-    <module>telsos-quark</module>
   </modules>
 
 </project>
