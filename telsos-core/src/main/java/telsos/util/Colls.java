@@ -8,14 +8,16 @@ import java.util.function.Function;
 import java.util.function.IntFunction;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Sets;
+import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 
 public final class Colls {
 
-  @SafeVarargs
-  public static <T> T[] requireNotNulls(T... objects) {
+  public static <T> T[] requireNotNulls(T[] objects) {
     for (final T obj : objects) {
       Objects.requireNonNull(obj);
     }
@@ -54,7 +56,17 @@ public final class Colls {
     return postProcessor.apply(coll);
   }
 
-  public static <T> ImmutableSet<T> nonEmptyImmutableSet(T obj, T[] objs) {
+  @SafeVarargs
+  public static <T> ImmutableList<T> immutableList(T obj, T... objs) {
+    return createNonEmpty(obj, objs,
+        (IntFunction<MutableList<T>>) Lists.mutable::ofInitialCapacity,
+        MutableList::add,
+        (s, tab) -> s.addAll(Arrays.asList(tab)),
+        MutableList::toImmutable);
+  }
+
+  @SafeVarargs
+  public static <T> ImmutableSet<T> immutableSet(T obj, T... objs) {
     return createNonEmpty(obj, objs,
         (IntFunction<MutableSet<T>>) Sets.mutable::ofInitialCapacity,
         MutableSet::add,
