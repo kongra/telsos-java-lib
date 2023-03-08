@@ -10,17 +10,16 @@ class Euler14Test {
   }
 
   static long collatzTrans(long n) {
-    if (isEven(n)) {
+    if (isEven(n))
       return n / 2;
-    }
     return 3 * n + 1;
   }
 
   static void euler14(long n) {
-    long maxLen = 0;
-    long j = 0;
-    for (long i = 1; i < n; i++) {
-      long len = collatzLength(i);
+    var maxLen = 0L;
+    var j = 0L;
+    for (var i = 1L; i < n; i++) {
+      final var len = collatzLength(i);
       if (len > maxLen) {
         maxLen = len;
         j = i;
@@ -37,8 +36,9 @@ class Euler14Test {
   }
 
   public static void main(String... args) {
-    for (long i = 0L; i < 10L; i++)
+    for (var i = 0L; i < 10L; i++) {
       euler14(1_000_000L + i);
+    }
   }
 
 }
