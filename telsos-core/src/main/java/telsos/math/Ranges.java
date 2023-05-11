@@ -29,4 +29,7 @@ public final class Ranges {
           ERROR_MESSAGE_PREFIX + start + "," + end);
     return n -> start <= n && n <= end;
   }
+
+  private Ranges() {}
+
 }
