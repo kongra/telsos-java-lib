@@ -6,7 +6,7 @@ import java.util.Stack;
 /**
  * This class must NOT be used with Java Virtual Threads. Consider using
  * {@link ScopedValue} instead.
- * 
+ *
  * @param <T>
  */
 public final class DynVar<T> implements AutoCloseable {
