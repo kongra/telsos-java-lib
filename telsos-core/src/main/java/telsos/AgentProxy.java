@@ -60,13 +60,12 @@ public final class AgentProxy {
           | AttachNotSupportedException e) {
         throw new TelsosException(e);
       } finally {
-        if (jvm != null) {
+        if (jvm != null)
           try {
             jvm.detach();
           } catch (final IOException e) {
             LOG.log(Level.ERROR, e);
           }
-        }
       }
     }
   }

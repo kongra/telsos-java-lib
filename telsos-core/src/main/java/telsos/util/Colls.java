@@ -18,17 +18,15 @@ import org.eclipse.collections.api.set.MutableSet;
 public final class Colls {
 
   public static <T> T[] requireNotNulls(T[] objects) {
-    for (final T obj : objects) {
+    for (final T obj : objects)
       Objects.requireNonNull(obj);
-    }
     return objects;
   }
 
   public static <T, I extends Iterable<T>> I requireNotNulls(
       I iterable) {
-    for (final T obj : iterable) {
+    for (final T obj : iterable)
       Objects.requireNonNull(obj);
-    }
     return iterable;
   }
 
@@ -50,9 +48,8 @@ public final class Colls {
     final var capacity = 1 + (areSomeObjs ? objs.length : 0);
     final var coll = createWithCapacity.apply(capacity);
     addObj.accept(coll, obj);
-    if (areSomeObjs) {
+    if (areSomeObjs)
       addObjs.accept(coll, objs);
-    }
     return postProcessor.apply(coll);
   }
 

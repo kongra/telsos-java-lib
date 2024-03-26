@@ -13,9 +13,8 @@ public final class HumanReadable {
     var index = 0;
     final var KB = 1024;
     for (index = 0; index < BYTES_MULTIPLIES_POSTFIXES.length; index++) {
-      if (bytes < KB) {
+      if (bytes < KB)
         break;
-      }
 
       bytes = bytes / KB;
     }
@@ -30,9 +29,8 @@ public final class HumanReadable {
   public static String nanosecs(double nanosecs, int digits) {
     var index = 0;
     for (index = 0; index < NANOSECS_MULTIPLIES_POSTFIXES.length; index++) {
-      if (nanosecs < 1_000) {
+      if (nanosecs < 1_000)
         break;
-      }
 
       nanosecs = nanosecs / 1_000;
     }
