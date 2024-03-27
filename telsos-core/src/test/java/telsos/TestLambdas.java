@@ -47,8 +47,9 @@ class TestLambdas {
   }
 
   static <T> void doColl(Collection<T> coll, Consumer<T> body) {
-    for (final T t : coll)
+    for (final T t : coll) {
       body.accept(t);
+    }
   }
 
 }

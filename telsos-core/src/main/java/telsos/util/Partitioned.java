@@ -9,7 +9,8 @@ import telsos.math.newtype.PosInt;
 
 public final class Partitioned<T> extends AbstractList<List<T>> {
 
-  public static <T> Partitioned<T> partition(List<T> list, PosInt partitionSize) {
+  public static <T> Partitioned<T> partition(List<T> list,
+      PosInt partitionSize) {
     return new Partitioned<>(list, partitionSize);
   }
 

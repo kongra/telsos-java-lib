@@ -43,8 +43,9 @@ public final class DepthFirstSearch<T> {
       final var children = adjs.apply(e);
       if (children != null) {
         final var childrenIt = children.iterator();
-        if (childrenIt.hasNext())
+        if (childrenIt.hasNext()) {
           carrier.addFirst(childrenIt);
+        }
       }
     }
 

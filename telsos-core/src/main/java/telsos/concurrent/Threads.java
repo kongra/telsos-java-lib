@@ -64,8 +64,9 @@ public final class Threads {
   }
 
   public static void joinAll(Iterable<Thread> threads) {
-    for (final var thread : threads)
+    for (final var thread : threads) {
       run(thread::join);
+    }
   }
 
   public static Thread startNew(Runnable body) {

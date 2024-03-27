@@ -20,8 +20,9 @@ public class BenchStreams {
   @Benchmark
   public static void iterBench(MyState state, Blackhole blackhole) {
     var sum = 0L;
-    for (var i = state.start; i < state.n; i++)
+    for (var i = state.start; i < state.n; i++) {
       sum += i;
+    }
     state.result = sum;
     blackhole.consume(sum);
   }
@@ -37,8 +38,9 @@ public class BenchStreams {
   @Benchmark
   public static void iterLongBench(MyState state, Blackhole blackhole) {
     Long sum = 0L;
-    for (Long i = state.start; i < state.n; i++)
+    for (Long i = state.start; i < state.n; i++) {
       sum += i;
+    }
     state.result = sum;
     blackhole.consume(sum);
   }
