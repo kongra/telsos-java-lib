@@ -14,7 +14,7 @@ public final class NatLong extends NewLong {
   }
 
   public static boolean isNat(long n) {
-    return 0 <= n;
+    return n >= 0;
   }
 
   private NatLong(long value) {

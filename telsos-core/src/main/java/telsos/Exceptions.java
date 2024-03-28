@@ -1,6 +1,7 @@
 package telsos;
 
 import java.util.Objects;
+import java.util.function.Supplier;
 
 public final class Exceptions {
 
@@ -26,6 +27,8 @@ public final class Exceptions {
   private static <T extends Throwable> void sneakyThrow0(Throwable t) throws T {
     throw (T) t;
   }
+
+  public static final Supplier<RuntimeException> IMPOSSIBLE = ImpossibleException::new;
 
   private Exceptions() {}
 

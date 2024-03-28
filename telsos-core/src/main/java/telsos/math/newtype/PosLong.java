@@ -14,7 +14,7 @@ public final class PosLong extends NewLong {
   }
 
   public static boolean isPos(long n) {
-    return 0 < n;
+    return n > 0;
   }
 
   private PosLong(long value) {

@@ -9,7 +9,7 @@ import telsos.math.newtype.PosInt;
 
 public final class Partitioned<T> extends AbstractList<List<T>> {
 
-  public static <T> Partitioned<T> partition(List<T> list,
+  public static <T> Partitioned<T> list(List<T> list,
       PosInt partitionSize) {
     return new Partitioned<>(list, partitionSize);
   }
@@ -30,8 +30,9 @@ public final class Partitioned<T> extends AbstractList<List<T>> {
     final var end = Math.min(start + partitionSize, list.size());
 
     if (start > end)
-      throw new IndexOutOfBoundsException("Index " + index
-          + " is out of the list range <0," + (size() - 1) + ">");
+      throw new IndexOutOfBoundsException(
+          "Index %d is out of the list range 0..%d"
+              .formatted(index, size() - 1));
 
     // We don't make a defensive copy of the subList!
     return list.subList(start, end);

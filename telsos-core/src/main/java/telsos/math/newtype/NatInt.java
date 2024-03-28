@@ -14,7 +14,7 @@ public final class NatInt extends NewInt {
   }
 
   public static boolean isNat(int n) {
-    return 0 <= n;
+    return n >= 0;
   }
 
   private NatInt(int value) {

@@ -14,7 +14,7 @@ public final class PosInt extends NewInt {
   }
 
   public static boolean isPos(int n) {
-    return 0 < n;
+    return n > 0;
   }
 
   private PosInt(int value) {
