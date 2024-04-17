@@ -9,7 +9,7 @@
   <version>1.0</version>
   <packaging>pom</packaging>
   <name>telsos</name>
-  <url>http://www.example.com</url>
+  <url>https://github.com/kongra/telsos-java</url>
 
   <modules>
     <module>telsos-agent</module>
