@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import telsos.newtype.Newtype;
 
-public class NonBlank extends Newtype<String> {
+public final class NonBlank extends Newtype<String> {
 
   public static Optional<NonBlank> of(String s) {
     return of(s, NonBlank::isNonBlank, NonBlank::new);
@@ -20,7 +20,7 @@ public class NonBlank extends Newtype<String> {
     return s != null && !s.isBlank();
   }
 
-  protected NonBlank(String value) {
+  private NonBlank(String value) {
     super(value);
   }
 
