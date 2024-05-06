@@ -5,6 +5,7 @@ import java.util.Deque;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -30,25 +31,28 @@ public final class DepthFirstSearch<T> {
 
   private Optional<T> searchImpl(Deque<Iterator<T>> carrier) {
     while (!carrier.isEmpty()) {
-      final var it = carrier.getFirst();
-      if (!it.hasNext()) {
+      final var firstIteratorInCarrier = carrier.getFirst();
+      if (!firstIteratorInCarrier.hasNext()) {
+        // No elements in the firstIteratorInCarrier, let's remove it.
         carrier.removeFirst();
         continue;
       }
 
-      final var e = it.next();
-      if (goal.test(e))
-        return Optional.of(e);
+      final var element = firstIteratorInCarrier.next();
+      if (goal.test(element))
+        // We have a success.
+        return Optional.of(element);
 
-      final var children = adjs.apply(e);
-      if (children != null) {
-        final var childrenIt = children.iterator();
-        if (childrenIt.hasNext()) {
-          carrier.addFirst(childrenIt);
+      final var iterableOverChildren = adjs.apply(element);
+      if (iterableOverChildren != null) {
+        final var iteratorOverChildren = iterableOverChildren.iterator();
+        if (iteratorOverChildren.hasNext()) {
+          carrier.addFirst(iteratorOverChildren);
         }
       }
     }
 
+    // No more iterables in the carrier - we didn't succeed.
     return Optional.empty();
   }
 
@@ -57,7 +61,7 @@ public final class DepthFirstSearch<T> {
   private final Predicate<T> goal;
 
   private DepthFirstSearch(Adjs<T> adjs, Predicate<T> goal) {
-    this.goal = goal;
-    this.adjs = adjs;
+    this.adjs = Objects.requireNonNull(adjs);
+    this.goal = Objects.requireNonNull(goal);
   }
 }

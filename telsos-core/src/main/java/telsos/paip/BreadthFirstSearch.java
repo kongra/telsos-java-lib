@@ -4,6 +4,7 @@ package telsos.paip;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -29,26 +30,28 @@ public final class BreadthFirstSearch<T> {
 
   private Optional<T> searchImpl(Deque<Iterable<T>> carrier) {
     while (!carrier.isEmpty()) {
-      for (final T e : carrier.getFirst()) {
-        if (goal.test(e))
-          return Optional.of(e);
+      final var firstIterableInCarrier = carrier.getFirst();
+      for (final T element : firstIterableInCarrier) {
+        if (goal.test(element))
+          // We have a success.
+          return Optional.of(element);
 
-        final var children = adjs.apply(e);
-        if (areNonEmpty(children)) {
-          carrier.addLast(children);
+        final var iterableOverChildren = adjs.apply(element);
+        if (isNotEmpty(iterableOverChildren)) {
+          carrier.addLast(iterableOverChildren);
         }
       }
 
-      // No more elements in it, let's remove it
+      // No more elements in the iterable, let's remove it from the carrier.
       carrier.removeFirst();
     }
 
+    // No more iterables in the carrier - we didn't succeed.
     return Optional.empty();
   }
 
-  private boolean areNonEmpty(Iterable<T> children) {
-    // Returning null when there are no children is good for performance!
-    return children != null && children.iterator().hasNext();
+  private boolean isNotEmpty(Iterable<T> iterable) {
+    return iterable != null && iterable.iterator().hasNext();
   }
 
   private final Adjs<T> adjs;
@@ -56,7 +59,7 @@ public final class BreadthFirstSearch<T> {
   private final Predicate<T> goal;
 
   private BreadthFirstSearch(Adjs<T> adjs, Predicate<T> goal) {
-    this.goal = goal;
-    this.adjs = adjs;
+    this.adjs = Objects.requireNonNull(adjs);
+    this.goal = Objects.requireNonNull(goal);
   }
 }
