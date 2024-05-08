@@ -1,4 +1,4 @@
 // © 2024 Konrad Grzanek <kongra@gmail.com>
-package telsos.util;
+package telsos.utils;
 
 public record LongPair(long first, long second) {}

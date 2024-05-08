@@ -1,5 +1,5 @@
 // © 2022 Konrad Grzanek <kongra@gmail.com>
-package telsos.util;
+package telsos.utils;
 
 import java.util.Arrays;
 import java.util.Objects;

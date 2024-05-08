@@ -1,9 +1,9 @@
 // © 2024 Konrad Grzanek <kongra@gmail.com>
-package telsos.util;
+package telsos.utils;
 
 import java.util.Optional;
 
-import telsos.newtype.Newtype;
+import telsos.newtypes.Newtype;
 
 public final class DescRange extends Newtype<LongPair> {
 

@@ -3,10 +3,10 @@ package telsos;
 
 import java.util.function.LongConsumer;
 
-import telsos.math.newtype.NatLong;
-import telsos.math.newtype.PosLong;
-import telsos.util.AscRange;
-import telsos.util.DescRange;
+import telsos.math.newtypes.NatLong;
+import telsos.math.newtypes.PosLong;
+import telsos.utils.AscRange;
+import telsos.utils.DescRange;
 
 public final class Control {
 

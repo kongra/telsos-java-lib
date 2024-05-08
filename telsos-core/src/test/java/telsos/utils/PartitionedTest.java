@@ -1,5 +1,5 @@
 // © 2024 Konrad Grzanek <kongra@gmail.com>
-package telsos.util;
+package telsos.utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -9,8 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import telsos.Control;
-import telsos.math.newtype.NatLong;
-import telsos.math.newtype.PosInt;
+import telsos.math.newtypes.NatLong;
+import telsos.math.newtypes.PosInt;
 
 class PartitionedTest {
 

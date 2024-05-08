@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import telsos.ImpossibleException;
-import telsos.math.newtype.NatInt;
+import telsos.math.newtypes.NatInt;
 
 public final class TreePrinter<T> {
 

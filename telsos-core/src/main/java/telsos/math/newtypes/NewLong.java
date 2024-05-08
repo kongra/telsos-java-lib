@@ -1,11 +1,11 @@
 // © 2022 Konrad Grzanek <kongra@gmail.com>
-package telsos.math.newtype;
+package telsos.math.newtypes;
 
 import java.util.Optional;
 import java.util.function.LongFunction;
 import java.util.function.LongPredicate;
 
-import telsos.newtype.AbstractNewtype;
+import telsos.newtypes.AbstractNewtype;
 
 public class NewLong extends AbstractNewtype<NewLong> {
 

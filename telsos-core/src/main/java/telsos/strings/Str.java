@@ -1,4 +1,4 @@
-package telsos.string;
+package telsos.strings;
 
 public final class Str {
 

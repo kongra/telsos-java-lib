@@ -1,11 +1,11 @@
 // © 2022 Konrad Grzanek <kongra@gmail.com>
-package telsos.string;
+package telsos.strings;
 
 import java.util.Optional;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
-import telsos.newtype.Newtype;
+import telsos.newtypes.Newtype;
 
 public final class Email extends Newtype<String> {
 

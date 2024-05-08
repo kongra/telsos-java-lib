@@ -1,5 +1,5 @@
 // © 2024 Konrad Grzanek <kongra@gmail.com>
-package telsos.function;
+package telsos.functions;
 
 import java.util.Objects;
 

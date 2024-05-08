@@ -1,8 +1,8 @@
-package telsos.string;
+package telsos.strings;
 
 import java.util.Optional;
 
-import telsos.newtype.Newtype;
+import telsos.newtypes.Newtype;
 
 public final class NonBlank extends Newtype<String> {
 

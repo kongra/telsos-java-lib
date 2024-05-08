@@ -1,11 +1,11 @@
 // © 2024 Konrad Grzanek <kongra@gmail.com>
-package telsos.util;
+package telsos.utils;
 
 import java.util.AbstractList;
 import java.util.List;
 import java.util.Objects;
 
-import telsos.math.newtype.PosInt;
+import telsos.math.newtypes.PosInt;
 
 public final class Partitioned<T> extends AbstractList<List<T>> {
 

@@ -1,5 +1,5 @@
 // © 2022 Konrad Grzanek <kongra@gmail.com>
-package telsos.math.newtype;
+package telsos.math.newtypes;
 
 import java.util.Optional;
 

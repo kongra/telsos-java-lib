@@ -1,11 +1,11 @@
 // © 2022 Konrad Grzanek <kongra@gmail.com>
-package telsos.math.newtype;
+package telsos.math.newtypes;
 
 import java.util.Optional;
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 
-import telsos.newtype.AbstractNewtype;
+import telsos.newtypes.AbstractNewtype;
 
 public class NewInt extends AbstractNewtype<NewInt> {
 

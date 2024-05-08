@@ -1,5 +1,5 @@
 // © 2022 Konrad Grzanek <kongra@gmail.com>
-package telsos.string;
+package telsos.strings;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

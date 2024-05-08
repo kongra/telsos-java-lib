@@ -1,5 +1,5 @@
 // © 2019 Konrad Grzanek <kongra@gmail.com>
-package telsos.function;
+package telsos.functions;
 
 import telsos.TelsosException;
 
