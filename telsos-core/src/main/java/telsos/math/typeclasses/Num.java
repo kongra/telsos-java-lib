@@ -19,6 +19,6 @@ public interface Num<T> {
 
   int signum(T x);
 
-  T zero();
+  T fromInt(int i);
 
 }

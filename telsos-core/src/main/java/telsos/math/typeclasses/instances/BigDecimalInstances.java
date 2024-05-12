@@ -96,9 +96,10 @@ public final class BigDecimalInstances {
       }
 
       @Override
-      public BigDecimal zero() {
-        return BigDecimal.ZERO;
+      public BigDecimal fromInt(int i) {
+        return new BigDecimal(i);
       }
+
     };
   }
 
