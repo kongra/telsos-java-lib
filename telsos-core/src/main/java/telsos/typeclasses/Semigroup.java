@@ -1,5 +1,5 @@
 // © 2024 Konrad Grzanek <kongra@gmail.com>
-package telsos.math.typeclasses;
+package telsos.typeclasses;
 
 @FunctionalInterface
 public interface Semigroup<T> {

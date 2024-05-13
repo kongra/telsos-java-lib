@@ -1,5 +1,5 @@
 // © 2024 Konrad Grzanek <kongra@gmail.com>
-package telsos.math.typeclasses;
+package telsos.typeclasses;
 
 public interface Num<T> {
 
@@ -18,7 +18,5 @@ public interface Num<T> {
   T negate(T x);
 
   int signum(T x);
-
-  T fromInt(int i);
 
 }

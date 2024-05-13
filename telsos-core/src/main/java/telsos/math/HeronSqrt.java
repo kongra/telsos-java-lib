@@ -10,8 +10,9 @@ public interface HeronSqrt<T> {
 
   default T eval(T x) {
     final var fixedPoint = fixedPoint();
+    final var enm = fixedPoint.enm();
     final var num = fixedPoint.num();
     final UnaryOperator<T> f = fixedPoint.averageDamp(y -> num.divide(x, y));
-    return fixedPoint.eval(f, num.fromInt(1));
+    return fixedPoint.eval(f, enm.fromInt(1).orElseThrow());
   }
 }

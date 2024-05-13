@@ -3,32 +3,37 @@ package telsos.math;
 
 import java.util.function.UnaryOperator;
 
-import telsos.math.typeclasses.Num;
-import telsos.math.typeclasses.Ord;
+import telsos.typeclasses.Num;
+import telsos.typeclasses.Ord;
 
 interface NumericFixedPoint<T> {
 
   Num<T> num();
+
+  telsos.typeclasses.Enum<T> enm();
 
   Ord<T> ord();
 
   default T avg(T x, T y) {
     final var num = num();
     final var sum = num.add(x, y);
-    final var two = num.fromInt(2);
+    final var two = enm().fromInt(2).orElseThrow();
     return num.divide(sum, two);
   }
 
   default T abs(T x) {
     final var num = num();
     final var ord = ord();
-    return ord.lt(x, num.fromInt(0)) ? num.negate(x) : x;
+    return ord.lt(x, enm().fromInt(0).orElseThrow()) ? num.negate(x) : x;
   }
 
   default boolean areCloseEnough(T x, T y) {
+    final var enm = enm();
     final var num = num();
     final var ord = ord();
-    final var epsilon = num.divide(num.fromInt(1), num.fromInt(1_000_000));
+    final var epsilon = num.divide(
+        enm.fromInt(1).orElseThrow(),
+        enm.fromInt(1_000_000).orElseThrow());
     return ord.lte(abs(num.subtract(x, y)), epsilon);
   }
 

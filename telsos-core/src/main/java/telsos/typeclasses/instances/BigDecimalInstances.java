@@ -1,16 +1,18 @@
 // © 2024 Konrad Grzanek <kongra@gmail.com>
-package telsos.math.typeclasses.instances;
+package telsos.typeclasses.instances;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Objects;
+import java.util.Optional;
 
-import telsos.math.typeclasses.Bounded;
-import telsos.math.typeclasses.Eq;
-import telsos.math.typeclasses.Monoid;
-import telsos.math.typeclasses.Num;
-import telsos.math.typeclasses.Ord;
-import telsos.math.typeclasses.Semigroup;
+import telsos.typeclasses.Bounded;
+import telsos.typeclasses.Enum;
+import telsos.typeclasses.Eq;
+import telsos.typeclasses.Monoid;
+import telsos.typeclasses.Num;
+import telsos.typeclasses.Ord;
+import telsos.typeclasses.Semigroup;
 
 public final class BigDecimalInstances {
 
@@ -23,6 +25,29 @@ public final class BigDecimalInstances {
   public static final Eq<BigDecimal> EQ = (x, y) -> x.compareTo(y) == 0;
 
   public static final Ord<BigDecimal> ORD = Ord.of(BigDecimal::compareTo);
+
+  public static final Enum<BigDecimal> ENUM = new Enum<>() {
+    @Override
+    public Optional<BigDecimal> fromInt(int i) {
+      return Optional.of(new BigDecimal(i));
+    }
+
+    @Override
+    public int toInt(BigDecimal e) {
+      return e.intValue();
+    }
+
+    @Override
+    public Optional<BigDecimal> pred(BigDecimal e) {
+      return Optional.of(e.add(BigDecimal.ONE));
+    }
+
+    @Override
+    public Optional<BigDecimal> succ(BigDecimal e) {
+      return Optional.of(e.subtract(BigDecimal.ONE));
+    }
+
+  };
 
   public static Semigroup<BigDecimal> semigroupWith(MathContext mc) {
     return monoidWith(mc);
@@ -94,12 +119,6 @@ public final class BigDecimalInstances {
       public int signum(BigDecimal x) {
         return x.signum();
       }
-
-      @Override
-      public BigDecimal fromInt(int i) {
-        return new BigDecimal(i);
-      }
-
     };
   }
 
