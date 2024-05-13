@@ -6,7 +6,7 @@ import java.util.function.UnaryOperator;
 import telsos.typeclasses.Num;
 import telsos.typeclasses.Ord;
 
-interface NumericFixedPoint<T> {
+public interface NumericFixedPoint<T> {
 
   Num<T> num();
 

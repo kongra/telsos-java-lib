@@ -16,7 +16,7 @@ import telsos.typeclasses.instances.BigDecimalInstances;
 
 class NumericFixedPointTest {
 
-  class BigDecimalFixedPoint implements NumericFixedPoint<BigDecimal> {
+  static class BigDecimalFixedPoint implements NumericFixedPoint<BigDecimal> {
 
     final Num<BigDecimal> NUM;
 
@@ -40,6 +40,7 @@ class NumericFixedPointTest {
     }
   }
 
+  @SuppressWarnings("static-method")
   @Test
   void testEvalUnaryOperatorOfTT() {
     final var mc = new MathContext(100, RoundingMode.HALF_EVEN);
