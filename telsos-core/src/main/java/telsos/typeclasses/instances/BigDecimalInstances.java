@@ -122,6 +122,8 @@ public final class BigDecimalInstances {
     };
   }
 
-  private BigDecimalInstances() {}
+  private BigDecimalInstances() {
+    throw new UnsupportedOperationException();
+  }
 
 }
