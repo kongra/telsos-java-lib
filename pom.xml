@@ -12,6 +12,8 @@
   <url>https://github.com/kongra/telsos-java</url>
 
   <properties>
+	<telsos.version>1.0</telsos.version>
+	
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>22</maven.compiler.source>
     <maven.compiler.target>22</maven.compiler.target>
@@ -37,6 +39,7 @@
   <modules>
     <module>telsos-agent</module>
     <module>telsos-core</module>
+    <module>telsos-nc4</module>
   </modules>
 
 </project>
