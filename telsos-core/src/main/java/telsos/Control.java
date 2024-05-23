@@ -73,6 +73,9 @@ public final class Control {
     return completedStepsCount;
   }
 
-  private Control() {}
+  private Control() {
+    throw new UnsupportedOperationException(
+        "This is a utility class and cannot be instantiated");
+  }
 
 }
