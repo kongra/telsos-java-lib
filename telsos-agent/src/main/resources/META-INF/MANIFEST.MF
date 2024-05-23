@@ -1,2 +1,0 @@
-Agent-Class: telsos.Agent
-Premain-Class: telsos.Agent
