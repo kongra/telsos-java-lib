@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>kongra</groupId>
   <artifactId>telsos-java</artifactId>
   <version>1.0</version>
-  
+
   <properties>
     <telsos.version>1.0</telsos.version>
 
@@ -32,7 +32,7 @@
     <maven-site-plugin.version>4.0.0-M14</maven-site-plugin.version>
     <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
   </properties>
-  
+
   <dependencies>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -126,7 +126,8 @@
           <version>${maven-jar-plugin.version}</version>
           <configuration>
             <archive>
-              <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+              <manifestFile>
+              src/main/resources/META-INF/MANIFEST.MF</manifestFile>
             </archive>
           </configuration>
         </plugin>
