@@ -1,85 +1,122 @@
 // © 2024 Konrad Grzanek <kongra@gmail.com>
 package telsos.logging;
 
+import telsos.processes.ProcessContextInService;
+
 public interface Log {
 
-  void log(Level level, String message);
+  void log(ProcessContextInService processContextInService, Level level,
+      String message);
 
-  void log(Level level, String message, Throwable throwable);
+  void log(ProcessContextInService processContextInService, Level level,
+      String message,
+      Throwable throwable);
 
-  default void log(Level level, String format, Object... arguments) {
-    log(level, String.format(format, arguments));
+  default void log(ProcessContextInService processContextInService, Level level,
+      String format,
+      Object... arguments) {
+    log(processContextInService, level, String.format(format, arguments));
   }
 
-  default void trace(String message) {
-    log(Level.TRACE, message);
+  default void trace(ProcessContextInService processContextInService,
+      String message) {
+    log(processContextInService, Level.TRACE, message);
   }
 
-  default void trace(String message, Throwable throwable) {
-    log(Level.TRACE, message, throwable);
+  default void trace(ProcessContextInService processContextInService,
+      String message,
+      Throwable throwable) {
+    log(processContextInService, Level.TRACE, message, throwable);
   }
 
-  default void trace(String format, Object... arguments) {
-    log(Level.TRACE, format, arguments);
+  default void trace(ProcessContextInService processContextInService,
+      String format,
+      Object... arguments) {
+    log(processContextInService, Level.TRACE, format, arguments);
   }
 
-  default void debug(String message) {
-    log(Level.DEBUG, message);
+  default void debug(ProcessContextInService processContextInService,
+      String message) {
+    log(processContextInService, Level.DEBUG, message);
   }
 
-  default void debug(String message, Throwable throwable) {
-    log(Level.DEBUG, message, throwable);
+  default void debug(ProcessContextInService processContextInService,
+      String message,
+      Throwable throwable) {
+    log(processContextInService, Level.DEBUG, message, throwable);
   }
 
-  default void debug(String format, Object... arguments) {
-    log(Level.DEBUG, format, arguments);
+  default void debug(ProcessContextInService processContextInService,
+      String format,
+      Object... arguments) {
+    log(processContextInService, Level.DEBUG, format, arguments);
   }
 
-  default void info(String message) {
-    log(Level.INFO, message);
+  default void info(ProcessContextInService processContextInService,
+      String message) {
+    log(processContextInService, Level.INFO, message);
   }
 
-  default void info(String message, Throwable throwable) {
-    log(Level.INFO, message, throwable);
+  default void info(ProcessContextInService processContextInService,
+      String message,
+      Throwable throwable) {
+    log(processContextInService, Level.INFO, message, throwable);
   }
 
-  default void info(String format, Object... arguments) {
-    log(Level.INFO, format, arguments);
+  default void info(ProcessContextInService processContextInService,
+      String format,
+      Object... arguments) {
+    log(processContextInService, Level.INFO, format, arguments);
   }
 
-  default void warn(String message) {
-    log(Level.WARN, message);
+  default void warn(ProcessContextInService processContextInService,
+      String message) {
+    log(processContextInService, Level.WARN, message);
   }
 
-  default void warn(String message, Throwable throwable) {
-    log(Level.WARN, message, throwable);
+  default void warn(ProcessContextInService processContextInService,
+      String message,
+      Throwable throwable) {
+    log(processContextInService, Level.WARN, message, throwable);
   }
 
-  default void warn(String format, Object... arguments) {
-    log(Level.WARN, format, arguments);
+  default void warn(ProcessContextInService processContextInService,
+      String format,
+      Object... arguments) {
+    log(processContextInService, Level.WARN, format, arguments);
   }
 
-  default void error(String message) {
-    log(Level.ERROR, message);
+  default void error(ProcessContextInService processContextInService,
+      String message) {
+    log(processContextInService, Level.ERROR, message);
   }
 
-  default void error(String message, Throwable throwable) {
-    log(Level.ERROR, message, throwable);
+  default void error(ProcessContextInService processContextInService,
+      String message,
+      Throwable throwable) {
+    log(processContextInService, Level.ERROR, message, throwable);
   }
 
-  default void error(String format, Object... arguments) {
-    log(Level.ERROR, format, arguments);
+  default void error(ProcessContextInService processContextInService,
+      String format,
+      Object... arguments) {
+    log(processContextInService, Level.ERROR, format, arguments);
   }
 
-  default void fatal(String message) {
-    log(Level.FATAL, message);
+  default void fatal(ProcessContextInService processContextInService,
+      String message) {
+    log(processContextInService, Level.FATAL, message);
   }
 
-  default void fatal(String message, Throwable throwable) {
-    log(Level.FATAL, message, throwable);
+  default void fatal(ProcessContextInService processContextInService,
+      String message,
+      Throwable throwable) {
+    log(processContextInService, Level.FATAL, message, throwable);
   }
 
-  default void fatal(String format, Object... arguments) {
-    log(Level.FATAL, format, arguments);
+  default void fatal(ProcessContextInService processContextInService,
+      String format,
+      Object... arguments) {
+    log(processContextInService, Level.FATAL, format, arguments);
   }
 }
