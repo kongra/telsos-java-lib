@@ -3,22 +3,18 @@ package telsos.logging;
 
 import java.util.logging.Logger;
 
-import telsos.processes.ProcessContextInService;
-
 final class LogFactoryForLogger implements LogFactory<Logger> {
 
   @Override
   public Log getLog(Logger logger) {
     return new Log() {
       @Override
-      public void log(ProcessContextInService serviceProcessCtx, Level level,
-          String message) {
+      public void log(Level level, String message) {
         logger.log(asTargetLevel(level), message);
       }
 
       @Override
-      public void log(ProcessContextInService serviceProcessCtx, Level level,
-          String message, Throwable throwable) {
+      public void log(Level level, String message, Throwable throwable) {
         logger.log(asTargetLevel(level), message, throwable);
       }
     };
