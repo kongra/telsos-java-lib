@@ -8,7 +8,7 @@ import telsos.processes.ProcessContextInService;
 final class LogFactoryForLogger implements LogFactory<Logger> {
 
   @Override
-  public Log create(Logger logger) {
+  public Log getLog(Logger logger) {
     return new Log() {
       @Override
       public void log(ProcessContextInService serviceProcessCtx, Level level,

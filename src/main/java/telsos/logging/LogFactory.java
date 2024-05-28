@@ -4,6 +4,6 @@ package telsos.logging;
 @FunctionalInterface
 public interface LogFactory<T> {
 
-  Log create(T arg);
+  Log getLog(T arg);
 
 }

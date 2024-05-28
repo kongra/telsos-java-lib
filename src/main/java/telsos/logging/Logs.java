@@ -12,11 +12,11 @@ public final class Logs {
   }
 
   public static LogFactory<String> forName() {
-    return name -> forLogger().create(Logger.getLogger(name));
+    return name -> forLogger().getLog(Logger.getLogger(name));
   }
 
   public static LogFactory<Class<?>> forClass() {
-    return c -> forName().create(c.getName());
+    return c -> forName().getLog(c.getName());
   }
 
   private Logs() {
