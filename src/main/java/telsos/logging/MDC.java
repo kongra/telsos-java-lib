@@ -11,14 +11,15 @@ public interface MDC {
   default String asString() {
     final var buf = new StringBuilder("{");
     forEach((key, value, isLast) -> {
-      buf.append(key); buf.append('='); buf.append(value);
+      buf.append(key);
+      buf.append('=');
+      buf.append(value);
       if (!isLast) {
         buf.append(",");
       }
     });
 
-    buf.append('}');
-    return buf.toString();
+    return buf.append('}').toString();
   }
 
 }

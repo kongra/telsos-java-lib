@@ -1,9 +1,18 @@
 package telsos;
 
 import java.util.Objects;
+import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
 public final class Exceptions {
+
+  public static <T> T evalNothrowing(Callable<T> body) {
+    try {
+      return body.call();
+    } catch (Exception e) {
+      throw new TelsosException(e);
+    }
+  }
 
   /**
    * Throw even checked exceptions without being required to declare them or
