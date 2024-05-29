@@ -3,9 +3,17 @@ package telsos.logging;
 
 public interface Log {
 
-  void log(Level level, String message);
+  void logImpl(Level level, String message);
 
-  void log(Level level, String message, Throwable throwable);
+  void logImpl(Level level, String message, Throwable throwable);
+
+  default void log(Level level, String message) {
+    logImpl(level, messageWithMDCPrefix(message));
+  }
+
+  default void log(Level level, String message, Throwable throwable) {
+    logImpl(level, messageWithMDCPrefix(message), throwable);
+  }
 
   default void log(Level level, String format, Object... arguments) {
     log(level, String.format(format, arguments));
@@ -81,5 +89,13 @@ public interface Log {
 
   default void fatal(String format, Object... arguments) {
     log(Level.FATAL, format, arguments);
+  }
+
+  private static String messageWithMDCPrefix(String message) {
+    final var delayedMDC = MDC.delayed.get().orElse(null);
+    if (delayedMDC != null) {
+      message = delayedMDC.deref().asString() + " " + message;
+    }
+    return message;
   }
 }

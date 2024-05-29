@@ -3,6 +3,8 @@ package telsos.logging;
 
 import java.util.logging.Logger;
 
+import telsos.logging.impl.LogFactoryForLogger;
+
 public final class Logs {
 
   private static final LogFactory<Logger> forLogger = new LogFactoryForLogger();

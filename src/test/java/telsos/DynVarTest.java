@@ -54,7 +54,8 @@ class DynVarTest {
   void testGet() {
     assertThat(dynVar.get()).isEmpty();
     assertThat(dynVar.get("default-value")).isEqualTo("default-value");
-    assertThat(dynVar.get(() -> "supplied-default-value")).isEqualTo("supplied-default-value");
+    assertThat(dynVar.get(() -> "supplied-default-value"))
+        .isEqualTo("supplied-default-value");
   }
 
 }

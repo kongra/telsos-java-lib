@@ -6,13 +6,16 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
 
-public final class Delay<T> {
+import telsos.functions.Deref;
+
+public final class Delay<T> implements Deref<T> {
 
   public static <T> Delay<T> of(Supplier<T> supplier) {
     return new Delay<>(supplier);
   }
 
-  public T get() {
+  @Override
+  public T deref() {
     if (lock != null) {
       realize();
     }

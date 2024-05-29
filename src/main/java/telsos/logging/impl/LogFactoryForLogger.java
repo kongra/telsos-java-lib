@@ -1,20 +1,24 @@
 // © 2024 Konrad Grzanek <kongra@gmail.com>
-package telsos.logging;
+package telsos.logging.impl;
 
 import java.util.logging.Logger;
 
-final class LogFactoryForLogger implements LogFactory<Logger> {
+import telsos.logging.Level;
+import telsos.logging.Log;
+import telsos.logging.LogFactory;
+
+public final class LogFactoryForLogger implements LogFactory<Logger> {
 
   @Override
   public Log getLog(Logger logger) {
     return new Log() {
       @Override
-      public void log(Level level, String message) {
+      public void logImpl(Level level, String message) {
         logger.log(asTargetLevel(level), message);
       }
 
       @Override
-      public void log(Level level, String message, Throwable throwable) {
+      public void logImpl(Level level, String message, Throwable throwable) {
         logger.log(asTargetLevel(level), message, throwable);
       }
     };

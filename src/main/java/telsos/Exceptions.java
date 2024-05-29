@@ -9,7 +9,7 @@ public final class Exceptions {
   public static <T> T evalNothrowing(Callable<T> body) {
     try {
       return body.call();
-    } catch (Exception e) {
+    } catch (final Exception e) {
       throw new TelsosException(e);
     }
   }

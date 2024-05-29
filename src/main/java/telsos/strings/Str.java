@@ -6,6 +6,10 @@ public final class Str {
     return s == null ? null : s.strip();
   }
 
+  public static String wrapInQuotes(String s) {
+    return "\"" + s + "\"";
+  }
+
   private Str() {}
 
 }
