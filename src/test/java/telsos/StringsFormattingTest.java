@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +21,7 @@ class StringsFormattingTest {
     final var list2 = list1
         .stream()
         .filter(this::isOdd)
-        .collect(Collectors.toList());
+        .toList();
 
     final var s1 = """
         some value without a doubt some longer text  , so just go away

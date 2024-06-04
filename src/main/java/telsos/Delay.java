@@ -8,7 +8,7 @@ import java.util.function.Supplier;
 
 import telsos.functions.Deref;
 
-public final class Delay<T> implements Deref<T> {
+public final class Delay<T> implements Deref<T>, Supplier<T> {
 
   public static <T> Delay<T> of(Supplier<T> supplier) {
     return new Delay<>(supplier);
@@ -24,6 +24,11 @@ public final class Delay<T> implements Deref<T> {
       return Exceptions.fail(exception);
 
     return value;
+  }
+
+  @Override
+  public T get() {
+    return deref();
   }
 
   public boolean isRealized() {
