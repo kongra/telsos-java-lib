@@ -42,7 +42,7 @@ public interface NumericFixedPoint<T> {
       if (areCloseEnough(start, fOfStart))
         return fOfStart;
 
-      start    = fOfStart;
+      start = fOfStart;
       fOfStart = f.apply(fOfStart);
     }
   }

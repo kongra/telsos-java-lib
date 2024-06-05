@@ -20,7 +20,7 @@ public final class Partitioned<T> extends AbstractList<List<T>> {
 
   private Partitioned(List<T> list, PosInt partitionSize) {
     // We don't make a defensive copy of the argument list!
-    this.list          = Objects.requireNonNull(list);
+    this.list = Objects.requireNonNull(list);
     this.partitionSize = partitionSize.value();
   }
 

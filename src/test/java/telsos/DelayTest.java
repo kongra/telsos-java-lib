@@ -22,14 +22,14 @@ class DelayTest {
   @BeforeEach
   void setUp() {
     supplierCallsCount = new AtomicInteger(0);
-    delay              = Delay.of(() -> {
-                         supplierCallsCount.incrementAndGet();
-                         return TEST_VALUE;
-                       });
+    delay = Delay.of(() -> {
+      supplierCallsCount.incrementAndGet();
+      return TEST_VALUE;
+    });
 
-    delayThrowing      = Delay.of(() -> {
-                         throw new RuntimeException("Test exception");
-                       });
+    delayThrowing = Delay.of(() -> {
+      throw new RuntimeException("Test exception");
+    });
   }
 
   @Test

@@ -21,7 +21,7 @@ class NewtonsSqrtTest {
     final var mc = new MathContext(100, RoundingMode.HALF_EVEN);
     final var fixedPoint = new NumericFixedPointTest.BigDecimalFixedPoint(mc);
     newtonsMethod = () -> fixedPoint;
-    sqrt          = () -> newtonsMethod;
+    sqrt = () -> newtonsMethod;
   }
 
   @Test

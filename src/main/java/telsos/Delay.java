@@ -40,7 +40,7 @@ public final class Delay<T> implements Deref<T> {
   private Exception exception;
 
   private Delay(Supplier<T> supplier) {
-    lock          = new ReentrantLock();
+    lock = new ReentrantLock();
     this.supplier = Objects.requireNonNull(supplier);
   }
 
@@ -56,7 +56,7 @@ public final class Delay<T> implements Deref<T> {
             exception = e;
           }
           supplier = null;
-          lock     = null;
+          lock = null;
         }
       } finally {
         l.unlock();
