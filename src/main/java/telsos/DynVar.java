@@ -6,7 +6,9 @@ import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
-public final class DynVar<T> {
+import telsos.functions.Deref;
+
+public final class DynVar<T> implements Deref<Optional<T>> {
 
   public static <T> DynVar<T> newInstance() {
     return of(ScopedValue.newInstance());
@@ -25,17 +27,18 @@ public final class DynVar<T> {
         .evalNothrowing(() -> ScopedValue.where(scopedValue, value).call(body));
   }
 
-  public Optional<T> get() {
-    return scopedValue.isBound() ? Optional.of(scopedValue.get())
-        : Optional.empty();
-  }
-
   public T get(T defaultValue) {
     return scopedValue.orElse(defaultValue);
   }
 
   public T get(Supplier<T> defaultValueSupplier) {
     return scopedValue.orElse(defaultValueSupplier.get());
+  }
+
+  @Override
+  public Optional<T> deref() {
+    return scopedValue.isBound() ? Optional.of(scopedValue.get())
+        : Optional.empty();
   }
 
   private final ScopedValue<T> scopedValue;
