@@ -93,9 +93,9 @@ public interface Log {
 
   private static String messageWithMDCPrefix(String message) {
     final var delayedMDC = MDC.delayed.get().orElse(null);
-    if (delayedMDC != null) {
-      message = delayedMDC.deref().asString() + " " + message;
-    }
-    return message;
+    if (delayedMDC == null)
+      return message;
+
+    return delayedMDC.deref().asString() + " " + message;
   }
 }
