@@ -5,30 +5,36 @@ import java.time.Duration;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 
+import telsos.Exceptions;
+
 public final class Threads {
 
-  @FunctionalInterface
-  public interface RunnableThrowingInterrupted {
-
-    void run() throws InterruptedException;
-
-  }
-
-  public static void run(RunnableThrowingInterrupted body) {
+  public static void run(InterruptibleRunnable body) {
     try {
-      body.run();
+      body.runInterruptible();
     } catch (final InterruptedException e) {
-      e.printStackTrace();
       Thread.currentThread().interrupt();
+      Exceptions.sneakyThrow(e);
     }
   }
 
-  public static void acquiring(Semaphore s, Runnable body) {
-    acquiring(s, 1, body);
+  public static <T> T eval(InterruptibleSupplier<T> supplier) {
+    try {
+      return supplier.getInterruptible();
+    } catch (final InterruptedException e) {
+      Thread.currentThread().interrupt();
+      Exceptions.sneakyThrow(e);
+      // It never gets here
+      return null;
+    }
   }
 
-  public static void acquiring(Semaphore s, int permits,
-      Runnable body) {
+  public static void runAcquiring(Semaphore s, InterruptibleRunnable body) {
+    runAcquiring(s, 1, body);
+  }
+
+  public static void runAcquiring(Semaphore s, int permits,
+      InterruptibleRunnable body) {
     run(() -> s.acquire(permits));
     try {
       body.run();
@@ -37,19 +43,35 @@ public final class Threads {
     }
   }
 
-  public static void locking(Lock lock, Runnable body) {
+  public static <T> T evalAcquiring(Semaphore s,
+      InterruptibleSupplier<T> supplier) {
+    return evalAcquiring(s, 1, supplier);
+  }
+
+  public static <T> T evalAcquiring(Semaphore s, int permits,
+      InterruptibleSupplier<T> body) {
+    run(() -> s.acquire(permits));
+    try {
+      return body.get();
+    } finally {
+      s.release(permits);
+    }
+  }
+
+  public static void runLocking(Lock lock, InterruptibleRunnable body) {
     lock.lock();
     try {
-      body.run();
+      run(body);
     } finally {
       lock.unlock();
     }
   }
 
-  public static void locking(Lock lock, RunnableThrowingInterrupted body) {
+  public static <T> T evalLocking(Lock lock,
+      InterruptibleSupplier<T> supplier) {
     lock.lock();
     try {
-      run(body);
+      return supplier.get();
     } finally {
       lock.unlock();
     }
@@ -72,4 +94,5 @@ public final class Threads {
   private Threads() {
     throw new UnsupportedOperationException();
   }
+
 }
