@@ -24,7 +24,8 @@ public final class DynVar<T> implements Deref<Optional<T>> {
 
   public <E> E eval(T value, Callable<E> body) {
     return Exceptions
-        .evalNothrowing(() -> ScopedValue.where(scopedValue, value).call(body));
+        .evalNothrowing(() -> ScopedValue.where(scopedValue, value)
+            .call(body::call));
   }
 
   public T get(T defaultValue) {
