@@ -1,3 +1,6 @@
-/target/
-.settings/
 .git/
+.settings/
+/node_modules/
+/target/
+package-lock.json
+package.json
