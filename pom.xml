@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>kongra</groupId>
-  <artifactId>jelsos-lib</artifactId>
+  <artifactId>jesty-lib</artifactId>
   <version>1.0</version>
   <properties>
     <assertj.version>3.27.3</assertj.version>
@@ -12,8 +12,8 @@
     <junit-jupiter.version>5.12.0</junit-jupiter.version>
     <maven-clean-plugin.version>3.3.2</maven-clean-plugin.version>
     <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
-    <maven.compiler.source>23</maven.compiler.source>
-    <maven.compiler.target>23</maven.compiler.target>
+    <maven.compiler.source>24</maven.compiler.source>
+    <maven.compiler.target>24</maven.compiler.target>
     <maven-deploy-plugin.version>3.1.2</maven-deploy-plugin.version>
     <maven-failsafe-plugin.version>3.2.5</maven-failsafe-plugin.version>
     <maven-install-plugin.version>3.1.2</maven-install-plugin.version>
@@ -83,6 +83,8 @@
           <version>${maven-compiler-plugin.version}</version>
           <configuration>
             <compilerArgs>
+              <!-- <arg>-Xlint:preview</arg> -->
+              <arg>-Xlint:-preview</arg>
               <arg>--enable-preview</arg>
             </compilerArgs>
           </configuration>
