@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-import jelsos.lib.Kleene;
+import telsos.java.lib.Kleene;
 
 @SuppressWarnings("static-method")
 class KleeneTest {

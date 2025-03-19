@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
-import jelsos.lib.paip.DepthFirstSearch;
+import telsos.java.lib.paip.DepthFirstSearch;
 
 public class TestDepthFirstSearch {
 

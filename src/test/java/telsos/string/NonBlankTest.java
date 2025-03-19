@@ -4,8 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-import jelsos.lib.string.NonBlank;
-import jelsos.lib.string.Str;
+import telsos.java.lib.string.NonBlank;
+import telsos.java.lib.string.Str;
 
 @SuppressWarnings("static-method")
 class NonBlankTest {

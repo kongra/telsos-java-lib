@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import jelsos.lib.Delay;
+import telsos.java.lib.Delay;
 
 class DelayTest {
 

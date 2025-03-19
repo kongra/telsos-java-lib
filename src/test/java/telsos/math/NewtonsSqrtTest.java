@@ -9,8 +9,8 @@ import java.math.RoundingMode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import jelsos.lib.math.NewtonsMethod;
-import jelsos.lib.math.NewtonsSqrt;
+import telsos.java.lib.math.NewtonsMethod;
+import telsos.java.lib.math.NewtonsSqrt;
 
 class NewtonsSqrtTest {
 
