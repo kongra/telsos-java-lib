@@ -8,7 +8,8 @@ import jelsos.lib.newtype.AbstractNewtype;
 
 public class NewLong extends AbstractNewtype<NewLong> {
 
-  protected static <S extends NewLong> Optional<S> of(long n,
+  protected static <S extends NewLong> Optional<S> of(
+      long n,
       LongPredicate pred,
       LongFunction<S> constr) {
     return pred.test(n)
@@ -16,7 +17,8 @@ public class NewLong extends AbstractNewtype<NewLong> {
         : Optional.empty();
   }
 
-  protected static <S extends NewLong> Optional<S> ofNullable(Long n,
+  protected static <S extends NewLong> Optional<S> ofNullable(
+      Long n,
       LongPredicate pred,
       LongFunction<S> constr) {
     return null == n ? Optional.empty() : of(n, pred, constr);
