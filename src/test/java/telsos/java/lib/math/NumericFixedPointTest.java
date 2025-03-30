@@ -1,4 +1,4 @@
-package jesty.lib.math;
+package telsos.java.lib.math;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -8,8 +8,6 @@ import java.math.RoundingMode;
 
 import org.junit.jupiter.api.Test;
 
-import telsos.java.lib.math.HeronSqrt;
-import telsos.java.lib.math.NumericFixedPoint;
 import telsos.java.lib.typeclass.Enum;
 import telsos.java.lib.typeclass.Num;
 import telsos.java.lib.typeclass.Ord;

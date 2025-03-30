@@ -1,4 +1,4 @@
-package jesty.lib.paip;
+package telsos.java.lib.paip;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

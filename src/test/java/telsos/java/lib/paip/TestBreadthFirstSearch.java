@@ -1,4 +1,4 @@
-package jesty.lib.paip;
+package telsos.java.lib.paip;
 
 import static java.util.Map.entry;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -10,8 +10,6 @@ import java.util.Map.Entry;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
-
-import telsos.java.lib.paip.BreadthFirstSearch;
 
 public class TestBreadthFirstSearch {
 

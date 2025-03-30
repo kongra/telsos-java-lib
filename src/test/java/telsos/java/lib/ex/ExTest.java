@@ -1,12 +1,10 @@
-package jesty.lib.ex;
+package telsos.java.lib.ex;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
-
-import telsos.java.lib.ex.Ex;
 
 class ExTest {
 

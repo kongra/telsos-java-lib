@@ -1,4 +1,4 @@
-package jesty.lib.math;
+package telsos.java.lib.math;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -8,9 +8,6 @@ import java.math.RoundingMode;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import telsos.java.lib.math.NewtonsMethod;
-import telsos.java.lib.math.NewtonsSqrt;
 
 class NewtonsSqrtTest {
 

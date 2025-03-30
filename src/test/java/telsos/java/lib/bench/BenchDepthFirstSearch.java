@@ -1,4 +1,4 @@
-package jesty.lib.bench;
+package telsos.java.lib.bench;
 
 import java.util.concurrent.TimeUnit;
 
@@ -8,7 +8,7 @@ import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.infra.Blackhole;
 
-import jesty.lib.paip.TestDepthFirstSearch;
+import telsos.java.lib.paip.TestDepthFirstSearch;
 
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)

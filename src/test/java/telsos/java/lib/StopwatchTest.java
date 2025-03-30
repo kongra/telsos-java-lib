@@ -1,11 +1,9 @@
-package jesty.lib;
+package telsos.java.lib;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import telsos.java.lib.Stopwatch;
 
 class StopwatchTest {
 

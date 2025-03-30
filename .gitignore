@@ -1,4 +1,5 @@
 .git/
+.quarkus/
 .settings/
 /node_modules/
 /target/

@@ -1,10 +1,8 @@
-package jesty.lib.math;
+package telsos.java.lib.math;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
-
-import telsos.java.lib.math.Kleene;
 
 class KleeneTest {
 

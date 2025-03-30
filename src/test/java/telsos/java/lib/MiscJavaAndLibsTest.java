@@ -1,4 +1,4 @@
-package jesty.lib;
+package telsos.java.lib;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

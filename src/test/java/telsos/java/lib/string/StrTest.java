@@ -1,10 +1,8 @@
-package jesty.lib.string;
+package telsos.java.lib.string;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
-
-import telsos.java.lib.string.Str;
 
 class StrTest {
 

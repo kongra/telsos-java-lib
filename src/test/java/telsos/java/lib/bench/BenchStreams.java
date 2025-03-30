@@ -1,4 +1,4 @@
-package jesty.lib.bench;
+package telsos.java.lib.bench;
 
 import java.util.concurrent.TimeUnit;
 import java.util.stream.LongStream;

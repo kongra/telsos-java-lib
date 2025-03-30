@@ -1,4 +1,4 @@
-package jesty.lib.bench;
+package telsos.java.lib.bench;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 

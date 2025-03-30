@@ -1,4 +1,4 @@
-package jesty.lib;
+package telsos.java.lib;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -7,8 +7,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import telsos.java.lib.Delay;
 
 class DelayTest {
 
