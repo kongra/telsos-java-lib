@@ -10,8 +10,8 @@ class FunctionalTests {
 
   @Test
   void test() {
-    Function<Double, Double> square = x -> x * x;
-    double y = square.apply(5.0);
+    final Function<Double, Double> square = x -> x * x;
+    final double y = square.apply(5.0);
     assertThat(y).isEqualTo(25);
   }
 

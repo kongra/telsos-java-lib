@@ -1,11 +1,11 @@
 package telsos.java.lib.logging;
 
-import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
 import telsos.java.lib.Delay;
 import telsos.java.lib.DynVar;
+import telsos.java.lib.O;
 import telsos.java.lib.function.EntryConsumer;
 import telsos.java.lib.string.NonBlank;
 import telsos.java.lib.string.Str;
@@ -16,14 +16,14 @@ public interface MDC {
   DynVar<Delay<MDC>> delayed = DynVar.newInstance();
 
   static void exec(Supplier<MDC> supplier, Runnable body) {
-    Objects.requireNonNull(supplier);
-    Objects.requireNonNull(body);
+    O.nn(supplier);
+    O.nn(body);
     delayed.exec(Delay.of(supplier), body);
   }
 
   static <E> E eval(Supplier<MDC> supplier, Callable<E> body) {
-    Objects.requireNonNull(supplier);
-    Objects.requireNonNull(body);
+    O.nn(supplier);
+    O.nn(body);
     return delayed.eval(Delay.of(supplier), body);
   }
 

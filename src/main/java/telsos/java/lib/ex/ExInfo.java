@@ -5,8 +5,7 @@ public final class ExInfo extends RuntimeException {
   private final transient Object data;
 
   public ExInfo() {
-    super();
-    this.data = null;
+    data = null;
   }
 
   public ExInfo(String message) {
@@ -15,7 +14,7 @@ public final class ExInfo extends RuntimeException {
 
   public ExInfo(Throwable cause) {
     super(cause);
-    this.data = null;
+    data = null;
   }
 
   public ExInfo(String message, Object data) {

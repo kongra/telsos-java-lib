@@ -2,8 +2,8 @@ package telsos.java.lib.util;
 
 import java.util.AbstractList;
 import java.util.List;
-import java.util.Objects;
 
+import telsos.java.lib.O;
 import telsos.java.lib.math.newtype.PosInt;
 
 public final class Partitioned<T> extends AbstractList<List<T>> {
@@ -19,7 +19,7 @@ public final class Partitioned<T> extends AbstractList<List<T>> {
 
   private Partitioned(List<T> list, PosInt partitionSize) {
     // We don't make a defensive copy of the argument list!
-    this.list = Objects.requireNonNull(list);
+    this.list = O.nn(list);
     this.partitionSize = partitionSize.value();
   }
 

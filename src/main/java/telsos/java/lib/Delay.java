@@ -1,6 +1,5 @@
 package telsos.java.lib;
 
-import java.util.Objects;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
@@ -41,7 +40,7 @@ public final class Delay<T> implements Deref<T> {
 
   private Delay(Supplier<T> supplier) {
     lock = new ReentrantLock();
-    this.supplier = Objects.requireNonNull(supplier);
+    this.supplier = O.nn(supplier);
   }
 
   private void realize() {

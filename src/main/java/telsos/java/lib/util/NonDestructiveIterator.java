@@ -1,7 +1,8 @@
 package telsos.java.lib.util;
 
 import java.util.Iterator;
-import java.util.Objects;
+
+import telsos.java.lib.O;
 
 public final class NonDestructiveIterator<E> implements Iterator<E> {
 
@@ -9,7 +10,7 @@ public final class NonDestructiveIterator<E> implements Iterator<E> {
     if (iterator instanceof final NonDestructiveIterator<E> it)
       return it;
 
-    Objects.requireNonNull(iterator);
+    O.nn(iterator);
     return new NonDestructiveIterator<>(iterator);
   }
 

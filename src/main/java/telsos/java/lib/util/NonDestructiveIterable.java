@@ -1,15 +1,16 @@
 package telsos.java.lib.util;
 
 import java.util.Iterator;
-import java.util.Objects;
+
+import telsos.java.lib.O;
 
 public final class NonDestructiveIterable<T> implements Iterable<T> {
 
   public static <T> NonDestructiveIterable<T> of(Iterable<T> iterable) {
+    O.nn(iterable);
     if (iterable instanceof final NonDestructiveIterable<T> it)
       return it;
 
-    Objects.requireNonNull(iterable);
     return new NonDestructiveIterable<>(iterable);
   }
 

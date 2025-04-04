@@ -3,10 +3,11 @@ package telsos.java.lib.paip;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+
+import telsos.java.lib.O;
 
 public final class BreadthFirstSearch<T> {
 
@@ -54,7 +55,7 @@ public final class BreadthFirstSearch<T> {
   private final Predicate<T> goal;
 
   private BreadthFirstSearch(Adjs<T> adjs, Predicate<T> goal) {
-    this.adjs = Objects.requireNonNull(adjs);
-    this.goal = Objects.requireNonNull(goal);
+    this.adjs = O.nn(adjs);
+    this.goal = O.nn(goal);
   }
 }

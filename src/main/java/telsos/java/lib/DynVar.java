@@ -1,6 +1,5 @@
 package telsos.java.lib;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
@@ -44,6 +43,6 @@ public final class DynVar<T> implements Deref<Optional<T>> {
   private final ScopedValue<T> scopedValue;
 
   private DynVar(ScopedValue<T> scopedValue) {
-    this.scopedValue = Objects.requireNonNull(scopedValue);
+    this.scopedValue = O.nn(scopedValue);
   }
 }

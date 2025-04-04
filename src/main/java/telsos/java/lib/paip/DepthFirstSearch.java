@@ -4,10 +4,11 @@ import java.util.Deque;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+
+import telsos.java.lib.O;
 
 public final class DepthFirstSearch<T> {
 
@@ -60,7 +61,7 @@ public final class DepthFirstSearch<T> {
   private final Predicate<T> goal;
 
   private DepthFirstSearch(Adjs<T> adjs, Predicate<T> goal) {
-    this.adjs = Objects.requireNonNull(adjs);
-    this.goal = Objects.requireNonNull(goal);
+    this.adjs = O.nn(adjs);
+    this.goal = O.nn(goal);
   }
 }

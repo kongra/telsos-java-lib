@@ -1,9 +1,10 @@
 package telsos.java.lib.newtype;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
+
+import telsos.java.lib.O;
 
 public class Newtype<T> extends AbstractNewtype<Newtype<T>> {
 
@@ -18,7 +19,7 @@ public class Newtype<T> extends AbstractNewtype<Newtype<T>> {
   private final T value;
 
   protected Newtype(T value) {
-    this.value = Objects.requireNonNull(value);
+    this.value = O.nn(value);
   }
 
   public T value() {

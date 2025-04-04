@@ -2,9 +2,9 @@ package telsos.java.lib.typeclass.instances;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.util.Objects;
 import java.util.Optional;
 
+import telsos.java.lib.O;
 import telsos.java.lib.typeclass.Bounded;
 import telsos.java.lib.typeclass.Enum;
 import telsos.java.lib.typeclass.Eq;
@@ -55,7 +55,7 @@ public final class BigDecimalInstances {
   public static final Semigroup<BigDecimal> SEMIGROUP;
 
   public static Monoid<BigDecimal> monoidWith(MathContext mc) {
-    Objects.requireNonNull(mc);
+    O.nn(mc);
     return new Monoid<>() {
       @Override
       public BigDecimal sconcat(BigDecimal x, BigDecimal y) {
@@ -86,7 +86,7 @@ public final class BigDecimalInstances {
   }
 
   public static Num<BigDecimal> numWith(MathContext mc) {
-    Objects.requireNonNull(mc);
+    O.nn(mc);
     return new Num<>() {
 
       @Override

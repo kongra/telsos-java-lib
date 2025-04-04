@@ -1,24 +1,23 @@
 package telsos.java.lib.util;
 
-import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.IntFunction;
+
+import telsos.java.lib.O;
 
 public final class Colls {
 
   public static <T> T[] requireNotNulls(T[] objects) {
     for (final T obj : objects) {
-      Objects.requireNonNull(obj);
+      O.nn(obj);
     }
     return objects;
   }
 
   public static <T, I extends Iterable<T>> I requireNotNulls(
       I iterable) {
-    for (final T obj : iterable) {
-      Objects.requireNonNull(obj);
-    }
+    iterable.forEach(O::nn);
     return iterable;
   }
 
