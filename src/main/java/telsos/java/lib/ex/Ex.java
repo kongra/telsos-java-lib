@@ -74,6 +74,15 @@ public final class Ex {
     return () -> new Invalid(messageSupplier.get(), whatSupplier.get());
   }
 
+  public static Supplier<Impossible> impossible(String message) {
+    return () -> new Impossible(message);
+  }
+
+  public static Supplier<Impossible> impossible(Supplier<String> messageSupplier) {
+    Objects.requireNonNull(messageSupplier);
+    return () -> new Impossible(messageSupplier.get());
+  }
+
   @SuppressWarnings("unchecked")
   private static <X extends Throwable> void sneakyThrow0(Throwable t) throws X {
     throw (X) t;
