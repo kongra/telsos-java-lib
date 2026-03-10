@@ -2,6 +2,9 @@ package telsos.java.lib.ex;
 
 public final class ExInfo extends RuntimeException {
 
+  @java.io.Serial
+  private static final long serialVersionUID = 1L;
+
   private final transient Object data;
 
   public ExInfo() {

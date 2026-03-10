@@ -5,7 +5,6 @@ import java.math.MathContext;
 import java.util.Optional;
 
 import telsos.java.lib.O;
-import telsos.java.lib.typeclass.Bounded;
 import telsos.java.lib.typeclass.Enum;
 import telsos.java.lib.typeclass.Eq;
 import telsos.java.lib.typeclass.Monoid;
@@ -14,12 +13,6 @@ import telsos.java.lib.typeclass.Ord;
 import telsos.java.lib.typeclass.Semigroup;
 
 public final class BigDecimalInstances {
-
-  private static final BoundsRecord<BigDecimal> BIG_DECIMAL_BOUNDS = new BoundsRecord<>(
-      new BigDecimal("-0").setScale(0),
-      new BigDecimal("0").setScale(0));
-
-  public static final Bounded<BigDecimal> BOUNDED = () -> BIG_DECIMAL_BOUNDS;
 
   public static final Eq<BigDecimal> EQ = (x, y) -> x.compareTo(y) == 0;
 
@@ -38,12 +31,12 @@ public final class BigDecimalInstances {
 
     @Override
     public Optional<BigDecimal> pred(BigDecimal e) {
-      return Optional.of(e.add(BigDecimal.ONE));
+      return Optional.of(e.subtract(BigDecimal.ONE));
     }
 
     @Override
     public Optional<BigDecimal> succ(BigDecimal e) {
-      return Optional.of(e.subtract(BigDecimal.ONE));
+      return Optional.of(e.add(BigDecimal.ONE));
     }
 
   };

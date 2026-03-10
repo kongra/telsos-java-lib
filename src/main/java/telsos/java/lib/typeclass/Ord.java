@@ -2,7 +2,6 @@ package telsos.java.lib.typeclass;
 
 import java.util.Comparator;
 
-import telsos.java.lib.ex.Impossible;
 
 @FunctionalInterface
 public interface Ord<T> {
@@ -49,8 +48,7 @@ public interface Ord<T> {
     return switch (Integer.signum(i)) {
       case -1 -> Ordering.LT;
       case 0  -> Ordering.EQ;
-      case 1  -> Ordering.GT;
-      default -> throw new Impossible();
+      default -> Ordering.GT;
     };
   }
 

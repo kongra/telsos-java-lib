@@ -8,7 +8,7 @@ public abstract class AbstractNewtype<T extends AbstractNewtype<T>> {
 
   @Override
   public final int hashCode() {
-    return 31 + hash();
+    return 31 * 17 + hash();
   }
 
   @SuppressWarnings("unchecked")

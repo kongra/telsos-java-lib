@@ -2,6 +2,9 @@ package telsos.java.lib.ex;
 
 public final class Invalid extends RuntimeException {
 
+  @java.io.Serial
+  private static final long serialVersionUID = 1L;
+
   private final transient Object what;
 
   public Invalid(String message, Object what) {

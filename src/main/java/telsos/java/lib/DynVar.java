@@ -31,7 +31,7 @@ public final class DynVar<T> implements Deref<Optional<T>> {
   }
 
   public T get(Supplier<T> defaultValueSupplier) {
-    return scopedValue.orElse(defaultValueSupplier.get());
+    return scopedValue.isBound() ? scopedValue.get() : defaultValueSupplier.get();
   }
 
   @Override

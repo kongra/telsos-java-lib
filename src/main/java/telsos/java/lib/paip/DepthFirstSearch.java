@@ -43,12 +43,9 @@ public final class DepthFirstSearch<T> {
         // We have a success.
         return Optional.of(element);
 
-      final var childrenIt = adjs.apply(element);
-      if (childrenIt != null) {
-        final var iteratorOverChildren = childrenIt.iterator();
-        if (iteratorOverChildren.hasNext()) {
-          carrier.addFirst(iteratorOverChildren);
-        }
+      final var iteratorOverChildren = adjs.apply(element).iterator();
+      if (iteratorOverChildren.hasNext()) {
+        carrier.addFirst(iteratorOverChildren);
       }
     }
 

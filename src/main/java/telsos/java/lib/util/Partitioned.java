@@ -38,8 +38,8 @@ public final class Partitioned<T> extends AbstractList<List<T>> {
   }
 
   @Override
-  public int size() {
-    return (int) Math.ceil((double) list.size() / partitionSize);
+  public boolean equals(Object o) {
+    return super.equals(o);
   }
 
   @Override
@@ -48,8 +48,8 @@ public final class Partitioned<T> extends AbstractList<List<T>> {
   }
 
   @Override
-  public boolean equals(Object o) {
-    return super.equals(o);
+  public int size() {
+    return (int) Math.ceil((double) list.size() / partitionSize);
   }
 
 }

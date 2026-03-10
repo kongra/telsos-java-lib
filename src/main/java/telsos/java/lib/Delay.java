@@ -15,9 +15,8 @@ public final class Delay<T> implements Deref<T> {
 
   @Override
   public T deref() {
-    if (lock != null) {
+    if (lock != null)
       realize();
-    }
 
     if (exception != null)
       return Ex.rethrow(exception);

@@ -35,19 +35,14 @@ public final class BreadthFirstSearch<T> {
           // We have a success
           return Optional.of(element);
 
-        final var adjsIt = adjs.apply(element);
-        if (isNotEmpty(adjsIt)) {
-          carrier.addLast(adjsIt);
-        }
+        final var it = adjs.apply(element).iterator();
+        if (it.hasNext())
+          carrier.addLast(() -> it);
       }
     }
 
     // No more iterables in the carrier - we didn't succeed
     return Optional.empty();
-  }
-
-  private boolean isNotEmpty(Iterable<T> iterable) {
-    return iterable != null && iterable.iterator().hasNext();
   }
 
   private final Adjs<T> adjs;

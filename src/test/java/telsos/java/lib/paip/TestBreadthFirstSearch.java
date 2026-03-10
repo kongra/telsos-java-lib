@@ -39,7 +39,7 @@ public class TestBreadthFirstSearch {
   }
 
   public static Iterable<String> children1(String s) {
-    return tree1.getOrDefault(s, null);
+    return tree1.getOrDefault(s, List.of());
   }
 
   public static Optional<String> search1(String start, String goal) {
